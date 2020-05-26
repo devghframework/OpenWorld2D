@@ -7,7 +7,7 @@
 
 제작과정을 편집해 유튜브에도 올릴 예정에 있습니다.
 
-제작에 문의사항이 있으시면 아래 메일로 문의 주시기 바랍니다.
+소스에 문의사항이 있으시면 아래 이메일로 문의 주시기 바랍니다.
 
 email   : devlee.freebsd@gmail.com<br>
 twitch  : https://www.twitch.tv/codingstudio<br>

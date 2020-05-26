@@ -14,7 +14,7 @@ OS : macOS Catalina<br>
 개발툴 : QtCreator 4.12<br>
 <br>
 <br>
-소스에 문의사항이 있으시면 아래 이메일로 문의 주시기 바랍니다.<br>
+소스에 문의사항이 있으면 아래 이메일로 문의 주시기 바랍니다.<br>
 <br>
 email   : devlee.freebsd@gmail.com<br>
 twitch  : https://www.twitch.tv/codingstudio<br>

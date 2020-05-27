@@ -3,6 +3,7 @@
      BSD License Usage
 
      [Coding Studio]
+     Git     : https://github.com/devghframework/OpenWorld2D
      email   : devlee.freebsd@gmail.com
      twitch  : https://www.twitch.tv/codingstudio
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
@@ -35,12 +36,15 @@ protected:
 
 
 private slots:
-    void on_btnShowTileMap_clicked();
-    void on_btnShowTileMapLine_clicked();
-    void on_btnShowTileLine_clicked();
-    void on_btnShowDataMap_clicked();
     void on_cboBackgroundColor_currentIndexChanged(int index);
     void mornitoringTimer();
+
+    void on_btnLoadBackgroundImage_clicked();
+    void on_chkScroll_stateChanged(int arg1);
+    void on_chkShowTileMap_stateChanged(int arg1);
+    void on_chkShowTileLine_stateChanged(int arg1);
+    void on_chkShowTileMapLine_stateChanged(int arg1);
+    void on_chkShowDataMap_stateChanged(int arg1);
 
 private:
     Ui::MainWindow *m_ui;

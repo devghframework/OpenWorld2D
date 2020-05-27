@@ -3,6 +3,7 @@
      BSD License Usage
 
      [Coding Studio]
+     Git     : https://github.com/devghframework/OpenWorld2D
      email   : devlee.freebsd@gmail.com
      twitch  : https://www.twitch.tv/codingstudio
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
@@ -69,7 +70,7 @@ void IsoMetric::CalculateMetricZone() {
     int regionDy = 0;
 
     // 마우스가 위치한 마커 데이타를 가져온다.
-    int posMouseMap = this->m_mouseMap[this->m_offY][this->m_offX];
+    int posMouseMap = this->m_mouseMapData[this->m_offY][this->m_offX];
 
     // 데이타에 따른 마우스의 매트릭 위치를 이동한다.
     switch (posMouseMap) {
@@ -90,7 +91,7 @@ void IsoMetric::CalculateMetricZone() {
  * 옮겨진 마우스 위치에 해당하는 매트릭 시작 위치 (픽셀)를 계산한다.
  * \brief IsoMetric::SetMetricStartPoint
  */
-void IsoMetric::SetMetricZone() {
+void IsoMetric::CalculateMetricPixel() {
     this->m_metricPixelX = 0;
     this->m_metricPixelY = 0;
     if ((this->m_metricY % 2) == 0) {
@@ -108,7 +109,7 @@ void IsoMetric::SetMetricZone() {
  * \param metricY
  * \return
  */
-QPair<int, int> IsoMetric::GetMetricPixel(int metricX, int metricY) {
+QPoint IsoMetric::GetMetricPixel(int metricX, int metricY) {
     int metricPixelX = 0;
     int metricPixelY = 0;
     if ((metricY % 2) == 0) {
@@ -119,8 +120,8 @@ QPair<int, int> IsoMetric::GetMetricPixel(int metricX, int metricY) {
         metricPixelY = metricY * (METRIC_HEIGH / 2);
     }
 
-    QPair<int, int> pair(metricPixelX, metricPixelY);
-    return pair;
+    QPoint point(metricPixelX, metricPixelY);
+    return point;
 }
 
 /*!
@@ -129,10 +130,10 @@ QPair<int, int> IsoMetric::GetMetricPixel(int metricX, int metricY) {
  * \param mouseY
  * \return
  */
-QPair<int, int> IsoMetric::GetMetricLocation(int mouseX, int mouseY)
+QPoint IsoMetric::GetMetricLocation(int mouseX, int mouseY)
 {
-    int regionX = mouseX / METRIC_WIDTH;
-    int regionY = (mouseY / METRIC_HEIGH) * 2;
+//    int regionX = mouseX / METRIC_WIDTH;
+//    int regionY = (mouseY / METRIC_HEIGH) * 2;
     int offX = mouseX % METRIC_WIDTH;
     int offY = mouseY % METRIC_HEIGH;
 
@@ -140,7 +141,7 @@ QPair<int, int> IsoMetric::GetMetricLocation(int mouseX, int mouseY)
     int regionDy = 0;
 
     // 마우스가 위치한 마커 데이타를 가져온다.
-    int posMouseMap = this->m_mouseMap[offY][offX];
+    int posMouseMap = this->m_mouseMapData[offY][offX];
 
     // 데이타에 따른 마우스의 매트릭 위치를 이동한다.
     switch (posMouseMap) {
@@ -155,8 +156,8 @@ QPair<int, int> IsoMetric::GetMetricLocation(int mouseX, int mouseY)
     int metricX = this->m_regionX + regionDx;
     int metricY = this->m_regionY + regionDy;
 
-    QPair<int, int> pair(metricX, metricY);
-    return pair;
+    QPoint point(metricX, metricY);
+    return point;
 }
 
 /*!
@@ -167,7 +168,7 @@ void IsoMetric::MouseMoveEvent(int mouseX, int mouseY) {
 
     CalculateMetricPosition(mouseX, mouseY);
     CalculateMetricZone();
-    SetMetricZone();
+    CalculateMetricPixel();
 }
 
 
@@ -185,9 +186,9 @@ void IsoMetric::SetLocation(int mouseX, int mouseY) {
  * \brief IsoMetric::GetLocation 현재 마우스가 위치한 곳의 매트릭좌표를 리턴한다.
  * \return
  */
-QPair<int, int> IsoMetric::GetCurrentMetricLocation() {
-    QPair<int, int> pair(this->m_metricX, this->m_metricY);
-    return pair;
+QPoint IsoMetric::GetCurrentMetricLocation() {
+    QPoint point(this->m_metricX, this->m_metricY);
+    return point;
 }
 
 QRect IsoMetric::GetCurrentMetricPixel() {

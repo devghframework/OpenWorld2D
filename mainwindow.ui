@@ -14,45 +14,6 @@
    <string>코딩스튜디오 - 오픈월드 프로젝트</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btnShowTileMap">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>70</y>
-      <width>112</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>타일맵보이기</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnShowTileLine">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>100</y>
-      <width>112</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>타일선보이기</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnShowTileMapLine">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>130</y>
-      <width>112</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>타일맵/선보이기</string>
-    </property>
-   </widget>
    <widget class="OWDrawWidget" name="widgetOpenWorld" native="true">
     <property name="geometry">
      <rect>
@@ -61,19 +22,6 @@
       <width>441</width>
       <height>451</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnShowDataMap">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>160</y>
-      <width>112</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>타일데이타보이기</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -125,9 +73,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>200</y>
+      <y>156</y>
       <width>181</width>
-      <height>181</height>
+      <height>281</height>
      </rect>
     </property>
     <property name="title">
@@ -136,8 +84,8 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>130</y>
+       <x>10</x>
+       <y>230</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -149,33 +97,33 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>80</y>
        <width>141</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>매트릭의 픽셀 위치</string>
+      <string>매트릭의 픽셀 좌표</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
-       <width>58</width>
+       <width>111</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>매트릭 위치</string>
+      <string>화면상의매트릭 좌표</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="edtMetricLocation">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>50</y>
        <width>113</width>
        <height>21</height>
@@ -185,7 +133,7 @@
     <widget class="QLineEdit" name="edtMetricPixel">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>100</y>
        <width>113</width>
        <height>21</height>
@@ -195,13 +143,137 @@
     <widget class="QLineEdit" name="edtMetricData">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
+       <y>250</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>마우스의 맵 테두리 터치 이벤트</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtBorderTouchDir">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
        <y>150</y>
        <width>113</width>
        <height>21</height>
       </rect>
      </property>
     </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>맵데이타내의 좌표</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtMetricDataLocation">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="btnLoadBackgroundImage">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>440</y>
+      <width>112</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>배경이미지...</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkScroll">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>444</y>
+      <width>61</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>스크롤</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkShowTileMap">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>70</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>기본배경이미지 보기</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkShowTileLine">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>90</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>맵타일선 보기</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkShowTileMapLine">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>110</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>맵이미지/선 보기</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkShowDataMap">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>130</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>맵데이타 보기</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

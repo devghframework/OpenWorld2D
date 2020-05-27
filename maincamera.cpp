@@ -3,6 +3,7 @@
      BSD License Usage
 
      [Coding Studio]
+     Git     : https://github.com/devghframework/OpenWorld2D
      email   : devlee.freebsd@gmail.com
      twitch  : https://www.twitch.tv/codingstudio
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
@@ -25,6 +26,10 @@ MainCamera::MainCamera()
     this->m_backgroundColor = new QBrush(QColor(Qt::black));
 }
 
+MainCamera::~MainCamera()
+{
+}
+
 IsoMetric *MainCamera::GetIsoMetric() {
     return this->m_isoMetric;
 }
@@ -33,13 +38,13 @@ TileMap *MainCamera::GetTileMap() {
     return this->m_tileMap;
 }
 
-void MainCamera::SetSize(QRect rect) {
+void MainCamera::SetScreenSize(QRect rect) {
     this->m_backgroundSize = rect;
-    this->m_tileMap->SetSize(rect);
+    this->m_tileMap->SetScreenSize(rect);
 }
 
 void MainCamera::OptionShowTileMap(bool bShowTileMap, bool bShowTileMapLine) {
-    this->m_tileMap->OptionShowTileMap(bShowTileMap);
+    this->m_tileMap->OptionShowDefaultTileMapImage(bShowTileMap);
     this->m_tileMap->OptionShowTileMapLine(bShowTileMapLine);
 }
 

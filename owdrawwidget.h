@@ -3,6 +3,7 @@
      BSD License Usage
 
      [Coding Studio]
+     Git     : https://github.com/devghframework/OpenWorld2D
      email   : devlee.freebsd@gmail.com
      twitch  : https://www.twitch.tv/codingstudio
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
@@ -20,6 +21,7 @@ class OWDrawWidget : public QWidget
 {
 public:
     OWDrawWidget(QWidget* parent = nullptr);
+    ~OWDrawWidget();
 
 
 protected:
@@ -32,12 +34,18 @@ protected:
 
 public:
     void SetBackgroundColor(QColor);
-    QPair<int, int> GetMetricLocation(int, int);
+    QPoint GetMetricLocation(int, int);
+    int GetBorderToucDir();
 
 private:
     QWidget *m_openWorldWidget;
     MainCamera *m_mainCamera;
     QPoint *m_mousePoint;
+
+    /*!
+     * \brief m_borderTouchDir 마우스가 어느방향의 테두리를 터치하였는지 저장
+     */
+    int m_borderTouchDir = TileMap::BORDER_NONE;
 
 public:
     MainCamera *GetMainCamera();

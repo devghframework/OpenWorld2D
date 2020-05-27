@@ -20,6 +20,7 @@
 #include <QBrush>
 #include <QColor>
 
+
 OWDrawWidget::OWDrawWidget(QWidget* parent)
     : QWidget(parent)
 {
@@ -27,8 +28,9 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
     //this->m_openWorldWidget->setFont(QFont ("Courier", 8));
 
     this->m_mainCamera = new MainCamera();
-    this->m_mainCamera->OptionShowTileMap(true, true);
-
+    this->m_mainCamera->OptionShowDefaultTileMapImage(true);
+    this->m_mainCamera->OptionShowTileMapLine(true);
+    this->m_mainCamera->OptionShowTileData(true);
     this->m_mousePoint = new QPoint(100, 100);  // 시작 마우스 위치
 }
 

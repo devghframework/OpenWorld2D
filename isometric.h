@@ -16,12 +16,16 @@
 #include <QPixmap>
 #include <QPair>
 
-class IsoMetric
+/*!
+ * \class Isometric
+ * \brief The Isometric class
+ */
+class Isometric
 {
 
 public:
-    IsoMetric(void);
-    ~IsoMetric();
+    Isometric(void);
+    ~Isometric();
 
 
 public:

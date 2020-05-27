@@ -20,41 +20,56 @@
 
 MainCamera::MainCamera()
 {
-    this->m_isoMetric = new IsoMetric();
+    this->m_isoMetric = new Isometric();
     this->m_bDrawBackgroundImage = true;
     this->m_tileMap = new TileMap(this->m_isoMetric);
     this->m_backgroundColor = new QBrush(QColor(Qt::black));
 }
 
+
 MainCamera::~MainCamera()
 {
 }
 
-IsoMetric *MainCamera::GetIsoMetric() {
+
+Isometric *MainCamera::GetIsoMetric() {
     return this->m_isoMetric;
 }
+
 
 TileMap *MainCamera::GetTileMap() {
     return this->m_tileMap;
 }
+
 
 void MainCamera::SetScreenSize(QRect rect) {
     this->m_backgroundSize = rect;
     this->m_tileMap->SetScreenSize(rect);
 }
 
-void MainCamera::OptionShowTileMap(bool bShowTileMap, bool bShowTileMapLine) {
-    this->m_tileMap->OptionShowDefaultTileMapImage(bShowTileMap);
-    this->m_tileMap->OptionShowTileMapLine(bShowTileMapLine);
-}
-
-void MainCamera::OptionShowTileData(bool bShowTileData) {
-    this->m_tileMap->OptionShowTileData(bShowTileData);
-}
 
 void MainCamera::SetBackgroundColor(QBrush *brush) {
     this->m_backgroundColor = brush;
 }
+
+
+void MainCamera::OptionShowDefaultTileMapImage(bool bShow)
+{
+    this->m_tileMap->OptionShowDefaultTileMapImage(bShow);
+}
+
+
+void MainCamera::OptionShowTileMapLine(bool bShow)
+{
+    this->m_tileMap->OptionShowTileMapLine(bShow);
+}
+
+
+void MainCamera::OptionShowTileData(bool bShow)
+{
+    this->m_tileMap->OptionShowTileData(bShow);
+}
+
 
 void MainCamera::Draw(QPaintDevice *device, QPoint *mousePoint) {
 

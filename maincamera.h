@@ -12,38 +12,49 @@
 #ifndef DRAWMANAGER_H
 #define DRAWMANAGER_H
 
-#include "IsoMetric.h"
+#include "isometric.h"
 #include "tilemap.h"
 
 #include <QPainter>
 #include <QRect>
 
-
+/*!
+ * \class MainCamera
+ * \brief The MainCamera class
+ */
 class MainCamera
 {
 public:
     MainCamera();
     ~MainCamera();
 
+
 private:
-    IsoMetric *m_isoMetric;
+    Isometric *m_isoMetric;
     TileMap *m_tileMap;
     QBrush *m_backgroundColor;
     QRect m_backgroundSize;
     QPixmap m_backgroundDefaultImage;
+
 
 public:
     QPainter *m_mainPainter;
 
 
 public:
-    IsoMetric *GetIsoMetric();
+    Isometric *GetIsoMetric();
     TileMap *GetTileMap();
 
     void SetBackgroundColor(QBrush *brush);
     void SetScreenSize(QRect rect);
-    void OptionShowTileMap(bool bShowTileMap, bool bShowTileMapLine);
-    void OptionShowTileData(bool bShowTileData);
+
+//    void OptionShowTileMap(bool bShowTileMap, bool bShowTileMapLine);
+//    void OptionShowTileData(bool bShowTileData);
+
+    void OptionShowDefaultTileMapImage(bool);
+    void OptionShowTileMapLine(bool);
+    void OptionShowTileData(bool);
+
     void Draw(QPaintDevice *device, QPoint *mousePoint);
 
 

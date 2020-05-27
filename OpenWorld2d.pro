@@ -35,7 +35,7 @@ SOURCES += \
     tilemap.cpp
 
 HEADERS += \
-    IsoMetric.h \
+    isometric.h \
     isometric.h \
     maincamera.h \
     mainwindow.h \

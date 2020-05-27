@@ -12,7 +12,7 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
-#include "IsoMetric.h"
+#include "isometric.h"
 
 #include <QtCore>
 #include <QPixmap>
@@ -20,13 +20,17 @@
 #include <QRect>
 #include <QVector>
 
-
+/*!
+ * \class TileMap
+ * \brief The TileMap class
+ */
 class TileMap
 {
     Q_GADGET
 
+
 public:
-    TileMap(IsoMetric *isoMetric);
+    TileMap(Isometric *isoMetric);
 
     /*!
      * \brief The BORDER_DIR 테두리 방향
@@ -40,8 +44,9 @@ public:
     };
     Q_ENUM(BORDER_DIR)
 
+
 private:
-    IsoMetric *m_isoMetric;
+    Isometric *m_isoMetric;
     QPixmap *m_defaultTileMapImage = nullptr;
     QPixmap *m_tileMapImage = nullptr;
     QPixmap *m_tileMapLine = nullptr;
@@ -60,6 +65,7 @@ private:
     QPoint *m_mapDataMetricLocation;  // 현재 마우스가 위치한 맵데이타의 좌표
 
     int m_touchBoderDirection;
+
 
 private:
     /*****************************************************************************
@@ -88,6 +94,10 @@ private:
 
 private:
     void InitTilemapData(QSize tileImageSize);
+    void DrawDefaultTilemap(QPainter *);
+    void DrawScrollTilemap(QPainter *);
+    void DrawTilemapLine(QPainter *);
+    void DrawMTilemapData(QPainter *);
 
 
 public:
@@ -95,15 +105,10 @@ public:
     void SetTileImage(QString fileName);
     void SetScreenSize(QRect);
     void DrawTilemap(QPainter *);
-    void DrawDefaultTilemap(QPainter *);
-    void DrawScrollTilemap(QPainter *);
-    void DrawTilemapLine(QPainter *);
-    void DrawMTilemapData(QPainter *);
 
     QPoint *GetMetricDataLocation(int, int);
     int GetDataMetricDataLocation(int, int);
     void BorderTouchEvent(int touchBorderDir);
-    void ScrollMap();
     int *GetOutsideBorderLocation();
 
     void OptionShowDefaultTileMapImage(bool);

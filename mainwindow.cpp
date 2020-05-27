@@ -17,7 +17,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "IsoMetric.h"
+#include "isometric.h"
 #include "maincamera.h"
 #include "owdrawwidget.h"
 
@@ -39,6 +39,11 @@
 
 #define DEBUG
 
+
+/*!
+ * \brief MainWindow::MainWindow 어플리케이션 생성자
+ * \param parent
+ */
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , m_ui(new Ui::MainWindow)
@@ -55,15 +60,29 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(mornitoringTimer()));
-    this->timer->start(1000);
+    this->timer->start(500);
 }
 
+
+/*!
+ * \brief MainWindow::~MainWindow 객체 소멸자
+ */
 MainWindow::~MainWindow()
 {
     this->timer->stop();
     delete this->m_ui;
 }
 
+
+/*!
+ * \brief MainWindow::mornitoringTimer 모니터링 타이머 함수
+ * 모니터링 내용
+ * 1. 화면내 매트릭 좌표
+ * 2. 매트릭 위치의 픽셀 데이타
+ * 3. 화면 가장자리 터치 이벤트
+ * 4. 매트릭 데이타내의 좌표
+ * 5. 매트릭 데이타 좌표의 데이타
+ */
 void MainWindow::mornitoringTimer()
 {
     // 화면내 매트릭 위치
@@ -100,16 +119,24 @@ void MainWindow::mornitoringTimer()
 }
 
 
+/*!
+ * \brief MainWindow::showEvent 윈도우 Show event
+ * \param event
+ */
 void MainWindow::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event);
 
 #ifdef DEBUG
-    qDebug("한글 깨짐 확인.");
+    qDebug("한글이 깨지는지 확인하는 문자열 == No problem if you see this string.");
 #endif
 }
 
 
+/*!
+ * \brief MainWindow::on_cboBackgroundColor_currentIndexChanged 배경색 선택 콤보박스 인덱스 변경 함수
+ * \param index
+ */
 void MainWindow::on_cboBackgroundColor_currentIndexChanged(int index)
 {
     QVariant variant = this->m_ui->cboBackgroundColor->itemData(index);
@@ -119,6 +146,9 @@ void MainWindow::on_cboBackgroundColor_currentIndexChanged(int index)
 }
 
 
+/*!
+ * \brief MainWindow::on_btnLoadBackgroundImage_clicked 타일이미지를 파일로 부터 로딩하는 함수
+ */
 void MainWindow::on_btnLoadBackgroundImage_clicked()
 {
     QString sModulePath = QCoreApplication::applicationDirPath();
@@ -135,41 +165,50 @@ void MainWindow::on_btnLoadBackgroundImage_clicked()
 }
 
 
-void MainWindow::on_chkScroll_stateChanged(int arg1)
-{
-    Q_UNUSED(arg1);
-    this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionScroll(this->m_ui->chkScroll->isChecked());
-}
-
-
-void MainWindow::on_chkShowTileMap_stateChanged(int arg1)
+/*!
+ * \brief MainWindow::on_chkShowDefaultTileMap_stateChanged 기본 타일맵 이미지 보여주기 여부 콤보박스 상태변경 이벤트
+ * \param arg1
+ */
+void MainWindow::on_chkShowDefaultTileMap_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
 
-    this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileMap(this->m_ui->chkShowTileMap->isChecked(), false);
+    this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowDefaultTileMapImage(this->m_ui->chkShowDefaultTileMap->isChecked());
     this->m_ui->widgetOpenWorld->repaint();
 }
 
 
+/*!
+ * \brief MainWindow::on_chkShowTileLine_stateChanged 타일맵 라인 보여주기 여부 콤보박스 상태변경 이벤트
+ * \param arg1
+ */
 void MainWindow::on_chkShowTileLine_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
-    this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileMap(false, this->m_ui->chkShowTileLine->isChecked());
+    this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileMapLine(this->m_ui->chkShowTileLine->isChecked());
     this->m_ui->widgetOpenWorld->repaint();
 }
 
 
-void MainWindow::on_chkShowTileMapLine_stateChanged(int arg1)
-{
-    Q_UNUSED(arg1);
-    this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileMap(this->m_ui->chkShowTileMapLine->isChecked(), this->m_ui->chkShowTileMapLine->isChecked());
-    this->m_ui->widgetOpenWorld->repaint();
-}
-
-
+/*!
+ * \brief MainWindow::on_chkShowDataMap_stateChanged 데이타맵 보여주기 여부 콤보박스 상태변경 이벤트
+ * 사용자 타일맵 이미지를 불러와야 작동 한다.
+ * \param arg1
+ */
 void MainWindow::on_chkShowDataMap_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileData(this->m_ui->chkShowDataMap->isChecked());
     this->m_ui->widgetOpenWorld->repaint();
+}
+
+
+/*!
+ * \brief MainWindow::on_chkScroll_stateChanged 스크롤 가능 여부 콤보박스 상태 변경 이벤트
+ * \param arg1
+ */
+void MainWindow::on_chkScroll_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionScroll(this->m_ui->chkScroll->isChecked());
 }

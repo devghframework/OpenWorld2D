@@ -17,6 +17,12 @@
 #include <QWidget>
 #include <QPainter>
 
+/*!
+ * \class OWDrawWidget
+ * \brief The OWDrawWidget class
+ *
+ * 오픈월드 메인 위젯
+ */
 class OWDrawWidget : public QWidget
 {
 public:

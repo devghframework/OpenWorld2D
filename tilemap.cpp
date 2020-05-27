@@ -11,7 +11,7 @@
 
 
 #include "tilemap.h"
-#include "IsoMetric.h"
+#include "isometric.h"
 
 #include <QString>
 #include <QImageReader>
@@ -25,7 +25,7 @@
 #define DEBUG
 
 
-TileMap::TileMap(IsoMetric *isoMetric)
+TileMap::TileMap(Isometric *isoMetric)
 {
     this->m_outsideBorderLocation = new int[4]{0, 0, 0, 0};
 
@@ -43,6 +43,11 @@ TileMap::TileMap(IsoMetric *isoMetric)
     this->m_mapDataMetricLocation = new QPoint(0, 0);
 }
 
+/*!
+ * \brief TileMap::LoadTileImage 이미지 파일을 읽어 QPixmap으로 리턴하는 함수
+ * \param fileName
+ * \return
+ */
 QPixmap *TileMap::LoadTileImage(QString fileName)
 {
     QPixmap *pixMap = new QPixmap();
@@ -62,19 +67,27 @@ QPixmap *TileMap::LoadTileImage(QString fileName)
 }
 
 
+/*!
+ * \brief TileMap::SetTileImage 이미지 파일을 읽어 타일맵으로 설정하고, 맵데이타를 생성하는 함수
+ * \param fileName
+ */
 void TileMap::SetTileImage(QString fileName) {
     this->m_tileMapImage = LoadTileImage(fileName);
     InitTilemapData(this->m_tileMapImage->size());
 }
 
 
+/*!
+ * \brief TileMap::SetScreenSize 스크린 정보를 설정하는 함수, 스크린 사이즈와 매트릭정보를 설정한다.
+ * \param screenSize
+ */
 void TileMap::SetScreenSize(QRect screenSize)
 {
     this->m_screenSize = screenSize;
 
     // 스크린 사이즈를 ISO Metric 단위로 변환한다.
-    int metricWidth = ceil((double)(this->m_screenSize.width()) / (double)IsoMetric::METRIC_WIDTH);
-    int metricHeight = ceil((double)(this->m_screenSize.height()*2) / (double)IsoMetric::METRIC_HEIGH);
+    int metricWidth = ceil((double)(this->m_screenSize.width()) / (double)Isometric::METRIC_WIDTH);
+    int metricHeight = ceil((double)(this->m_screenSize.height()*2) / (double)Isometric::METRIC_HEIGH);
 
     // 스크린 사이즈를 매트릭 사이즈로 변환된 값을 저장한다.
     this->m_screenMetricSize.setWidth(metricWidth);
@@ -88,10 +101,14 @@ void TileMap::SetScreenSize(QRect screenSize)
 }
 
 
+/*!
+ * \brief TileMap::InitTilemapData 타일맵 이미지에 맞는 타일맵 데이타를 생성하는 함수
+ * \param tileImageSize
+ */
 void TileMap::InitTilemapData(QSize tileImageSize)
 {
-    int metricWidth = ceil((double)(tileImageSize.width()) / (double)IsoMetric::METRIC_WIDTH);
-    int metricHeight = ceil((double)(tileImageSize.height()*2) / (double)IsoMetric::METRIC_HEIGH);
+    int metricWidth = ceil((double)(tileImageSize.width()) / (double)Isometric::METRIC_WIDTH);
+    int metricHeight = ceil((double)(tileImageSize.height()*2) / (double)Isometric::METRIC_HEIGH);
 
     for(int i=0; i<metricHeight; i++) {
         this->m_tileMapData.append(QVector<int>(metricWidth));
@@ -101,33 +118,61 @@ void TileMap::InitTilemapData(QSize tileImageSize)
 }
 
 
+/*!
+ * \brief TileMap::GetOutsideBorderLocation 스크린 영역의 가장자리 정보를 리턴하는 함수
+ * \return
+ */
 int *TileMap::GetOutsideBorderLocation() {
     return this->m_outsideBorderLocation;
 }
 
 
+/*!
+ * \brief TileMap::OptionShowDefaultTileMapImage 기본 타일맵 이미지 보여주기
+ * \param bShow
+ */
 void TileMap::OptionShowDefaultTileMapImage(bool bShow)
 {
     this->m_bShowDefaultTileMapImage = bShow;
 }
 
 
+/*!
+ * \brief TileMap::OptionShowTileMapLine 타일맵 선 보여주기
+ * \param bShowLine
+ */
 void TileMap::OptionShowTileMapLine(bool bShowLine)
 {
     this->m_bShowTileMapLine = bShowLine;
 }
 
 
+/*!
+ * \brief TileMap::OptionShowTileData 타일맵 데이타 보여주기
+ * \param bShowData
+ */
 void TileMap::OptionShowTileData(bool bShowData) {
     this->m_bShowTileData = bShowData;
 }
 
 
+/*!
+ * \brief TileMap::OptionScroll 타일맵 스크롤 여부
+ * \param bScroll
+ */
 void TileMap::OptionScroll(bool bScroll) {
     this->m_bScroll = bScroll;
 }
 
 
+/*!
+ * \brief TileMap::DrawTilemap 타일맵을 그리는 함수
+ * 1. 기본 배경이미지 그리기
+ * 2. 사용자 지정 이미지 그리기
+ * 3. 타일맵 라인 그리기
+ * 4. 타일맵 데이타 그리기
+ * \param painter
+ */
 void TileMap::DrawTilemap(QPainter *painter)
 {
     // 기본 배경 이미지를 바둑판 모양으로 채운다.
@@ -158,6 +203,10 @@ void TileMap::DrawTilemap(QPainter *painter)
 }
 
 
+/*!
+ * \brief TileMap::DrawDefaultTilemap 기본 타일맵 이미지를 그리는 함수
+ * \param painter
+ */
 void TileMap::DrawDefaultTilemap(QPainter *painter)
 {
     int x =0, y=0;
@@ -172,6 +221,10 @@ void TileMap::DrawDefaultTilemap(QPainter *painter)
 }
 
 
+/*!
+ * \brief TileMap::DrawScrollTilemap 스크롤 타일맵을 그리는 함수
+ * \param painter
+ */
 void TileMap::DrawScrollTilemap(QPainter *painter) {
 
     if(this->m_bScroll)
@@ -218,7 +271,7 @@ void TileMap::DrawScrollTilemap(QPainter *painter) {
             // 위아래 스크롤시 화면 흔들림 방지를 위해 보정을 했으나,
             // 데이타 맵도 같이 보정해 줘야 한다.
             // Isometric 좌표도 동시에 변경해야 하는데, 가능한지
-            painter->drawPixmap(pixel.x() - IsoMetric::METRIC_HARF_WIDTH, pixel.y(), *this->m_tileMapImage);
+            painter->drawPixmap(pixel.x() - Isometric::METRIC_HARF_WIDTH, pixel.y(), *this->m_tileMapImage);
         } else
             painter->drawPixmap(pixel.x(), pixel.y(), *this->m_tileMapImage);
 
@@ -230,6 +283,10 @@ void TileMap::DrawScrollTilemap(QPainter *painter) {
 }
 
 
+/*!
+ * \brief TileMap::DrawTilemapLine 타일맵 라인을 그리는 함수
+ * \param painter
+ */
 void TileMap::DrawTilemapLine(QPainter *painter)
 {
     // 타일 선 이미지를 바둑판 모양으로 채운다.
@@ -249,6 +306,10 @@ void TileMap::DrawTilemapLine(QPainter *painter)
 }
 
 
+/*!
+ * \brief TileMap::DrawMTilemapData 타일맵 데이타를 그리는 함수
+ * \param painter
+ */
 void TileMap::DrawMTilemapData(QPainter *painter)
 {
     if(this->m_bShowTileData) {
@@ -259,8 +320,8 @@ void TileMap::DrawMTilemapData(QPainter *painter)
             for(int i=0; i<this->m_tileMapData.length(); i++) {
                 for(int j=0; j<this->m_tileMapData[i].length(); j++) {
                     QPoint point = this->m_isoMetric->GetMetricPixel(j, i);
-                    painter->drawText(QRect(point.x() + IsoMetric::METRIC_HARF_WIDTH - 2,
-                                            point.y() + IsoMetric::METRIC_HARF_HEIGH - 5,
+                    painter->drawText(QRect(point.x() + Isometric::METRIC_HARF_WIDTH - 2,
+                                            point.y() + Isometric::METRIC_HARF_HEIGH - 5,
                                             20, 20),
                                       0,
                                       QString::number(this->m_tileMapData[i][j]));
@@ -271,18 +332,30 @@ void TileMap::DrawMTilemapData(QPainter *painter)
 }
 
 
+/*!
+ * \brief TileMap::BorderTouchEvent 스크린 상의 가장자리 (위,아래,왼쪽,오른쪽)을 터치했는지 알 수 있는 함수
+ * \param touchBorderDir
+ */
 void TileMap::BorderTouchEvent(int touchBorderDir) {
     m_touchBoderDirection = touchBorderDir;
 }
 
 
+/*!
+ * \brief TileMap::GetMetricDataLocation 마우스가 위치한 곳의 맵데이터의 위치를 구하는 함수
+ * \param metricX
+ * \param metricY
+ * \return
+ */
 QPoint *TileMap::GetMetricDataLocation(int metricX, int metricY) {
     if(metricX < 0 || metricY < 0) return nullptr;
     if(this->m_tileMapData.length() <= 0) return nullptr;
 
+#ifdef DEBUG
     qDebug() << "Screen Location: X: " << metricX << ", Y: " << metricY;
     qDebug() << "Metric Start Location: X: " << qFabs(this->m_tileImageMetricLocation->x())
              << ", Y: " << qFabs(this->m_tileImageMetricLocation->y());
+#endif
 
     int dataMapLocationX = qFabs(this->m_tileImageMetricLocation->x()) + metricX;
     int dataMapLocationY = qFabs(this->m_tileImageMetricLocation->y()) + metricY;
@@ -299,7 +372,7 @@ QPoint *TileMap::GetMetricDataLocation(int metricX, int metricY) {
 
 
 /*!
- * \brief TileMap::GetDataMetricDataLocation 매트릭 좌표의 데이타를 리턴한다.
+ * \brief TileMap::GetDataMetricDataLocation 매트릭 데이타의 좌표 데이타를 구하는 함수.
  * \param metricX
  * \param metricY
  * \return

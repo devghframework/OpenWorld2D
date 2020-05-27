@@ -13,7 +13,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "IsoMetric.h"
+#include "isometric.h"
 #include "maincamera.h"
 #include "tilemap.h"
 #include <QTimer>
@@ -23,6 +23,10 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+/*!
+ * \class MainWindow
+ * \brief The MainWindow class
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -40,11 +44,11 @@ private slots:
     void mornitoringTimer();
 
     void on_btnLoadBackgroundImage_clicked();
-    void on_chkScroll_stateChanged(int arg1);
-    void on_chkShowTileMap_stateChanged(int arg1);
+    void on_chkShowDefaultTileMap_stateChanged(int arg1);
     void on_chkShowTileLine_stateChanged(int arg1);
-    void on_chkShowTileMapLine_stateChanged(int arg1);
     void on_chkShowDataMap_stateChanged(int arg1);
+    void on_chkScroll_stateChanged(int arg1);
+
 
 private:
     Ui::MainWindow *m_ui;

@@ -9,7 +9,7 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "IsoMetric.h"
+#include "isometric.h"
 #include "qdebug.h"
 #include <QPainter>
 #include <QString>
@@ -19,7 +19,7 @@
 
 #define DEBUG
 
-IsoMetric::IsoMetric() {
+Isometric::Isometric() {
     this->m_metricX = 0;
     this->m_metricY = 0;
 
@@ -42,7 +42,7 @@ IsoMetric::IsoMetric() {
 }
 
 
-IsoMetric::~IsoMetric() {
+Isometric::~Isometric() {
 
 }
 
@@ -53,7 +53,7 @@ IsoMetric::~IsoMetric() {
  * \param x
  * \param y
  */
-void IsoMetric::CalculateMetricPosition(int mouseX, int mouseY) {
+void Isometric::CalculateMetricPosition(int mouseX, int mouseY) {
     this->m_regionX = mouseX / METRIC_WIDTH;
     this->m_regionY = (mouseY / METRIC_HEIGH) * 2;
     this->m_offX = mouseX % METRIC_WIDTH;
@@ -65,7 +65,7 @@ void IsoMetric::CalculateMetricPosition(int mouseX, int mouseY) {
  * 마우스맵 데이타에 해당하는 매트릭 존 위치를 계산하는 함수
  * \brief IsoMetric::CalculateMetricZone
  */
-void IsoMetric::CalculateMetricZone() {
+void Isometric::CalculateMetricZone() {
     int regionDx = 0;
     int regionDy = 0;
 
@@ -91,7 +91,7 @@ void IsoMetric::CalculateMetricZone() {
  * 옮겨진 마우스 위치에 해당하는 매트릭 시작 위치 (픽셀)를 계산한다.
  * \brief IsoMetric::SetMetricStartPoint
  */
-void IsoMetric::CalculateMetricPixel() {
+void Isometric::CalculateMetricPixel() {
     this->m_metricPixelX = 0;
     this->m_metricPixelY = 0;
     if ((this->m_metricY % 2) == 0) {
@@ -109,7 +109,7 @@ void IsoMetric::CalculateMetricPixel() {
  * \param metricY
  * \return
  */
-QPoint IsoMetric::GetMetricPixel(int metricX, int metricY) {
+QPoint Isometric::GetMetricPixel(int metricX, int metricY) {
     int metricPixelX = 0;
     int metricPixelY = 0;
     if ((metricY % 2) == 0) {
@@ -130,7 +130,7 @@ QPoint IsoMetric::GetMetricPixel(int metricX, int metricY) {
  * \param mouseY
  * \return
  */
-QPoint IsoMetric::GetMetricLocation(int mouseX, int mouseY)
+QPoint Isometric::GetMetricLocation(int mouseX, int mouseY)
 {
 //    int regionX = mouseX / METRIC_WIDTH;
 //    int regionY = (mouseY / METRIC_HEIGH) * 2;
@@ -164,7 +164,7 @@ QPoint IsoMetric::GetMetricLocation(int mouseX, int mouseY)
  * 마우스 이동 이벤트 함수
  * \brief IsoMetric::MouseMove
  */
-void IsoMetric::MouseMoveEvent(int mouseX, int mouseY) {
+void Isometric::MouseMoveEvent(int mouseX, int mouseY) {
 
     CalculateMetricPosition(mouseX, mouseY);
     CalculateMetricZone();
@@ -178,7 +178,7 @@ void IsoMetric::MouseMoveEvent(int mouseX, int mouseY) {
  * \param mouseX
  * \param mouseY
  */
-void IsoMetric::SetLocation(int mouseX, int mouseY) {
+void Isometric::SetLocation(int mouseX, int mouseY) {
     MouseMoveEvent(mouseX, mouseY);
 }
 
@@ -186,12 +186,12 @@ void IsoMetric::SetLocation(int mouseX, int mouseY) {
  * \brief IsoMetric::GetLocation 현재 마우스가 위치한 곳의 매트릭좌표를 리턴한다.
  * \return
  */
-QPoint IsoMetric::GetCurrentMetricLocation() {
+QPoint Isometric::GetCurrentMetricLocation() {
     QPoint point(this->m_metricX, this->m_metricY);
     return point;
 }
 
-QRect IsoMetric::GetCurrentMetricPixel() {
+QRect Isometric::GetCurrentMetricPixel() {
     QRect rect(this->m_metricPixelX, this->m_metricPixelY, METRIC_WIDTH, METRIC_HEIGH);
     return rect;
 }
@@ -201,6 +201,6 @@ QRect IsoMetric::GetCurrentMetricPixel() {
  * \brief IsoMetric::DrawMetric
  * \param painter
  */
-void IsoMetric::DrawMouseMarker(QPainter *painter) {
+void Isometric::DrawMouseMarker(QPainter *painter) {
     painter->drawPixmap(this->m_metricPixelX, this->m_metricPixelY, this->m_marker);
 }

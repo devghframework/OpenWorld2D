@@ -1,7 +1,7 @@
 # OpenWorld2D
 2D로 구현하는 오픈월드 프로젝트
 <br>
-자체 개발하는 ISO Metric 기반인 2D 엔진을 기반으로 오픈월드를 만들어 가는 장기 프로젝트입니다.
+자체 개발하는 isometric 기반인 2D 엔진을 기반으로 오픈월드를 만들어 가는 장기 프로젝트입니다.
 <br>
 제작 과정은 트위치( https://www.twitch.tv/codingstudio )에서 주로 낮에 생방송으로 진행하고 있습니다.
 <br>

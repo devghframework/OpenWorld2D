@@ -19,3 +19,28 @@ OS : macOS Catalina<br>
 email   : devlee.freebsd@gmail.com<br>
 twitch  : https://www.twitch.tv/codingstudio<br>
 youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber<br>
+<br>
+<br>
+Mac 에서 컴파일 오류 발생시<br>
+     아래와 같은 오류가 발생한다면 qmake.conf에 문구를 추가한다.<br>
+     "Undefined symbols for architecture x86_64"<br>
+     QT설치디렉토리 : Qt/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf<br>
+     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9<br>
+<br>
+<br>
+잉크스케이프 (Inkscape)<br>
+<br>
+프로그램에서 사용되는 isometric 다음과 같은 정보를 가진다.<br>
+마름모 크기 : 40 x 20 pixel<br>
+마름모 각도 : 26.565 도<br>
+<br>
+잉크스케이프 환경설정 방법<br>
+파일 / 문서속성 / 격자<br>
+생성 : 마름모 격자<br>
+격자단위 : px<br>
+기본 X : 0.0<br>
+기본 Y : 0.0<br>
+여백 Y : 20.0<br>
+X 각도 : 26.57 (0.005도 차이가 있음)<br>
+Y 각도 : 26.57 (0.005도 차이가 있음)<br>
+<br>

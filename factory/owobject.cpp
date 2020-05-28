@@ -10,7 +10,6 @@
  */
 
 #include "factory/owobject.h"
-#include "factory/iowobject.h"
 
 #include <QPainter>
 

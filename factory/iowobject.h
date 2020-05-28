@@ -12,6 +12,7 @@
 #ifndef IOBJECTGENERATOR_H
 #define IOBJECTGENERATOR_H
 
+#include <QtCore>
 #include <QMap>
 #include <QObject>
 #include <QPainter>
@@ -37,6 +38,8 @@
  */
 class IOwObject
 {
+    Q_GADGET
+
 protected:
 
     // 오브젝트의 액션이나 이벤트를 정의한다.
@@ -63,6 +66,7 @@ protected:
         MOUSE_HOVER,
         MOUSE_CLICk
     };
+    Q_ENUM(MOUSE_ACTION)
 
 
     /*!
@@ -78,6 +82,7 @@ protected:
         TALK,  // 대화중
         CHAT   // 채팅중
     };
+    Q_ENUM(OBJECT_STATUS)
 
 
     /*!
@@ -94,6 +99,7 @@ protected:
         SE, // 남동쪽
         SW  // 남서쪽
     };
+    Q_ENUM(OBJECT_MOVE_DIRECTION)
 
 };
 

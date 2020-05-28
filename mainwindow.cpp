@@ -49,8 +49,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     this->m_ui->setupUi(this);
 
-    setMouseTracking(true);
-
     this->m_ui->cboBackgroundColor->addItem("Black", QColor(Qt::black));
     this->m_ui->cboBackgroundColor->addItem("White", QColor(Qt::white));
     this->m_ui->cboBackgroundColor->addItem("Red", QColor(Qt::red));

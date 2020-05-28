@@ -32,6 +32,8 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
     this->m_openWorldWidget = parent;
     //this->m_openWorldWidget->setFont(QFont ("Courier", 8));
 
+    this->setMouseTracking(true);
+
     this->m_mainCamera = new MainCamera();
     this->m_mainCamera->OptionShowDefaultTileMapImage(true);
     this->m_mainCamera->OptionShowTileMapLine(true);

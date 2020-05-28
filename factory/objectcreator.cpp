@@ -104,5 +104,7 @@ void ObjectCreator::DrawObjects(QPainter *painter)
         OwObject obj = this->m_objectList["1"];
         ObjectSplitImageInfo *charector = obj.GetObjectSplitImageInfo();
         painter->drawPixmap(100, 100, charector->splitImage[0]);
+        painter->drawPixmap(132, 100, charector->splitImage[1]);
+        painter->drawPixmap(164, 100, charector->splitImage[2]);
     }
 }

@@ -50,6 +50,10 @@ private slots:
     void on_chkScroll_stateChanged(int arg1);
 
 
+    void on_btnFadeIn_clicked();
+
+    void on_btnFadeOut_clicked();
+
 private:
     Ui::MainWindow *m_ui;
 

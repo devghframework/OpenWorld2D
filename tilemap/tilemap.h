@@ -59,11 +59,8 @@ private:
     // BORDER_DIR 값을 가진다.
     int *m_outsideBorderLocation;
 
-
     QPoint *m_tileImageMetricLocation; // 타일 이미지가 화면에 출력되는 시작 매트릭 좌표
-
     QPoint *m_mapDataMetricLocation;  // 현재 마우스가 위치한 맵데이타의 좌표
-
     int m_touchBoderDirection;
 
 
@@ -115,6 +112,7 @@ public:
     void OptionShowTileMapLine(bool);
     void OptionShowTileData(bool);
     void OptionScroll(bool);
+
 };
 
 #endif // TILEMAP_H

@@ -10,7 +10,6 @@
 
      아래와 같은 오류가 발생한다면 qmake.conf에 문구를 추가한다.
      "Undefined symbols for architecture x86_64"
-
      QT설치디렉토리 : Qt/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf
      QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
  */
@@ -211,4 +210,14 @@ void MainWindow::on_chkScroll_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionScroll(this->m_ui->chkScroll->isChecked());
+}
+
+void MainWindow::on_btnFadeIn_clicked()
+{
+    this->m_ui->widgetOpenWorld->FadeIn();
+}
+
+void MainWindow::on_btnFadeOut_clicked()
+{
+    this->m_ui->widgetOpenWorld->FadeOut();
 }

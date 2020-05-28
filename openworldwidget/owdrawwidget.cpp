@@ -19,8 +19,13 @@
 #include <QMouseEvent>
 #include <QBrush>
 #include <QColor>
+#include <QGraphicsOpacityEffect>
 
 
+/*!
+ * \brief OWDrawWidget::OWDrawWidget 오픈월드 메인 위젯 생성자
+ * \param parent
+ */
 OWDrawWidget::OWDrawWidget(QWidget* parent)
     : QWidget(parent)
 {
@@ -35,24 +40,38 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
 }
 
 
+/*!
+ * \brief OWDrawWidget::~OWDrawWidget
+ */
 OWDrawWidget::~OWDrawWidget()
 {
 
 }
 
 
+/*!
+ * \brief OWDrawWidget::GetMainCamera 위젯에 설정된 메인카메라를 가져오는 함수
+ * \return
+ */
 MainCamera *OWDrawWidget::GetMainCamera()
 {
     return this->m_mainCamera;
 }
 
 
+/*!
+ * \brief OWDrawWidget::paintEvent 페인트 이벤트 함수
+ */
 void OWDrawWidget::paintEvent(QPaintEvent*)
 {
     this->m_mainCamera->Draw(this, this->m_mousePoint);
 }
 
 
+/*!
+ * \brief OWDrawWidget::resizeEvent 리사이즈 이벤트 함수
+ * \param event
+ */
 void OWDrawWidget::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
@@ -61,6 +80,10 @@ void OWDrawWidget::resizeEvent(QResizeEvent *event)
 }
 
 
+/*!
+ * \brief OWDrawWidget::timerEvent 타이머 이벤트 함수
+ * \param event
+ */
 void OWDrawWidget::timerEvent(QTimerEvent *event)
 {
     Q_UNUSED(event);
@@ -68,6 +91,10 @@ void OWDrawWidget::timerEvent(QTimerEvent *event)
 }
 
 
+/*!
+ * \brief OWDrawWidget::mousePressEvent 마우스 눌림 이벤트 함수
+ * \param event
+ */
 void OWDrawWidget::mousePressEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
@@ -75,6 +102,10 @@ void OWDrawWidget::mousePressEvent(QMouseEvent *event)
 }
 
 
+/*!
+ * \brief OWDrawWidget::mouseReleaseEvent 마우스 눌림을 풀었을 때 함수
+ * \param event
+ */
 void OWDrawWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
@@ -82,6 +113,10 @@ void OWDrawWidget::mouseReleaseEvent(QMouseEvent *event)
 }
 
 
+/*!
+ * \brief OWDrawWidget::mouseMoveEvent 마우스 이동 이벤트 함수
+ * \param event
+ */
 void OWDrawWidget::mouseMoveEvent(QMouseEvent *event)
 {
     *this->m_mousePoint = event->pos();
@@ -104,18 +139,65 @@ void OWDrawWidget::mouseMoveEvent(QMouseEvent *event)
 }
 
 
+/*!
+ * \brief OWDrawWidget::SetBackgroundColor 메인카메라의 배경색을 지정하는 함수
+ * \param color
+ */
 void OWDrawWidget::SetBackgroundColor(QColor color) {
     this->m_mainCamera->SetBackgroundColor(new QBrush(color));
     update();
 }
 
 
+/*!
+ * \brief OWDrawWidget::GetMetricLocation 마우스 좌표에 해당하는 매트릭 좌표를 구하는 함수
+ * \param mouseX
+ * \param mouseY
+ * \return
+ */
 QPoint OWDrawWidget::GetMetricLocation(int mouseX, int mouseY) {
     QPoint point = this->m_mainCamera->GetIsoMetric()->GetMetricLocation(mouseX, mouseY);
     return point;
 }
 
 
+/*!
+ * \brief OWDrawWidget::GetBorderToucDir 위젯의 보더를 터치한 방향을 구하는 함수
+ * \return
+ */
 int OWDrawWidget::GetBorderToucDir() {
     return this->m_borderTouchDir;
+}
+
+
+/*!
+ * \brief OWDrawWidget::FadeIn 서서히 밝아지는 함수
+ */
+void OWDrawWidget::FadeIn()
+{
+    QGraphicsOpacityEffect *eff = new QGraphicsOpacityEffect(this);
+    this->setGraphicsEffect(eff);
+    QPropertyAnimation *a = new QPropertyAnimation(eff,"opacity");
+    a->setDuration(350);
+    a->setStartValue(0);
+    a->setEndValue(1);
+    a->setEasingCurve(QEasingCurve::InBack);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
+}
+
+
+/*!
+ * \brief OWDrawWidget::FadeOut 서서히 어두어 지는 함수
+ */
+void OWDrawWidget::FadeOut()
+{
+    QGraphicsOpacityEffect *eff = new QGraphicsOpacityEffect(this);
+    this->setGraphicsEffect(eff);
+    QPropertyAnimation *a = new QPropertyAnimation(eff,"opacity");
+    a->setDuration(350);
+    a->setStartValue(1);
+    a->setEndValue(0);
+    a->setEasingCurve(QEasingCurve::OutBack);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
+    connect(a,SIGNAL(finished()),this,SLOT(hideThisWidget()));
 }

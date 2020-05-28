@@ -38,10 +38,14 @@ protected:
   virtual void mouseReleaseEvent(QMouseEvent*) override;
   virtual void mouseMoveEvent(QMouseEvent*) override;
 
+
 public:
     void SetBackgroundColor(QColor);
     QPoint GetMetricLocation(int, int);
     int GetBorderToucDir();
+    void FadeIn();
+    void FadeOut();
+
 
 private:
     QWidget *m_openWorldWidget;
@@ -52,6 +56,7 @@ private:
      * \brief m_borderTouchDir 마우스가 어느방향의 테두리를 터치하였는지 저장
      */
     int m_borderTouchDir = TileMap::BORDER_NONE;
+
 
 public:
     MainCamera *GetMainCamera();

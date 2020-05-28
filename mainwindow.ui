@@ -50,8 +50,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>0</y>
+      <x>200</x>
+      <y>6</y>
       <width>231</width>
       <height>16</height>
      </rect>
@@ -268,6 +268,32 @@
      <string>맵데이타 보기</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnFadeIn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>450</y>
+      <width>81</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FadeIn</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnFadeOut">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>450</y>
+      <width>81</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FadeOut</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -285,7 +311,7 @@
   <customwidget>
    <class>OWDrawWidget</class>
    <extends>QWidget</extends>
-   <header location="global">owdrawwidget.h</header>
+   <header>openworldwidget/owdrawwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

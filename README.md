@@ -30,7 +30,7 @@ Mac 에서 컴파일 오류 발생시<br>
 <br>
 잉크스케이프 (Inkscape)<br>
 <br>
-프로그램에서 사용되는 isometric 다음과 같은 정보를 가진다.<br>
+프로그램에서 사용되는 isometric 은 다음과 같은 정보를 가진다.<br>
 마름모 크기 : 40 x 20 pixel<br>
 마름모 각도 : 26.565 도<br>
 <br>

@@ -212,12 +212,30 @@ void MainWindow::on_chkScroll_stateChanged(int arg1)
     this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionScroll(this->m_ui->chkScroll->isChecked());
 }
 
+
+/*!
+ * \brief MainWindow::on_btnFadeIn_clicked 페이드인 버튼 클릭
+ */
 void MainWindow::on_btnFadeIn_clicked()
 {
     this->m_ui->widgetOpenWorld->FadeIn();
 }
 
+
+/*!
+ * \brief MainWindow::on_btnFadeOut_clicked 페이드 아웃 버튼 클릭
+ */
 void MainWindow::on_btnFadeOut_clicked()
 {
     this->m_ui->widgetOpenWorld->FadeOut();
+}
+
+
+/*!
+ * \brief MainWindow::on_btnViewCharactor_clicked
+ */
+void MainWindow::on_btnViewCharactor_clicked()
+{
+    this->m_ui->widgetOpenWorld->GetMainCamera()->GetObjectCreator()->Create(1);
+    this->m_ui->widgetOpenWorld->repaint();
 }

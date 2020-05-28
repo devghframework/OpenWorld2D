@@ -54,6 +54,8 @@ private slots:
 
     void on_btnFadeOut_clicked();
 
+    void on_btnViewCharactor_clicked();
+
 private:
     Ui::MainWindow *m_ui;
 

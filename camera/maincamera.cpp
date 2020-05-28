@@ -25,6 +25,7 @@ MainCamera::MainCamera()
     this->m_bDrawBackgroundImage = true;
     this->m_tileMap = new TileMap(this->m_isoMetric);
     this->m_backgroundColor = new QBrush(QColor(Qt::black));
+    this->m_objCreator = new ObjectCreator();
 }
 
 
@@ -40,6 +41,12 @@ Isometric *MainCamera::GetIsoMetric() {
 
 TileMap *MainCamera::GetTileMap() {
     return this->m_tileMap;
+}
+
+
+ObjectCreator *MainCamera::GetObjectCreator()
+{
+    return this->m_objCreator;
 }
 
 
@@ -85,4 +92,7 @@ void MainCamera::Draw(QPaintDevice *device, QPoint *mousePoint) {
     // ISO Metric 적용
     m_isoMetric->SetLocation(mousePoint->x(), mousePoint->y());
     m_isoMetric->DrawMouseMarker(&painter);
+
+    // Object 출력
+    m_objCreator->DrawObjects(&painter);
 }

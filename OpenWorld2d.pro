@@ -28,6 +28,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     camera/maincamera.cpp \
+    factory/iowobject.cpp \
+    factory/objectcreator.cpp \
+    factory/owobject.cpp \
     isometric/isometric.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -36,6 +39,9 @@ SOURCES += \
 
 HEADERS += \
     camera/maincamera.h \
+    factory/iowobject.h \
+    factory/objectcreator.h \
+    factory/owobject.h \
     isometric/isometric.h \
     mainwindow.h \
     openworldwidget/owdrawwidget.h \
@@ -51,3 +57,6 @@ TRANSLATIONS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    UML/owuml.qmodel

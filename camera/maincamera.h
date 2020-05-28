@@ -18,6 +18,8 @@
 #include <QPainter>
 #include <QRect>
 
+#include <factory/objectcreator.h>
+
 /*!
  * \class MainCamera
  * \brief The MainCamera class
@@ -35,7 +37,7 @@ private:
     QBrush *m_backgroundColor;
     QRect m_backgroundSize;
     QPixmap m_backgroundDefaultImage;
-
+    ObjectCreator *m_objCreator;
 
 public:
     QPainter *m_mainPainter;
@@ -44,12 +46,10 @@ public:
 public:
     Isometric *GetIsoMetric();
     TileMap *GetTileMap();
+    ObjectCreator *GetObjectCreator();
 
     void SetBackgroundColor(QBrush *brush);
     void SetScreenSize(QRect rect);
-
-//    void OptionShowTileMap(bool bShowTileMap, bool bShowTileMapLine);
-//    void OptionShowTileData(bool bShowTileData);
 
     void OptionShowDefaultTileMapImage(bool);
     void OptionShowTileMapLine(bool);

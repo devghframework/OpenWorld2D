@@ -12,7 +12,7 @@
 #ifndef OWDRAWWIDGET_H
 #define OWDRAWWIDGET_H
 
-#include "maincamera.h"
+#include "camera/maincamera.h"
 
 #include <QWidget>
 #include <QPainter>

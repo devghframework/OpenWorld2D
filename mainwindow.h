@@ -13,9 +13,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "isometric.h"
-#include "maincamera.h"
-#include "tilemap.h"
+#include "isometric/isometric.h"
+#include "camera/maincamera.h"
+#include "tilemap/tilemap.h"
 #include <QTimer>
 
 

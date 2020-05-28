@@ -17,9 +17,9 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "isometric.h"
-#include "maincamera.h"
-#include "owdrawwidget.h"
+#include "isometric/isometric.h"
+#include "camera/maincamera.h"
+#include "openworldwidget/owdrawwidget.h"
 
 #include <QDebug>
 #include <QMainWindow>

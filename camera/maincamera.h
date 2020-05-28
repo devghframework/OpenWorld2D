@@ -12,8 +12,8 @@
 #ifndef DRAWMANAGER_H
 #define DRAWMANAGER_H
 
-#include "isometric.h"
-#include "tilemap.h"
+#include "isometric/isometric.h"
+#include "tilemap/tilemap.h"
 
 #include <QPainter>
 #include <QRect>

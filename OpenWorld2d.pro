@@ -27,20 +27,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    isometric.cpp \
+    camera/maincamera.cpp \
+    isometric/isometric.cpp \
     main.cpp \
-    maincamera.cpp \
     mainwindow.cpp \
-    owdrawwidget.cpp \
-    tilemap.cpp
+    openworldwidget/owdrawwidget.cpp \
+    tilemap/tilemap.cpp
 
 HEADERS += \
-    isometric.h \
-    isometric.h \
-    maincamera.h \
+    camera/maincamera.h \
+    isometric/isometric.h \
     mainwindow.h \
-    owdrawwidget.h \
-    tilemap.h
+    openworldwidget/owdrawwidget.h \
+    tilemap/tilemap.h
 
 FORMS += \
     mainwindow.ui

@@ -285,7 +285,7 @@
   <customwidget>
    <class>OWDrawWidget</class>
    <extends>QWidget</extends>
-   <header>owdrawwidget.h</header>
+   <header location="global">owdrawwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

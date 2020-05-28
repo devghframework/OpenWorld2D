@@ -10,8 +10,8 @@
  */
 
 
-#include "tilemap.h"
-#include "isometric.h"
+#include "tilemap/tilemap.h"
+#include "isometric/isometric.h"
 
 #include <QString>
 #include <QImageReader>

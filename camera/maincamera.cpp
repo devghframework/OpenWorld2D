@@ -9,7 +9,8 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "maincamera.h"
+#include "camera/maincamera.h"
+
 #include <QPainter>
 #include <QRect>
 #include <QImageReader>

@@ -12,7 +12,7 @@
      오픈 월드 메인 위젯
  */
 
-#include "owdrawwidget.h"
+#include "openworldwidget/owdrawwidget.h"
 
 #include <QWidget>
 #include <QPainter>

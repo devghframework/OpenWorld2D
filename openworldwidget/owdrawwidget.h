@@ -14,8 +14,11 @@
 
 #include "camera/maincamera.h"
 
-#include <QWidget>
 #include <QPainter>
+#include <QThread>
+#include <QWidget>
+
+#include <scene/scene.h>
 
 /*!
  * \class OWDrawWidget
@@ -25,19 +28,18 @@
  */
 class OWDrawWidget : public QWidget
 {
+    //QGraphicsView -- 참고
 public:
-    OWDrawWidget(QWidget* parent = nullptr);
+    OWDrawWidget(QWidget *parent = nullptr);
     ~OWDrawWidget();
 
-
 protected:
-  virtual void paintEvent(QPaintEvent*) override;
-  virtual void resizeEvent(QResizeEvent*) override;
-  virtual void timerEvent(QTimerEvent*) override;
-  virtual void mousePressEvent(QMouseEvent*) override;
-  virtual void mouseReleaseEvent(QMouseEvent*) override;
-  virtual void mouseMoveEvent(QMouseEvent*) override;
-
+    virtual void paintEvent(QPaintEvent *) override;
+    virtual void resizeEvent(QResizeEvent *) override;
+    virtual void timerEvent(QTimerEvent *) override;
+    virtual void mousePressEvent(QMouseEvent *) override;
+    virtual void mouseReleaseEvent(QMouseEvent *) override;
+    virtual void mouseMoveEvent(QMouseEvent *) override;
 
 public:
     void SetBackgroundColor(QColor);
@@ -45,10 +47,12 @@ public:
     int GetBorderToucDir();
     void FadeIn();
     void FadeOut();
+    //Scene &GetScene(int sceneNo);
 
 
 private:
     QWidget *m_openWorldWidget;
+    //Scene *m_scene;
     MainCamera *m_mainCamera;
     QPoint *m_mousePoint;
 

@@ -38,7 +38,14 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
     this->m_mainCamera->OptionShowDefaultTileMapImage(true);
     this->m_mainCamera->OptionShowTileMapLine(true);
     this->m_mainCamera->OptionShowTileData(true);
-    this->m_mousePoint = new QPoint(100, 100);  // 시작 마우스 위치
+    this->m_mousePoint = new QPoint(100, 100); // 시작 마우스 위치
+
+    // Scene 에디터가 필요함.
+    // Scene 에디터에서 작성 Scene데이를 로딩해서 처리 해야함.
+    // 현재는 Scene 이 작성된 데이타가 없기 때문에 수작업으로 데이타를 만들어서 처리한다.
+    // Scene 데이타는 하나만 존재하는 것으로 한다.
+//    this->m_scene = new Scene[1];
+//    this->m_scene->setParent(this);
 }
 
 
@@ -47,8 +54,19 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
  */
 OWDrawWidget::~OWDrawWidget()
 {
-
 }
+
+
+/*!
+ * \brief OWDrawWidget::GetScene Scene 을 가져온다.
+ * \param sceneNo
+ * \return
+ */
+//Scene &OWDrawWidget::GetScene(int sceneNo)
+//{
+//    Scene &scene = this->m_scene[sceneNo];
+//    return scene;
+//}
 
 
 /*!

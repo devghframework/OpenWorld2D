@@ -15,12 +15,20 @@
 #include <QImageReader>
 #include <QPainter>
 #include <QMessageBox>
+#include <QMap>
 
-#define DEBUG
+//#define _DEBUG
 
 OwObject::OwObject()
     : IOwObject()
-{}
+{
+
+}
+
+OwObject::~OwObject()
+{
+
+}
 
 QMap<QString, QObject> OwObject::GetObjects()
 {
@@ -36,7 +44,9 @@ QObject *OwObject::GetObject(QString key)
     return obj;
 }
 
-void OwObject::CreateObject() {}
+void OwObject::CreateObject() {
+
+}
 
 void OwObject::DrawObject(QPainter *painter)
 {

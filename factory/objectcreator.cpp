@@ -27,6 +27,11 @@ ObjectCreator::ObjectCreator()
 
 }
 
+ObjectCreator::~ObjectCreator()
+{
+    this->m_objectList.clear();
+}
+
 void ObjectCreator::Create(int categoly)
 {
 

@@ -22,7 +22,6 @@
 #include <QtCore/QtMath>
 #include <math.h>
 
-#define DEBUG
 
 
 TileMap::TileMap(Isometric *isoMetric)

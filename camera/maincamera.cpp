@@ -17,7 +17,7 @@
 #include <QBrush>
 #include <QColor>
 
-#define DEBUG
+//#define DEBUG
 
 MainCamera::MainCamera()
 {

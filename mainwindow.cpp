@@ -36,7 +36,7 @@
 #include <QFileDialog>
 #include <QItemEditorFactory>
 
-#define DEBUG
+//#define DEBUG
 
 
 /*!
@@ -236,4 +236,10 @@ void MainWindow::on_btnViewCharactor_clicked()
 {
     this->m_ui->widgetOpenWorld->GetMainCamera()->GetObjectCreator()->Create(1);
     this->m_ui->widgetOpenWorld->repaint();
+}
+
+void MainWindow::on_btnScene1_clicked()
+{
+    //Scene &scene = this->m_ui->widgetOpenWorld->GetScene(0);
+    //scene.SceneOperate("액션~~~");
 }

@@ -12,8 +12,8 @@
 #ifndef IOBJECTGENERATOR_H
 #define IOBJECTGENERATOR_H
 
-#include <QtCore>
-#include <QMap>
+//#include <QtCore>
+//#include <QMap>
 #include <QObject>
 #include <QPainter>
 

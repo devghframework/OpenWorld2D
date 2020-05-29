@@ -17,7 +17,6 @@
 #include <QImage>
 #include <QPair>
 
-#define DEBUG
 
 Isometric::Isometric() {
     this->m_metricX = 0;

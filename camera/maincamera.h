@@ -20,6 +20,8 @@
 
 #include <factory/objectcreator.h>
 
+#include <scene/scene.h>
+
 /*!
  * \class MainCamera
  * \brief The MainCamera class
@@ -38,10 +40,6 @@ private:
     QRect m_backgroundSize;
     QPixmap m_backgroundDefaultImage;
     ObjectCreator *m_objCreator;
-
-public:
-    QPainter *m_mainPainter;
-
 
 public:
     Isometric *GetIsoMetric();

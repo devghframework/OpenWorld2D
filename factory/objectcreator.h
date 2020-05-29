@@ -9,12 +9,13 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "factory/owobject.h"
-
-#include <QMap>
 
 #ifndef OBJECTCREATOR_H
 #define OBJECTCREATOR_H
+
+#include "factory/owobject.h"
+
+#include <QMap>
 
 
 /*!
@@ -36,8 +37,10 @@
  */
 class ObjectCreator
 {
+
 public:
     ObjectCreator();
+    virtual ~ObjectCreator();
 
     void Create(int categoly);
     OwObject GetObject(QString key);

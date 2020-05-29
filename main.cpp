@@ -16,9 +16,29 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
+#ifdef DEBUG
+#pragma region 전처리기
+    qDebug("The path/name of this file is %s", __FILE__);
+    qDebug("The current line is %d", __LINE__);
+    qDebug("The current system date is %s", __DATE__);
+    qDebug("The current system time is %s", __TIME__);
+    #ifdef __STDC__
+        qDebug("The compiler conforms with the ANSI C standard");
+    #else
+        qDebug("The compiler doesn't conform with the ANSI C standard");
+    #endif
+    #ifdef __cplusplus
+        qDebug("The compiler is working with C++");
+    #else
+        qDebug("The compiler is working with C");
+    #endif
+#pragma endregion 전처리기
+#endif
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

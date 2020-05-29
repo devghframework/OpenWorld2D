@@ -56,6 +56,8 @@ private slots:
 
     void on_btnViewCharactor_clicked();
 
+    void on_btnScene1_clicked();
+
 private:
     Ui::MainWindow *m_ui;
 

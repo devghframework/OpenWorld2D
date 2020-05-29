@@ -28,7 +28,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     camera/maincamera.cpp \
-    factory/iowobject.cpp \
     factory/objectcreator.cpp \
     factory/owobject.cpp \
     isometric/isometric.cpp \

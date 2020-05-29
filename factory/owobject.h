@@ -17,8 +17,6 @@
 #include <QPoint>
 #include <QSize>
 
-
-
 /*!
  * \class OwObject
  * \brief The OwObject class
@@ -39,10 +37,13 @@ public:
 
     void SetObjectSplitImageInfo(ObjectSplitImageInfo *);
     ObjectSplitImageInfo *GetObjectSplitImageInfo();
-private:
 
-    // 객체의 기본 특성을 정의한다.
-    #pragma region OBJECT_FIELD
+private:
+    void CreateSplitImage();
+
+private:
+// 객체의 기본 특성을 정의한다.
+#pragma region OBJECT_FIELDS
 
     /*!
      * \brief m_splitObjectInfo
@@ -51,15 +52,15 @@ private:
      * 각 배열에는 하나의 행동양식으로 이루어져 있다.
      */
     ObjectSplitImageInfo *m_splitObjectInfo; // 객체의 행동 이미지가 들어 있는 구조체의 1차원 배열
-    int m_objectStatus;     // 오브젝트 상태 (OBJECT_STATUS 값을 가진다.)
-    int m_animationNo = 0;  // Animation 을 할 경우 split image 의 번호
+    int m_objectStatus;    // 오브젝트 상태 (OBJECT_STATUS 값을 가진다.)
+    int m_animationNo = 0; // Animation 을 할 경우 split image 의 번호
 
-    QPoint m_metricLocation;  // 오브젝트의 매트릭 좌표
-    QPoint m_pixelLocation;   // 오브젝트이 픽셀 좌표
+    QPoint m_metricLocation; // 오브젝트의 매트릭 좌표
+    QPoint m_pixelLocation;  // 오브젝트이 픽셀 좌표
 
     //bool m_bClick;
 
-    #pragma endregion OBJECT_FIELD
+#pragma endregion OBJECT_FIELDS
 };
 
 #endif // OWOBJECT_H

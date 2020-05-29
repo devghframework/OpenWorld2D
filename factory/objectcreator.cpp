@@ -9,7 +9,7 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "objectcreator.h"
+#include "factory/objectcreator.h"
 
 #include <QDebug>
 #include <QPixmap>
@@ -49,38 +49,19 @@ void ObjectCreator::CreateCharactor()
 
     ObjectSplitImageInfo *objInfo = charector.GetObjectSplitImageInfo();
     objInfo = new ObjectSplitImageInfo();
+    objInfo->originFileName
+        = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
+    objInfo->copyStartPoint = QPoint(0, 0);
+    objInfo->fullWidth = 96;
+    objInfo->fullHeight = 32;
+    objInfo->width = 32;
+    objInfo->height = 32;
+    objInfo->actionNo = 1;
+    objInfo->totalSplitCount = 3;
 
-    QString fileName = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    QImageReader r(fileName);
-    r.setDecideFormatFromContent(true);
-    QImage i = r.read();
-    if (!i.isNull()) {
+    charector.SetObjectSplitImageInfo(objInfo);
 
-        QPixmap pixmap;
-        pixmap = QPixmap::fromImage(i);
-
-        objInfo->width = 32;
-        objInfo->height = 32;
-        objInfo->fullWidth = 96;
-        objInfo->fullHeight = 32;
-        objInfo->actionNo = 1;
-        objInfo->totalCount = 3;
-
-        objInfo->splitImage = new QPixmap[objInfo->totalCount];
-        objInfo->splitImage[0] = pixmap.copy(0, 0, objInfo->width, objInfo->height);
-        objInfo->splitImage[1] = pixmap.copy(32, 0, objInfo->width, objInfo->height);
-        objInfo->splitImage[2] = pixmap.copy(64, 0, objInfo->width, objInfo->height);
-
-        charector.SetObjectSplitImageInfo(objInfo);
-
-        this->m_objectList.insert("1", charector);
-    }
-    else {
-#ifdef DEBUG
-    qDebug("마우스 포인터 이미지를 읽을 수 없습니다.");
-    //libpng warning: iCCP: CRC error : 이미지 포멧이 잘못 되었을 경우
-#endif
-    }
+    this->m_objectList.insert("1", charector);
 }
 
 
@@ -93,6 +74,7 @@ void ObjectCreator::CreateObject()
 OwObject ObjectCreator::GetObject(QString key)
 {
     OwObject object =this->m_objectList[key];
+    return object;
 }
 
 

@@ -70,10 +70,10 @@ void Isometric::CalculateMetricZone() {
     int regionDy = 0;
 
     // 마우스가 위치한 마커 데이타를 가져온다.
-    int posMouseMap = this->m_mouseMapData[this->m_offY][this->m_offX];
+    int posMouseMapData = this->m_mouseMapData[this->m_offY][this->m_offX];
 
-    // 데이타에 따른 마우스의 매트릭 위치를 이동한다.
-    switch (posMouseMap) {
+    // 마우스 데이타맵 데이타 위치의 매트릭 위치로 이동한다.
+    switch (posMouseMapData) {
         case 0: regionDx = 0; regionDy = 0; break;
         case 1: regionDx -= 1; regionDy -= 1; break;
         case 2: regionDy -= 1; break;

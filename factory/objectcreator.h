@@ -9,7 +9,7 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "owobject.h"
+#include "factory/owobject.h"
 
 #include <QMap>
 

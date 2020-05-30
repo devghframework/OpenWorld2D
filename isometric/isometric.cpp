@@ -19,7 +19,7 @@
 
 
 Isometric::Isometric() {
-    // 기본 매트릭스 정보 설정
+    // 기본 매트릭 정보 설정
     this->m_defaultIsometricWidth = METRIC_WIDTH_2657;
     this->m_defaultIsometricHeight = METRIC_HEIGH_2657;
     this->m_defaultIsometricHarfWidth = METRIC_HARF_WIDTH_2657;

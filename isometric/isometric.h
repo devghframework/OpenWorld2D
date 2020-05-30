@@ -52,15 +52,15 @@ private:
     int m_defaultIsometricHarfHeight;
     QVector<int> *m_defaultMouseMapData;
 
-    int m_metricX;       // 메트릭스 X 위치
-    int m_metricY;       // 메트릭스 Y 위치
-    int m_metricPixelX;  // 메트릭스 픽셀 X 시작 위치
-    int m_metricPixelY;  // 메트릭스 픽셀 Y 시작 위치
+    int m_metricX;       // 메트릭 X 위치
+    int m_metricY;       // 메트릭 Y 위치
+    int m_metricPixelX;  // 메트릭 픽셀 X 시작 위치
+    int m_metricPixelY;  // 메트릭 픽셀 Y 시작 위치
 
-    int m_regionX;  // 메트릭스 X좌표
-    int m_regionY;  // 메트릭스 Y좌표
-    int m_offX;     // 메트릭스 X좌표의 오프셋좌표
-    int m_offY;     // 메트릭스 Y좌표의 오프셋좌표
+    int m_regionX;  // 메트릭 X좌표
+    int m_regionY;  // 메트릭 Y좌표
+    int m_offX;     // 메트릭 X좌표의 오프셋좌표
+    int m_offY;     // 메트릭 Y좌표의 오프셋좌표
 
     QPixmap m_marker;  // 아래 데이타에 맞는 마우스 포인터 이미지
 

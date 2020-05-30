@@ -18,7 +18,7 @@
 #include <QPainter>
 #include <QRect>
 
-#include <factory/objectcreator.h>
+#include <factory/objectmanager.h>
 
 #include <scene/scene.h>
 
@@ -39,12 +39,12 @@ private:
     QBrush *m_backgroundColor;
     QRect m_backgroundSize;
     QPixmap m_backgroundDefaultImage;
-    ObjectCreator *m_objCreator;
+    ObjectManager *m_objManager;
 
 public:
     Isometric *GetIsoMetric();
     TileMap *GetTileMap();
-    ObjectCreator *GetObjectCreator();
+    ObjectManager *GetObjectCreator();
 
     void SetBackgroundColor(QBrush *brush);
     void SetScreenSize(QRect rect);

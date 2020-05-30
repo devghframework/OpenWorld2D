@@ -85,8 +85,10 @@ void TileMap::SetScreenSize(QRect screenSize)
     this->m_screenSize = screenSize;
 
     // 스크린 사이즈를 ISO Metric 단위로 변환한다.
-    int metricWidth = ceil((double)(this->m_screenSize.width()) / (double)Isometric::METRIC_WIDTH);
-    int metricHeight = ceil((double)(this->m_screenSize.height()*2) / (double)Isometric::METRIC_HEIGH);
+    int metricWidth = ceil((double)(this->m_screenSize.width()) /
+                               (double)this->m_isoMetric->defaultIsometricWidth());
+    int metricHeight = ceil((double)(this->m_screenSize.height()*2) /
+                            (double)this->m_isoMetric->defaultIsometricHeight());
 
     // 스크린 사이즈를 매트릭 사이즈로 변환된 값을 저장한다.
     this->m_screenMetricSize.setWidth(metricWidth);
@@ -106,8 +108,10 @@ void TileMap::SetScreenSize(QRect screenSize)
  */
 void TileMap::InitTilemapData(QSize tileImageSize)
 {
-    int metricWidth = ceil((double)(tileImageSize.width()) / (double)Isometric::METRIC_WIDTH);
-    int metricHeight = ceil((double)(tileImageSize.height()*2) / (double)Isometric::METRIC_HEIGH);
+    int metricWidth = ceil((double)(tileImageSize.width()) /
+                           (double)this->m_isoMetric->defaultIsometricWidth());
+    int metricHeight = ceil((double)(tileImageSize.height()*2) /
+                            (double)this->m_isoMetric->defaultIsometricHeight());
 
     for(int i=0; i<metricHeight; i++) {
         this->m_tileMapData.append(QVector<int>(metricWidth));
@@ -270,7 +274,9 @@ void TileMap::DrawScrollTilemap(QPainter *painter) {
             // 위아래 스크롤시 화면 흔들림 방지를 위해 보정을 했으나,
             // 데이타 맵도 같이 보정해 줘야 한다.
             // Isometric 좌표도 동시에 변경해야 하는데, 가능한지
-            painter->drawPixmap(pixel.x() - Isometric::METRIC_HARF_WIDTH, pixel.y(), *this->m_tileMapImage);
+            painter->drawPixmap(pixel.x() - this->m_isoMetric->defaultIsometricHarfWidth(),
+                                pixel.y(),
+                                *this->m_tileMapImage);
         } else
             painter->drawPixmap(pixel.x(), pixel.y(), *this->m_tileMapImage);
 
@@ -319,8 +325,8 @@ void TileMap::DrawMTilemapData(QPainter *painter)
             for(int i=0; i<this->m_tileMapData.length(); i++) {
                 for(int j=0; j<this->m_tileMapData[i].length(); j++) {
                     QPoint point = this->m_isoMetric->GetMetricPixel(j, i);
-                    painter->drawText(QRect(point.x() + Isometric::METRIC_HARF_WIDTH - 2,
-                                            point.y() + Isometric::METRIC_HARF_HEIGH - 5,
+                    painter->drawText(QRect(point.x() + this->m_isoMetric->defaultIsometricHarfWidth() - 2,
+                                            point.y() + this->m_isoMetric->defaultIsometricHarfHeight() - 5,
                                             20, 20),
                                       0,
                                       QString::number(this->m_tileMapData[i][j]));

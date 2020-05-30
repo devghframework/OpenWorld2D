@@ -31,24 +31,26 @@ DEFINES += DEBUG
 
 SOURCES += \
     camera/maincamera.cpp \
-    factory/objectcreator.cpp \
+    factory/objectmanager.cpp \
     factory/owobject.cpp \
     isometric/isometric.cpp \
     main.cpp \
     mainwindow.cpp \
     openworldwidget/owdrawwidget.cpp \
     scene/scene.cpp \
+    scene/scenemanager.cpp \
     tilemap/tilemap.cpp
 
 HEADERS += \
     camera/maincamera.h \
     factory/iowobject.h \
-    factory/objectcreator.h \
+    factory/objectmanager.h \
     factory/owobject.h \
     isometric/isometric.h \
     mainwindow.h \
     openworldwidget/owdrawwidget.h \
     scene/scene.h \
+    scene/scenemanager.h \
     tilemap/tilemap.h
 
 FORMS += \

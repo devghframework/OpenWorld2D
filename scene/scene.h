@@ -5,9 +5,15 @@
 
 #include <tilemap/tilemap.h>
 
-#include <factory/objectcreator.h>
+#include <factory/objectmanager.h>
 #include <factory/owobject.h>
 
+/*!
+ * \class Scene
+ * \brief The Scene class
+ *
+ * 배경과 인물등을 구성하는 클래스
+ */
 class Scene : public QObject
 {
     Q_OBJECT
@@ -17,20 +23,10 @@ public:
     virtual ~Scene();
 
 
-private slots:
-    void SceneWork();
-
 private:
-    QTimer timer;
-
-private:
-    /*!
-     * \brief mainThread
-     */
-    QThread *m_mainThread;
-
     TileMap *m_tileMap;
-    ObjectCreator *m_objectCreator;
+    ObjectManager *m_objectCreator;
+
 };
 
 #endif // SCENE_H

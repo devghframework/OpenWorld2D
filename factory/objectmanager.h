@@ -35,12 +35,12 @@
  * 1-1             주인공
  ************************************
  */
-class ObjectCreator
+class ObjectManager
 {
 
 public:
-    ObjectCreator();
-    virtual ~ObjectCreator();
+    ObjectManager();
+    virtual ~ObjectManager();
 
     void Create(int categoly);
     OwObject GetObject(QString key);

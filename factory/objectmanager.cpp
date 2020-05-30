@@ -9,7 +9,7 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "factory/objectcreator.h"
+#include "factory/objectmanager.h"
 
 #include <QDebug>
 #include <QPixmap>
@@ -22,17 +22,17 @@
 /*!
  * \brief ObjectCreator::ObjectCreator
  */
-ObjectCreator::ObjectCreator()
+ObjectManager::ObjectManager()
 {
 
 }
 
-ObjectCreator::~ObjectCreator()
+ObjectManager::~ObjectManager()
 {
     this->m_objectList.clear();
 }
 
-void ObjectCreator::Create(int categoly)
+void ObjectManager::Create(int categoly)
 {
 
     switch (categoly) {
@@ -48,7 +48,7 @@ void ObjectCreator::Create(int categoly)
 }
 
 
-void ObjectCreator::CreateCharactor()
+void ObjectManager::CreateCharactor()
 {
     OwObject charector;
 
@@ -70,20 +70,20 @@ void ObjectCreator::CreateCharactor()
 }
 
 
-void ObjectCreator::CreateObject()
+void ObjectManager::CreateObject()
 {
 
 }
 
 
-OwObject ObjectCreator::GetObject(QString key)
+OwObject ObjectManager::GetObject(QString key)
 {
     OwObject object =this->m_objectList[key];
     return object;
 }
 
 
-void ObjectCreator::DrawObjects(QPainter *painter)
+void ObjectManager::DrawObjects(QPainter *painter)
 {
     if(this->m_objectList.size()<=0) return;
 

@@ -19,6 +19,7 @@
 #include <QWidget>
 
 #include <scene/scene.h>
+#include <scene/scenemanager.h>
 
 /*!
  * \class OWDrawWidget
@@ -43,16 +44,17 @@ protected:
 
 public:
     void SetBackgroundColor(QColor);
+    Isometric *GetIsometric();
     QPoint GetMetricLocation(int, int);
     int GetBorderToucDir();
     void FadeIn();
     void FadeOut();
-    //Scene &GetScene(int sceneNo);
-
+    SceneManager *GetSceneManager();
 
 private:
     QWidget *m_openWorldWidget;
-    //Scene *m_scene;
+    Isometric *m_isometric;
+    SceneManager *m_sceneManager;
     MainCamera *m_mainCamera;
     QPoint *m_mousePoint;
 

@@ -16,19 +16,28 @@
 #include <QPainter>
 #include <QMessageBox>
 #include <QMap>
+#include <QDebug>
+#include <QThread>
 
-//#define _DEBUG
 
 OwObject::OwObject()
     : IOwObject()
 {
+    this->m_objectStatus = IOwObject::NONE;
 
+    //connect(&actionTimer, SIGNAL (timeout()), this, SLOT (ObjectAction()));
 }
 
 OwObject::~OwObject()
 {
 
 }
+
+//void OwObject::ObjectAction()
+//{
+
+//}
+
 
 QMap<QString, QObject> OwObject::GetObjects()
 {
@@ -55,8 +64,53 @@ void OwObject::DrawObject(QPainter *painter)
 
 void OwObject::MouseDown(int metricX, int metricY)
 {
-    Q_UNUSED(metricX);
-    Q_UNUSED(metricY);
+    qDebug() << "Metric Location(X,Y) : " << QString::number(metricX) << ", "
+             << QString::number(metricY);
+    qDebug() << "Object Status: " << this->m_objectStatus;
+
+    if (this->m_objectStatus == IOwObject::NONE) {
+        this->m_objectStatus = IOwObject::WORK;
+
+        this->m_moveStartPoint.setX(metricX);
+        this->m_moveStartPoint.setY(metricY);
+    } else if (this->m_objectStatus == IOwObject::WORK) {
+        this->m_moveEndPoint.setX(metricX);
+        this->m_moveEndPoint.setY(metricY);
+
+        // 걷기 시작한다.
+        // 1.길찾기 알고리즘
+        // 2.걷는 에니메이션 출력 (쓰레드 처리를 해야 하는데....)
+        qDebug() << "걷는다...."
+                 << "도착할 때까지...";
+        // 쓰레드 만들자....
+        // 일단 테스트
+        do {
+            if (this->m_moveEndPoint.x() > this->m_moveStartPoint.x()) {
+                this->m_moveStartPoint.setX(this->m_moveStartPoint.x() + 1);
+            } else if (this->m_moveEndPoint.x() < this->m_moveStartPoint.x()) {
+                this->m_moveStartPoint.setX(this->m_moveStartPoint.x() - 1);
+            } else {
+                qDebug() << "X 도착.";
+            }
+
+            if (this->m_moveEndPoint.y() > this->m_moveStartPoint.y()) {
+                this->m_moveStartPoint.setY(this->m_moveStartPoint.y() + 1);
+            } else if (this->m_moveEndPoint.y() < this->m_moveStartPoint.y()) {
+                this->m_moveStartPoint.setY(this->m_moveStartPoint.y() - 1);
+            } else {
+                qDebug() << "Y 도착.";
+            }
+            qDebug() << "MOVING Start(x,y) : " << this->m_moveStartPoint.x() << ", "
+                     << this->m_moveStartPoint.y() << " >> End(x,y) : " << this->m_moveEndPoint.x()
+                     << ", " << this->m_moveEndPoint.y();
+
+        } while (this->m_moveStartPoint.x() != this->m_moveEndPoint.x()
+                 || this->m_moveStartPoint.y() != this->m_moveEndPoint.y());
+
+        qDebug(">>>> 도착함.....");
+
+        this->m_objectStatus = IOwObject::NONE;
+    }
 }
 
 void OwObject::MouseUp(int metricX, int metricY)

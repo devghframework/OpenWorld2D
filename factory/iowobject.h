@@ -39,6 +39,7 @@
 class IOwObject
 {
     Q_GADGET
+    //Q_OBJECT
 
 protected:
 

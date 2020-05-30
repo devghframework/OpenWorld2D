@@ -34,7 +34,9 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
 
     this->setMouseTracking(true);
 
-    this->m_mainCamera = new MainCamera();
+    this->m_isometric = new Isometric();
+
+    this->m_mainCamera = new MainCamera(this->m_isometric);
     this->m_mainCamera->OptionShowDefaultTileMapImage(true);
     this->m_mainCamera->OptionShowTileMapLine(true);
     this->m_mainCamera->OptionShowTileData(true);
@@ -44,8 +46,8 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
     // Scene 에디터에서 작성 Scene데이를 로딩해서 처리 해야함.
     // 현재는 Scene 이 작성된 데이타가 없기 때문에 수작업으로 데이타를 만들어서 처리한다.
     // Scene 데이타는 하나만 존재하는 것으로 한다.
-//    this->m_scene = new Scene[1];
-//    this->m_scene->setParent(this);
+    this->m_sceneManager = new SceneManager(this->m_isometric);
+    this->m_sceneManager->setParent(this);
 }
 
 
@@ -57,16 +59,20 @@ OWDrawWidget::~OWDrawWidget()
 }
 
 
+Isometric *OWDrawWidget::GetIsometric()
+{
+    return this->m_isometric;
+}
+
 /*!
- * \brief OWDrawWidget::GetScene Scene 을 가져온다.
+ * \brief OWDrawWidget::GetSceneManager SceneManager 을 가져온다.
  * \param sceneNo
  * \return
  */
-//Scene &OWDrawWidget::GetScene(int sceneNo)
-//{
-//    Scene &scene = this->m_scene[sceneNo];
-//    return scene;
-//}
+SceneManager *OWDrawWidget::GetSceneManager()
+{
+    return this->m_sceneManager;
+}
 
 
 /*!
@@ -94,8 +100,7 @@ void OWDrawWidget::paintEvent(QPaintEvent*)
  */
 void OWDrawWidget::resizeEvent(QResizeEvent *event)
 {
-    Q_UNUSED(event);
-
+    this->m_sceneManager->resizeEvent(event);
     this->m_mainCamera->SetScreenSize(this->rect());
 }
 
@@ -117,8 +122,7 @@ void OWDrawWidget::timerEvent(QTimerEvent *event)
  */
 void OWDrawWidget::mousePressEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event);
-
+    this->m_sceneManager->mousePressEvent(event);
 }
 
 
@@ -128,8 +132,7 @@ void OWDrawWidget::mousePressEvent(QMouseEvent *event)
  */
 void OWDrawWidget::mouseReleaseEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event);
-
+    this->m_sceneManager->mouseReleaseEvent(event);
 }
 
 
@@ -139,6 +142,8 @@ void OWDrawWidget::mouseReleaseEvent(QMouseEvent *event)
  */
 void OWDrawWidget::mouseMoveEvent(QMouseEvent *event)
 {
+    this->m_sceneManager->mouseMoveEvent(event);
+
     *this->m_mousePoint = event->pos();
     update();
 

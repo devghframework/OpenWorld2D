@@ -16,6 +16,7 @@
 
 #include <QPoint>
 #include <QSize>
+#include <QTimer>
 
 /*!
  * \class OwObject
@@ -32,6 +33,7 @@ public:
     QObject *GetObject(QString key) override;
     void CreateObject() override;
     void DrawObject(QPainter *painter) override;
+
     void MouseDown(int metricX, int metricY) override;
     void MouseUp(int metricX, int metricY) override;
     void MouseMove(int metricX, int metricY) override;
@@ -41,6 +43,12 @@ public:
 
 private:
     void CreateSplitImage();
+
+//private slots:
+//    void ObjectAction();
+
+private:
+//    QTimer actionTimer;
 
 private:
 // 객체의 기본 특성을 정의한다.
@@ -58,6 +66,11 @@ private:
 
     QPoint m_metricLocation; // 오브젝트의 매트릭 좌표
     QPoint m_pixelLocation;  // 오브젝트의 픽셀 좌표
+
+    int m_objectStatus;  // OBJECT_STATUS
+
+    QPoint m_moveStartPoint; // 시작좌표 : 케릭터 이동
+    QPoint m_moveEndPoint;   // 도착좌표 : 케릭터 이동
 
 #pragma endregion OBJECT_FIELDS
 };

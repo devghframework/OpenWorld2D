@@ -19,9 +19,9 @@
 
 //#define DEBUG
 
-MainCamera::MainCamera()
+MainCamera::MainCamera(Isometric *isometric)
 {
-    this->m_isoMetric = new Isometric();
+    this->m_isoMetric = isometric;
     this->m_bDrawBackgroundImage = true;
     this->m_tileMap = new TileMap(this->m_isoMetric);
     this->m_backgroundColor = new QBrush(QColor(Qt::black));
@@ -93,6 +93,6 @@ void MainCamera::Draw(QPaintDevice *device, QPoint *mousePoint) {
     m_isoMetric->SetLocation(mousePoint->x(), mousePoint->y());
     m_isoMetric->DrawMouseMarker(&painter);
 
-    // Object 출력
-    m_objManager->DrawObjects(&painter);
+    // Scene 출력
+    // m_objManager->DrawObjects(&painter);
 }

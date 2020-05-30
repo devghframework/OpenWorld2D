@@ -95,11 +95,11 @@ void Isometric::CalculateMetricPosition(int mouseX, int mouseY) {
     this->m_offY = mouseY % this->m_defaultIsometricHeight;
 
 #ifdef DEBUG
-    qDebug() << "MOUSE X, Y " << QString::number(mouseX) << ", " << QString::number(mouseY);
-    qDebug() << "REGION X, Y : " << QString::number(this->m_regionX) << ", "
-             << QString::number(this->m_regionY);
-    qDebug() << "OFFSET X, Y : " << QString::number(this->m_offX) << ", "
-             << QString::number(this->m_offY);
+//    qDebug() << "MOUSE X, Y " << QString::number(mouseX) << ", " << QString::number(mouseY);
+//    qDebug() << "REGION X, Y : " << QString::number(this->m_regionX) << ", "
+//             << QString::number(this->m_regionY);
+//    qDebug() << "OFFSET X, Y : " << QString::number(this->m_offX) << ", "
+//             << QString::number(this->m_offY);
 #endif
 }
 
@@ -114,7 +114,7 @@ void Isometric::CalculateMetricZone() {
     int posMouseMapData = this->m_defaultMouseMapData[this->m_offY][this->m_offX];
 
 #ifdef DEBUG
-    qDebug() << "MouseMapData: " << QString::number(posMouseMapData);
+//    qDebug() << "MouseMapData: " << QString::number(posMouseMapData);
 #endif
 
     // 마우스 데이타맵 데이타 위치의 매트릭 위치로 이동한다.

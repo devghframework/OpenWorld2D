@@ -43,9 +43,14 @@ public:
     virtual ~ObjectManager();
 
     void Create(int categoly);
-    OwObject GetObject(QString key);
-    void DrawObjects(QPainter *painter);
+    //OwObject GetObject(QString key);
+    void DrawObjects(QPainter *painter); // 필요없음.
 
+    // 움직일 수 있는 오브젝트에게만 이벤트를 전달한다.
+    // 현재는 카테고리 1 (케릭터) 만 존재한다.
+    void MouseDown(int metricX, int metricY);
+    void MouseUp(int metricX, int metricY);
+    void MouseMove(int metricX, int metricY);
 
 private:
     QMap<QString, OwObject> m_objectList;

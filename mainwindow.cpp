@@ -240,6 +240,6 @@ void MainWindow::on_btnViewCharactor_clicked()
 
 void MainWindow::on_btnScene1_clicked()
 {
-    //Scene &scene = this->m_ui->widgetOpenWorld->GetScene(0);
-    //scene.SceneOperate("액션~~~");
+//    SceneManager *sceneManager = this->m_ui->widgetOpenWorld->GetSceneManager();
+//    sceneManager->SceneAction();
 }

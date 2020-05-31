@@ -48,14 +48,9 @@ private slots:
     void on_chkShowTileLine_stateChanged(int arg1);
     void on_chkShowDataMap_stateChanged(int arg1);
     void on_chkScroll_stateChanged(int arg1);
-
-
     void on_btnFadeIn_clicked();
-
     void on_btnFadeOut_clicked();
-
     void on_btnViewCharactor_clicked();
-
     void on_btnScene1_clicked();
 
 private:

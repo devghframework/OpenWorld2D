@@ -30,6 +30,8 @@ DEFINES += DEBUG
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    scene/scene.cpp \
+    scene/scenemanager.cpp \
     camera/maincamera.cpp \
     factory/objectmanager.cpp \
     factory/owobject.cpp \
@@ -37,11 +39,11 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     openworldwidget/owdrawwidget.cpp \
-    scene/scene.cpp \
-    scene/scenemanager.cpp \
     tilemap/tilemap.cpp
 
 HEADERS += \
+    scene/scene.h \
+    scene/scenemanager.h \
     camera/maincamera.h \
     factory/iowobject.h \
     factory/objectmanager.h \
@@ -49,8 +51,6 @@ HEADERS += \
     coordinatesystem/isometric.h \
     mainwindow.h \
     openworldwidget/owdrawwidget.h \
-    scene/scene.h \
-    scene/scenemanager.h \
     tilemap/tilemap.h
 
 FORMS += \

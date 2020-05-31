@@ -34,13 +34,9 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
 
     this->setMouseTracking(true);
 
-    this->m_isometric = new Isometric();
+    //Q_GLOBAL_STATIC(DrawManager, this->m_drawManager);
 
-    this->m_mainCamera = new MainCamera(this->m_isometric);
-    this->m_mainCamera->OptionShowDefaultTileMapImage(true);
-    this->m_mainCamera->OptionShowTileMapLine(true);
-    this->m_mainCamera->OptionShowTileData(true);
-    this->m_mousePoint = new QPoint(100, 100); // 시작 마우스 위치
+    this->m_isometric = new Isometric();
 
     // Scene 에디터가 필요함.
     // Scene 에디터에서 작성 Scene데이를 로딩해서 처리 해야함.
@@ -48,6 +44,17 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
     // Scene 데이타는 하나만 존재하는 것으로 한다.
     this->m_sceneManager = new SceneManager(this->m_isometric);
     this->m_sceneManager->setParent(this);
+
+    this->m_mainCamera = new MainCamera(this->m_isometric, this->m_sceneManager);
+    this->m_mainCamera->setParent(this);
+    this->m_mainCamera->OptionShowDefaultTileMapImage(true);
+    this->m_mainCamera->OptionShowTileMapLine(true);
+    this->m_mainCamera->OptionShowTileData(true);
+
+    this->m_mousePoint = new QPoint(100, 100); // 시작 마우스 위치
+
+    connect(&this->m_renderingTimer, SIGNAL(timeout()), this, SLOT(update()));
+    this->m_renderingTimer.start(50);
 }
 
 
@@ -56,8 +63,8 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
  */
 OWDrawWidget::~OWDrawWidget()
 {
+    this->m_renderingTimer.stop();
 }
-
 
 Isometric *OWDrawWidget::GetIsometric()
 {
@@ -145,7 +152,7 @@ void OWDrawWidget::mouseMoveEvent(QMouseEvent *event)
     this->m_sceneManager->mouseMoveEvent(event);
 
     *this->m_mousePoint = event->pos();
-    update();
+    //update();
 
     QPoint metricLocation = GetMetricLocation(event->pos().x(), event->pos().y());
     int *borderData = this->GetMainCamera()->GetTileMap()->GetOutsideBorderLocation();
@@ -170,7 +177,7 @@ void OWDrawWidget::mouseMoveEvent(QMouseEvent *event)
  */
 void OWDrawWidget::SetBackgroundColor(QColor color) {
     this->m_mainCamera->SetBackgroundColor(new QBrush(color));
-    update();
+    //update();
 }
 
 

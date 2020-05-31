@@ -11,32 +11,24 @@
 
 #include "scene/scene.h"
 
+#include <coordinatesystem/isometric.h>
 #include <QDebug>
 #include <QObject>
+#include <QPoint>
 #include <QThread>
 #include <QtGlobal>
-#include <QPoint>
 
-
-#include <coordinatesystem/isometric.h>
-
-
-Scene::Scene()
+Scene::Scene(Isometric *isometric)
 {
-    this->m_objectManager = new ObjectManager();
+    this->m_isoMetric = isometric;
+    this->m_objectManager = new ObjectManager(isometric);
 
     // 씬들은 에디터에 의해 생성되고 바이너리 파일로 저장되어 있어야 한다. --> 데이타 암호화 시켜야 한다.(네트워크 통신 프로토콜도 암호화 필요)
     // 현재 데이타 처리가 되어 있지 않아서 동적으로 임시로 생성한다.
-    this->m_objectManager->Create(1);  // 카테고리에 등록되어 있는 케릭터 생성
+    this->m_objectManager->Create(1); // 카테고리에 등록되어 있는 케릭터 생성
 }
 
 Scene::~Scene() {}
-
-void Scene::SetIsometric(Isometric *isometric)
-{
-    this->m_isoMetric = isometric;
-}
-
 
 void Scene::mousePressEvent(const QMouseEvent *event)
 {
@@ -47,10 +39,15 @@ void Scene::mousePressEvent(const QMouseEvent *event)
 
 void Scene::mouseReleaseEvent(const QMouseEvent *event)
 {
-
+    Q_UNUSED(event)
 }
 
 void Scene::mouseMoveEvent(const QMouseEvent *event)
 {
+    Q_UNUSED(event)
+}
 
+void Scene::DrawScene(QPainter *painter)
+{
+    this->m_objectManager->DrawObjects(painter);
 }

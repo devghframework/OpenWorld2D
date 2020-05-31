@@ -69,6 +69,8 @@ void OwObject::ObjectAction()
 
 int OwObject::CheckDirection(int moveOldX, int moveOldY, int moveX, int moveY)
 {
+    //m_movingDirection
+        
     enum Dir {
         N = 0b00000001, // 1
         S = 0b00000010, // 2

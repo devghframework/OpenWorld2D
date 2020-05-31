@@ -10,22 +10,23 @@
  */
 
 #include "factory/objectmanager.h"
+#include "camera/maincamera.h"
 
-#include <QObject>
 #include <QDebug>
-#include <QPixmap>
-#include <QImageReader>
 #include <QImage>
-
+#include <QImageReader>
+#include <QObject>
+#include <QPainter>
+#include <QPixmap>
 
 #define DEUBG
 
 /*!
  * \brief ObjectCreator::ObjectCreator
  */
-ObjectManager::ObjectManager()
+ObjectManager::ObjectManager(Isometric *isometric)
 {
-
+    this->m_isometric = isometric;
 }
 
 ObjectManager::~ObjectManager()
@@ -50,55 +51,71 @@ void ObjectManager::Create(int categoly)
 
 void ObjectManager::CreateCharactor()
 {
-    OwObject charector;
+    // 오브젝트 생성
+    OwObject *owObject = new OwObject(this->m_isometric);
+    owObject->setParent(this);
+    //*owObject->m_splitObjectInfo = new ObjectSplitImageInfo[2];
 
-    ObjectSplitImageInfo *objInfo = charector.GetObjectSplitImageInfo();
-    objInfo = new ObjectSplitImageInfo();
-    objInfo->originFileName
+    // 남쪽방향 이동
+    ObjectSplitImageInfo *moveS = new ObjectSplitImageInfo();
+    moveS->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    objInfo->copyStartPoint = QPoint(0, 0);
-    objInfo->fullWidth = 96;
-    objInfo->fullHeight = 32;
-    objInfo->width = 32;
-    objInfo->height = 32;
-    objInfo->actionNo = 1;
-    objInfo->totalSplitCount = 3;
+    moveS->copyStartPoint = QPoint(0, 0);
+    moveS->copyDirection = IOwObject::COPY_RIGHT;
+    moveS->fullWidth = 96;
+    moveS->fullHeight = 32;
+    moveS->width = 32;
+    moveS->height = 32;
+    moveS->actionNo = IOwObject::DIRECTION_S;
+    moveS->totalSplitCount = 3;
+    moveS->movePixel = 2;
+    owObject->m_splitObjectInfo.insert(IOwObject::DIRECTION_S, moveS);
 
-    charector.SetObjectSplitImageInfo(objInfo);
+    // 북쪽방향 이동
+    ObjectSplitImageInfo *moveN = new ObjectSplitImageInfo();
+    moveN->originFileName
+        = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
+    moveN->copyDirection = IOwObject::COPY_RIGHT;
+    moveN->copyStartPoint = QPoint(0, 98);
+    moveN->fullWidth = 96;
+    moveN->fullHeight = 32;
+    moveN->width = 32;
+    moveN->height = 32;
+    moveN->actionNo = IOwObject::DIRECTION_N;
+    moveN->totalSplitCount = 3;
+    moveN->movePixel = 2;
+    owObject->m_splitObjectInfo.insert(IOwObject::DIRECTION_N, moveN);
 
-    this->m_objectList.insert("1", charector);
+    // 오브젝트 등록
+    owObject->SetObjectSplitImageInfo(owObject->m_splitObjectInfo);
+    this->m_objectList.insert(IOwObject::STATUS_WORK, owObject);
 }
 
-
-void ObjectManager::CreateObject()
-{
-
-}
+void ObjectManager::CreateObject() {}
 
 void ObjectManager::DrawObjects(QPainter *painter)
 {
-//    if(this->m_objectList.size()<=0) return;
+    if (this->m_objectList.size() <= 0)
+        return;
 
-//    for(int i=0; i<this->m_objectList.size(); i++) {
-//        OwObject obj = this->m_objectList["1"];
-//        ObjectSplitImageInfo *charector = obj.GetObjectSplitImageInfo();
-//        painter->drawPixmap(100, 100, charector->splitImage[0]);
-//        painter->drawPixmap(132, 100, charector->splitImage[1]);
-//        painter->drawPixmap(164, 100, charector->splitImage[2]);
-//    }
+    if (this->m_objectList[IOwObject::STATUS_WORK]) {
+        this->m_objectList[IOwObject::STATUS_WORK]->DrawObject(painter);
+    }
 }
 
 void ObjectManager::MouseDown(int metricX, int metricY)
 {
-    this->m_objectList["1"].MouseDown(metricX, metricY);
+    this->m_objectList[IOwObject::STATUS_WORK]->MouseDown(metricX, metricY);
 }
 
 void ObjectManager::MouseUp(int metricX, int metricY)
 {
-
+    Q_UNUSED(metricX)
+    Q_UNUSED(metricY)
 }
 
 void ObjectManager::MouseMove(int metricX, int metricY)
 {
-
+    Q_UNUSED(metricX)
+    Q_UNUSED(metricY)
 }

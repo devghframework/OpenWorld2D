@@ -12,15 +12,14 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <QObject>
 #include <QMouseEvent>
+#include <QObject>
 
 #include <tilemap/tilemap.h>
 
+#include <coordinatesystem/isometric.h>
 #include <factory/objectmanager.h>
 #include <factory/owobject.h>
-#include <coordinatesystem/isometric.h>
-
 
 /*!
  * \class Scene
@@ -33,14 +32,14 @@ class Scene : public QObject
     Q_OBJECT
 
 public:
-    Scene();
+    Scene(Isometric *isometric);
     virtual ~Scene();
-
-    void SetIsometric(Isometric *);
 
     void mousePressEvent(const QMouseEvent *);
     void mouseReleaseEvent(const QMouseEvent *);
     void mouseMoveEvent(const QMouseEvent *);
+
+    void DrawScene(QPainter *);
 
 private:
     TileMap *m_tileMap; // 씬의 배경 그림 (이미지가 아니라 데이타 형태로 불러와야 함)

@@ -10,22 +10,23 @@
  */
 
 #include "camera/maincamera.h"
+#include "scene/scene.h"
+#include "scene/scenemanager.h"
 
-#include <QPainter>
-#include <QRect>
-#include <QImageReader>
 #include <QBrush>
 #include <QColor>
+#include <QImageReader>
+#include <QPainter>
+#include <QRect>
 
-//#define DEBUG
-
-MainCamera::MainCamera(Isometric *isometric)
+MainCamera::MainCamera(Isometric *isometric, SceneManager *sceneManager)
 {
     this->m_isoMetric = isometric;
+    this->m_sceneManager = sceneManager;
+
     this->m_bDrawBackgroundImage = true;
     this->m_tileMap = new TileMap(this->m_isoMetric);
     this->m_backgroundColor = new QBrush(QColor(Qt::black));
-    this->m_objManager = new ObjectManager();
 }
 
 
@@ -41,12 +42,6 @@ Isometric *MainCamera::GetIsoMetric() {
 
 TileMap *MainCamera::GetTileMap() {
     return this->m_tileMap;
-}
-
-
-ObjectManager *MainCamera::GetObjectCreator()
-{
-    return this->m_objManager;
 }
 
 
@@ -94,5 +89,5 @@ void MainCamera::Draw(QPaintDevice *device, QPoint *mousePoint) {
     m_isoMetric->DrawMouseMarker(&painter);
 
     // Scene 출력
-    // m_objManager->DrawObjects(&painter);
+    this->m_sceneManager->GetScene("1")->DrawScene(&painter);
 }

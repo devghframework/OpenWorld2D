@@ -139,7 +139,7 @@ void MainWindow::on_cboBackgroundColor_currentIndexChanged(int index)
     QVariant variant = this->m_ui->cboBackgroundColor->itemData(index);
     QColor color = variant.value<QColor>();
     this->m_ui->widgetOpenWorld->GetMainCamera()->SetBackgroundColor(new QBrush(color));
-    this->m_ui->widgetOpenWorld->repaint();
+    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -157,7 +157,7 @@ void MainWindow::on_btnLoadBackgroundImage_clicked()
         this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->SetTileImage(strFileName.toUtf8());
         this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionShowDefaultTileMapImage(false);
         this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionScroll(this->m_ui->chkScroll->isChecked());
-        this->m_ui->widgetOpenWorld->repaint();
+        //this->m_ui->widgetOpenWorld->repaint();
     }
 }
 
@@ -171,7 +171,7 @@ void MainWindow::on_chkShowDefaultTileMap_stateChanged(int arg1)
     Q_UNUSED(arg1);
 
     this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowDefaultTileMapImage(this->m_ui->chkShowDefaultTileMap->isChecked());
-    this->m_ui->widgetOpenWorld->repaint();
+    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -183,7 +183,7 @@ void MainWindow::on_chkShowTileLine_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileMapLine(this->m_ui->chkShowTileLine->isChecked());
-    this->m_ui->widgetOpenWorld->repaint();
+    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -196,7 +196,7 @@ void MainWindow::on_chkShowDataMap_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileData(this->m_ui->chkShowDataMap->isChecked());
-    this->m_ui->widgetOpenWorld->repaint();
+    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -234,8 +234,8 @@ void MainWindow::on_btnFadeOut_clicked()
  */
 void MainWindow::on_btnViewCharactor_clicked()
 {
-    this->m_ui->widgetOpenWorld->GetMainCamera()->GetObjectCreator()->Create(1);
-    this->m_ui->widgetOpenWorld->repaint();
+    //this->m_ui->widgetOpenWorld->GetMainCamera()->GetObjectCreator()->Create(1);
+    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 void MainWindow::on_btnScene1_clicked()

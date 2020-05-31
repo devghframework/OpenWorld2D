@@ -14,12 +14,12 @@
 
 #include "camera/maincamera.h"
 
+#include <scene/scene.h>
+#include <scene/scenemanager.h>
+
 #include <QPainter>
 #include <QThread>
 #include <QWidget>
-
-#include <scene/scene.h>
-#include <scene/scenemanager.h>
 
 /*!
  * \class OWDrawWidget
@@ -57,6 +57,9 @@ private:
     SceneManager *m_sceneManager;
     MainCamera *m_mainCamera;
     QPoint *m_mousePoint;
+
+private:
+    QTimer m_renderingTimer;
 
     /*!
      * \brief m_borderTouchDir 마우스가 어느방향의 테두리를 터치하였는지 저장

@@ -12,11 +12,8 @@
 #ifndef IOBJECTGENERATOR_H
 #define IOBJECTGENERATOR_H
 
-//#include <QtCore>
-//#include <QMap>
 #include <QObject>
 #include <QPainter>
-
 
 /*!
  * \class IObjectGenerator
@@ -46,19 +43,17 @@ protected:
     // 오브젝트의 액션이나 이벤트를 정의한다.
     #pragma region OBJECT_ACTION
 
-    virtual QMap<QString, QObject> GetObjects() = 0;
-    virtual QObject *GetObject(QString key) = 0;
+    //virtual QMap<QString, QObject> GetObjects() = 0;
+    //virtual QObject *GetObject(QString key) = 0;
     virtual void CreateObject() {}
-    virtual void DrawObject(QPainter *painter) { Q_UNUSED(painter);}
-    virtual void MouseDown(int metricX, int metricY) { Q_UNUSED(metricX); Q_UNUSED(metricY);}
-    virtual void MouseUp(int metricX, int metricY) { Q_UNUSED(metricX); Q_UNUSED(metricY);}
-    virtual void MouseMove(int metricX, int metricY) { Q_UNUSED(metricX); Q_UNUSED(metricY);}
+    virtual void DrawObject(QPainter *) {}
+    virtual void MouseDown(int, int) {}
+    virtual void MouseUp(int, int) {}
+    virtual void MouseMove(int, int) {}
 
-    #pragma endregion OBJECT_ACTION
-
+#pragma endregion OBJECT_ACTION
 
 public:
-
     /*!
      * \brief The MOUSE_ACTION enum 마우스 이벤트
      */
@@ -69,45 +64,48 @@ public:
     };
     Q_ENUM(MOUSE_ACTION)
 
-
     /*!
      * \brief The OBJECT_STATUS enum 오브젝트의 상태
      */
     enum OBJECT_STATUS {
-        NONE = 0,  // 초기상태 (일반 사물일 경우 NONE 값을 가진다. 나무, 돌 등)
-        STAY,  // 대기 상태
-        WORK,  // 걷는 상태
-        RUN,   // 달리는 상태
-        IDLE,  // 쉬는 상태
-        STOP,  // 액션을 하다 멈춘상태
-        TALK,  // 대화중
-        CHAT   // 채팅중
+        STATUS_NONE = 0, // 초기상태 (일반 사물일 경우 NONE 값을 가진다. 나무, 돌 등)
+        STATUS_STAY, // 대기 상태
+        STATUS_WORK, // 걷는 상태
+        STATUS_RUN,  // 달리는 상태
+        STATUS_IDLE, // 쉬는 상태
+        STATUS_STOP, // 액션을 하다 멈춘상태
+        STATUS_TALK, // 대화중
+        STATUS_CHAT  // 채팅중
     };
     Q_ENUM(OBJECT_STATUS)
-
 
     /*!
      * \brief The OBJECT_MOVE_DIRECTION enum 사물이 움직이는 방향
      */
     enum OBJECT_MOVE_DIRECTION {
-        DEFAULT = 0,  // 정면을 바라본 초기 상태
-        E,  // 동쪽
-        W,  // 서쪽
-        S,  // 남쪽
-        N,  // 북쪽
-        NE, // 북동쪽
-        NW, // 북서쪽
-        SE, // 남동쪽
-        SW  // 남서쪽
+        DIRECTION_DEFAULT = 0, // 정면을 바라본 초기 상태
+        DIRECTION_E,           // 동쪽
+        DIRECTION_W,           // 서쪽
+        DIRECTION_S,           // 남쪽
+        DIRECTION_N,           // 북쪽
+        DIRECTION_NE,          // 북동쪽
+        DIRECTION_NW,          // 북서쪽
+        DIRECTION_SE,          // 남동쪽
+        DIRECTION_SW           // 남서쪽
     };
     Q_ENUM(OBJECT_MOVE_DIRECTION)
 
     /*!
      * \brief The SPLITIMAGE_COPY_DIR enum 원본 이미지에서 복사할 방향
      */
-    enum SPLITIMAGE_COPY_DIR { RIGHT = 0, BOTTOM };
+    enum SPLITIMAGE_COPY_DIR { COPY_RIGHT = 0, COPY_BOTTOM };
     Q_ENUM(SPLITIMAGE_COPY_DIR)
 
+    /*!
+     * \brief The OBJECT_DESTINATION enum 목작지 도착지 여부 (출발, 도착)
+     */
+    enum OBJECT_DESTINATION { NO_DESTINATION = 0, DESTINATION_START, DESTINATION_ARRIVED };
+    Q_ENUM(OBJECT_DESTINATION)
 };
 
 /*!
@@ -124,6 +122,7 @@ typedef struct structObjectSplitImage {
     int fullHeight;         // 이미지 전체 높이
     int width;              // 이미지 하나의 넓이
     int height;             // 이미지 하나의 높이
+    int movePixel;          // 이동시 픽셀
     QPixmap *splitImage;    // 1차원 배열 (행동양식에 해당하는 이미지 배열)
 } ObjectSplitImageInfo;
 

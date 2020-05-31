@@ -9,15 +9,15 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-
 #ifndef OBJECTCREATOR_H
 #define OBJECTCREATOR_H
 
 #include "factory/owobject.h"
 
-#include <QObject>
 #include <QMap>
+#include <QObject>
 
+#include <coordinatesystem/isometric.h>
 
 /*!
  * \class ObjectCreator
@@ -41,12 +41,12 @@ class ObjectManager : public QObject
     Q_OBJECT
 
 public:
-    ObjectManager();
+    ObjectManager(Isometric *);
     virtual ~ObjectManager();
 
     void Create(int categoly);
     //OwObject GetObject(QString key);
-    void DrawObjects(QPainter *painter); // 필요없음.
+    void DrawObjects(QPainter *painter);
 
     // 움직일 수 있는 오브젝트에게만 이벤트를 전달한다.
     // 현재는 카테고리 1 (케릭터) 만 존재한다.
@@ -55,8 +55,8 @@ public:
     void MouseMove(int metricX, int metricY);
 
 private:
-    QMap<QString, OwObject> m_objectList;
-
+    Isometric *m_isometric;
+    QMap<int, OwObject *> m_objectList;
 
 private:
     void CreateCharactor();

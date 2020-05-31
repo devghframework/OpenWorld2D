@@ -13,38 +13,36 @@
 #define DRAWMANAGER_H
 
 #include "coordinatesystem/isometric.h"
+#include "scene/scene.h"
+#include "scene/scenemanager.h"
 #include "tilemap/tilemap.h"
 
 #include <QPainter>
 #include <QRect>
 
-#include <factory/objectmanager.h>
-
-#include <scene/scene.h>
-
 /*!
  * \class MainCamera
  * \brief The MainCamera class
  */
-class MainCamera
+class MainCamera : public QObject
 {
-public:
-    MainCamera(Isometric *);
-    ~MainCamera();
+    Q_OBJECT
 
+public:
+    MainCamera(Isometric *, SceneManager *);
+    virtual ~MainCamera();
 
 private:
     Isometric *m_isoMetric;
+    SceneManager *m_sceneManager;
     TileMap *m_tileMap;
     QBrush *m_backgroundColor;
     QRect m_backgroundSize;
     QPixmap m_backgroundDefaultImage;
-    ObjectManager *m_objManager;
 
 public:
     Isometric *GetIsoMetric();
     TileMap *GetTileMap();
-    ObjectManager *GetObjectCreator();
 
     void SetBackgroundColor(QBrush *brush);
     void SetScreenSize(QRect rect);

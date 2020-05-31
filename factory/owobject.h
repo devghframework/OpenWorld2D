@@ -14,26 +14,31 @@
 
 #include "factory/iowobject.h"
 
+#include <QMap>
 #include <QObject>
+#include <QPaintEvent>
 #include <QPoint>
 #include <QSize>
 #include <QTimer>
+
+#include <coordinatesystem/isometric.h>
 
 /*!
  * \class OwObject
  * \brief The OwObject class
  *
  */
-class OwObject : public IOwObject
+class OwObject : public QObject, IOwObject
 {
-    //Q_OBJECT
+    Q_OBJECT
+    //Q_DISABLE_COPY(OwObject)
 
 public:
-    OwObject();
+    OwObject(Isometric *isometric);
     virtual ~OwObject();
 
-    QMap<QString, QObject> GetObjects() override;
-    QObject *GetObject(QString key) override;
+    //    QMap<QString, QObject> GetObjects() override;
+    //    QObject *GetObject(QString key) override;
     void CreateObject() override;
     void DrawObject(QPainter *painter) override;
 
@@ -41,17 +46,24 @@ public:
     void MouseUp(int metricX, int metricY) override;
     void MouseMove(int metricX, int metricY) override;
 
-    void SetObjectSplitImageInfo(ObjectSplitImageInfo *);
-    ObjectSplitImageInfo *GetObjectSplitImageInfo();
+    void SetObjectSplitImageInfo(QMap<int, ObjectSplitImageInfo *>);
+    //    ObjectSplitImageInfo *GetObjectSplitImageInfo();
 
 private:
     void CreateSplitImage();
+    void ArrivedDestinationEvent();
+    int CheckDirection(int moveOldX, int moveOldY, int moveX, int moveY);
 
-//private slots:
-//    void ObjectAction();
+private slots:
+    void ObjectAction();
 
 private:
-//    QTimer actionTimer;
+    Isometric *m_isometric;
+    QTimer m_actionTimer;
+
+public:
+    //ObjectSplitImageInfo **m_splitObjectInfo; // 객체의 행동 이미지가 들어 있는 구조체의 1차원 배열
+    QMap<int, ObjectSplitImageInfo *> m_splitObjectInfo;
 
 private:
 // 객체의 기본 특성을 정의한다.
@@ -63,17 +75,19 @@ private:
      * 하나의 행동양식은 여러장의 이미지로 이루어 진다.
      * 각 배열에는 하나의 행동양식으로 이루어져 있다.
      */
-    ObjectSplitImageInfo *m_splitObjectInfo; // 객체의 행동 이미지가 들어 있는 구조체의 1차원 배열
-    //int m_objectStatus;    // 오브젝트 상태 (OBJECT_STATUS 값을 가진다.)
-    //int m_animationNo = 0; // Animation 을 할 경우 split image 의 번호
+    int m_objectStatus; // 오브젝트 상태 (OBJECT_STATUS 값을 가진다.)
+
+    int m_animationNo = 0; // Animation 을 할 경우 split image 의 번호
+    int m_destination = OBJECT_DESTINATION::NO_DESTINATION; // 목적지 도착상태
 
     QPoint m_metricLocation; // 오브젝트의 매트릭 좌표
     QPoint m_pixelLocation;  // 오브젝트의 픽셀 좌표
 
-    int m_objectStatus;  // OBJECT_STATUS
-
-    QPoint m_moveStartPoint; // 시작좌표 : 케릭터 이동
-    QPoint m_moveEndPoint;   // 도착좌표 : 케릭터 이동
+    QPoint m_moveStartPoint;      // 시작좌표 : 케릭터 이동
+    QPoint m_moveEndPoint;        // 도착좌표 : 케릭터 이동
+    QPoint m_moveStartPointPixel; // 시작좌표 : 케릭터 이동
+    QPoint m_moveEndPointPixel;   // 도착좌표 : 케릭터 이동
+    int m_movingDirection;        // 움직이고 있는 방향 (OBJECT_MOVE_DIRECTION)
 
 #pragma endregion OBJECT_FIELDS
 };

@@ -12,7 +12,8 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
 
-#include "scene.h"
+#include "coordinatesystem/isometric.h"
+#include "scene/scene.h"
 
 #include <QObject>
 #include <QPaintEvent>
@@ -21,8 +22,6 @@
 #include <QMouseEvent>
 #include <QPoint>
 
-#include <coordinatesystem/isometric.h>
-#include <camera/maincamera.h>
 
 
 class SceneManager : public QObject
@@ -33,10 +32,7 @@ public:
     SceneManager(Isometric *);
     virtual ~SceneManager();
 
-    Scene *GetScene(QString &);
-    void SceneAction();
-    void SceneStop();
-    void SetCamera(const MainCamera &);
+    Scene *GetScene(const QString &);
 
     void paintEvent(const QPaintEvent *);
     void resizeEvent(const QResizeEvent *);
@@ -47,12 +43,7 @@ public:
 protected:
     void CreateScene();
 
-private slots:
-    void SceneWork();
-
 private:
-    QTimer timer; // 삭제 예정
-    //MainCamera m_mainCamera;
     Isometric *m_isometric;
     QPoint point;
 

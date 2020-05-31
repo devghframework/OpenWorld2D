@@ -66,7 +66,7 @@ X 각도 : 26.57 (0.005도 차이가 있음)<br>
 Y 각도 : 26.57 (0.005도 차이가 있음)<br>
 <br>
 <br>
-프로그램내에서 사용되는 좌표체계는 현재 네가지이다.<br>
+프로그램내에서 사용되는 좌표체계는 현재 세가지이다.<br>
 <br>
   월드 좌표계 (World Coordinate System)<br>
   픽셀 좌표계 (Pixel Image Coordinate System)<br>

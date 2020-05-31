@@ -14,6 +14,7 @@
 
 #include "factory/iowobject.h"
 
+#include <QObject>
 #include <QPoint>
 #include <QSize>
 #include <QTimer>
@@ -25,6 +26,8 @@
  */
 class OwObject : public IOwObject
 {
+    //Q_OBJECT
+
 public:
     OwObject();
     virtual ~OwObject();

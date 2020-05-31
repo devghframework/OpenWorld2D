@@ -21,7 +21,7 @@
 #include <QMouseEvent>
 #include <QPoint>
 
-#include <isometric/isometric.h>
+#include <coordinatesystem/isometric.h>
 #include <camera/maincamera.h>
 
 

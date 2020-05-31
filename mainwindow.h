@@ -13,7 +13,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "isometric/isometric.h"
+#include "coordinatesystem/isometric.h"
 #include "camera/maincamera.h"
 #include "tilemap/tilemap.h"
 #include <QTimer>

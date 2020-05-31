@@ -11,7 +11,7 @@
 
 
 #include "tilemap/tilemap.h"
-#include "isometric/isometric.h"
+#include "coordinatesystem/isometric.h"
 
 #include <QString>
 #include <QImageReader>

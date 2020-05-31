@@ -12,7 +12,7 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
-#include "isometric/isometric.h"
+#include "coordinatesystem/isometric.h"
 
 #include <QtCore>
 #include <QPixmap>

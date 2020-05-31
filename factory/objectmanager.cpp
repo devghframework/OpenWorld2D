@@ -11,6 +11,7 @@
 
 #include "factory/objectmanager.h"
 
+#include <QObject>
 #include <QDebug>
 #include <QPixmap>
 #include <QImageReader>

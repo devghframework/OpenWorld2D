@@ -9,7 +9,7 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "isometric/isometric.h"
+#include "coordinatesystem/isometric.h"
 #include "qdebug.h"
 #include <QPainter>
 #include <QString>

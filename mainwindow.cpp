@@ -16,7 +16,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "isometric/isometric.h"
+#include "coordinatesystem/isometric.h"
 #include "camera/maincamera.h"
 #include "openworldwidget/owdrawwidget.h"
 

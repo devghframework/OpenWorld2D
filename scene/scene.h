@@ -19,14 +19,14 @@
 
 #include <factory/objectmanager.h>
 #include <factory/owobject.h>
-#include <isometric/isometric.h>
+#include <coordinatesystem/isometric.h>
 
 
 /*!
  * \class Scene
  * \brief The Scene class
  *
- * 배경과 인물등을 구성하는 클래스
+ * 배경과 인물/사물등을 구성하는 클래스
  */
 class Scene : public QObject
 {
@@ -44,7 +44,7 @@ public:
 
 private:
     TileMap *m_tileMap; // 씬의 배경 그림 (이미지가 아니라 데이타 형태로 불러와야 함)
-    ObjectManager *m_objectCreator; // 등장인물과 사물들 생성 관리자.
+    ObjectManager *m_objectManager; // 등장인물과 사물들 생성 관리자.
     Isometric *m_isoMetric;
 };
 

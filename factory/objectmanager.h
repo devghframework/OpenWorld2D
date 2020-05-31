@@ -15,6 +15,7 @@
 
 #include "factory/owobject.h"
 
+#include <QObject>
 #include <QMap>
 
 
@@ -35,8 +36,9 @@
  * 1-1             주인공
  ************************************
  */
-class ObjectManager
+class ObjectManager : public QObject
 {
+    Q_OBJECT
 
 public:
     ObjectManager();

@@ -12,7 +12,7 @@
 #ifndef DRAWMANAGER_H
 #define DRAWMANAGER_H
 
-#include "isometric/isometric.h"
+#include "coordinatesystem/isometric.h"
 #include "tilemap/tilemap.h"
 
 #include <QPainter>

@@ -33,7 +33,7 @@ SOURCES += \
     camera/maincamera.cpp \
     factory/objectmanager.cpp \
     factory/owobject.cpp \
-    isometric/isometric.cpp \
+    coordinatesystem/isometric.cpp \
     main.cpp \
     mainwindow.cpp \
     openworldwidget/owdrawwidget.cpp \
@@ -46,7 +46,7 @@ HEADERS += \
     factory/iowobject.h \
     factory/objectmanager.h \
     factory/owobject.h \
-    isometric/isometric.h \
+    coordinatesystem/isometric.h \
     mainwindow.h \
     openworldwidget/owdrawwidget.h \
     scene/scene.h \
@@ -65,4 +65,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    UML/owuml.qmodel
+    UML/owuml.qmodel \
+    isometric/CoordinateSystem.txt

@@ -1,0 +1,19 @@
+
+OpenWorld2D 에서의 좌표계 (Coordinate System)
+
+프로그램내에서 사용되는 좌표체계는 현재 네가지이다.
+
+  월드 좌표계 (World Coordinate System)
+  픽셀 좌표계 (Pixel Image Coordinate System)
+  등각 투상 좌표계 (Isometric Coordinate System)
+
+마우스가 클릭할 경우의 좌표를 월드좌표게,
+맵을 등각분할 한 좌표를 등각 투상 좌표계로 나눈다.
+
+프로그램 내의 오브젝트들은 이미지를 갖고 이미지들은 등각투상 좌표를 갖고,
+그 좌표에 각각 해당하는 데이타를 가진다.
+
+그 데이타를 매트릭 데이타라고 부른다.
+
+  매트릭 데이타 (Metric Data)
+

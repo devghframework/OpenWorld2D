@@ -65,3 +65,21 @@ Mac 에서 컴파일 오류 발생시<br>
 X 각도 : 26.57 (0.005도 차이가 있음)<br>
 Y 각도 : 26.57 (0.005도 차이가 있음)<br>
 <br>
+<br>
+프로그램내에서 사용되는 좌표체계는 현재 세가지이다.<br>
+<br>
+  월드 좌표계 (World Coordinate System)<br>
+  픽셀 좌표계 (Pixel Image Coordinate System)<br>
+  등각 투상 좌표계 (Isometric Coordinate System)<br>
+<br>
+마우스가 클릭할 경우의 좌표를 월드좌표게,<br>
+맵을 등각분할 한 좌표를 등각 투상 좌표계로 나눈다.<br>
+<br>
+프로그램 내의 오브젝트들은 이미지를 갖고 이미지들은 등각투상 좌표를 갖고,<br>
+그 좌표에 각각 해당하는 데이타를 가진다.<br>
+<br>
+그 데이타를 매트릭 데이타라고 부른다.<br>
+<br>
+  매트릭 데이타 (Metric Data)<br>
+<br>
+

@@ -152,7 +152,6 @@ void OWDrawWidget::mouseMoveEvent(QMouseEvent *event)
     this->m_sceneManager->mouseMoveEvent(event);
 
     *this->m_mousePoint = event->pos();
-    //update();
 
     QPoint metricLocation = GetMetricLocation(event->pos().x(), event->pos().y());
     int *borderData = this->GetMainCamera()->GetTileMap()->GetOutsideBorderLocation();
@@ -177,7 +176,6 @@ void OWDrawWidget::mouseMoveEvent(QMouseEvent *event)
  */
 void OWDrawWidget::SetBackgroundColor(QColor color) {
     this->m_mainCamera->SetBackgroundColor(new QBrush(color));
-    //update();
 }
 
 

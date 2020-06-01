@@ -23,14 +23,14 @@
 
 /*!
  * \class OWDrawWidget
- * \brief The OWDrawWidget class
- *
- * 오픈월드 메인 위젯
+ * \brief The OWDrawWidget class 오플월드 메인 위젯
+ * 
+ * 하위 오브젝트들간 데이타 연동이 필요할 경우 현재 오브젝트의 함수를 통해 데이타를 공유하도록 한다.
  */
 class OWDrawWidget : public QWidget
 {
 public:
-    const static int RENDERING_TIME = 50; //millsecond
+    const static int RENDERING_TIME = 50; //millisecond
 
 public:
     OWDrawWidget(QWidget *parent = nullptr);

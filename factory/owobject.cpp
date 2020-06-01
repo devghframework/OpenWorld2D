@@ -10,7 +10,6 @@
  */
 
 #include "factory/owobject.h"
-//#include <helper/utils.h>
 #include <openworldwidget/owdrawwidget.h>
 
 #include <QDebug>
@@ -44,6 +43,7 @@ OwObject::~OwObject()
 
 /*!
  * \brief OwObject::ObjectAction 오브젝트의 움직임을 계산 하는 함수
+ * TODO : 현재 움직임 단위가 픽셀인데, 매트릭 단위로 움직이도록 변경해야 한다.
  */
 void OwObject::ObjectAction()
 {
@@ -54,14 +54,13 @@ void OwObject::ObjectAction()
             this->m_objectStatus = IOwObject::STATUS_DONE;
             return;
         }
-
     }
 
     // 모든 처리가 완료 되었을 경우 처리
     else if (this->m_objectStatus == IOwObject::STATUS_DONE) {
+        this->m_actionTimer.stop();
         this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S);
         this->m_objectStatus = IOwObject::STATUS_NONE;
-        this->m_actionTimer.stop();
         this->m_animationNo = 0;
         return;
     }
@@ -89,6 +88,7 @@ void OwObject::ObjectAction()
             this->m_movePointPixel.setX(this->m_movePointPixel.x()
                                         + this->m_splitObjectInfo[this->m_actionName]->movePixel);
         }
+
         // 현재 좌표가 목적지 보다 우측에 있을 경우
         else if (this->m_moveEndPointPixel.x() < this->m_movePointPixel.x()) {
             this->m_movePointPixel.setX(this->m_movePointPixel.x()
@@ -100,6 +100,7 @@ void OwObject::ObjectAction()
             this->m_movePointPixel.setY(this->m_movePointPixel.y()
                                         + this->m_splitObjectInfo[this->m_actionName]->movePixel);
         }
+
         // 현재 좌표가 목적지 보다 위에 있을 경우
         else if (this->m_moveEndPointPixel.y() < this->m_movePointPixel.y()) {
             this->m_movePointPixel.setY(this->m_movePointPixel.y()
@@ -128,6 +129,7 @@ void OwObject::ObjectAction()
 void OwObject::GetDirection(int moveOldX, int moveOldY, int moveX, int moveY)
 {
     int moveDirection;
+
     if (moveOldY > moveY) {
         moveDirection = IOwObject::DIRECTION_N;
     } else if (moveOldY < moveY) {
@@ -211,6 +213,12 @@ void OwObject::MouseMove(int metricX, int metricY)
 {
     Q_UNUSED(metricX);
     Q_UNUSED(metricY);
+}
+
+void OwObject::MouseHover(int metricX, int metricY)
+{
+    Q_UNUSED(metricX)
+    Q_UNUSED(metricY)
 }
 
 /*!

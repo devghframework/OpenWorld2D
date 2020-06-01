@@ -9,7 +9,7 @@
      youtube : https://www.youtube.com/channel/UCMj3LpAxKiBmPeScDkan0sg?view_as=subscriber
  */
 
-#include "factory/objectmanager.h"
+#include "factory/owobjectmanager.h"
 #include "camera/maincamera.h"
 //#include "helper/utils.h"
 
@@ -24,18 +24,18 @@
 /*!
  * \brief ObjectCreator::ObjectCreator
  */
-ObjectManager::ObjectManager(Isometric *isometric)
+OwObjectManager::OwObjectManager(Isometric *isometric)
 {
     //this->m_util = Utils::GetInstance();
     this->m_isometric = isometric;
 }
 
-ObjectManager::~ObjectManager()
+OwObjectManager::~OwObjectManager()
 {
     this->m_objectList.clear();
 }
 
-void ObjectManager::Create(int categoly)
+void OwObjectManager::Create(int categoly)
 {
     switch (categoly) {
     case 1:
@@ -49,8 +49,7 @@ void ObjectManager::Create(int categoly)
     }
 }
 
-
-void ObjectManager::CreateCharactor()
+void OwObjectManager::CreateCharactor()
 {
     // 오브젝트 생성
     OwObject *owObject = new OwObject(this->m_isometric);
@@ -225,9 +224,9 @@ void ObjectManager::CreateCharactor()
     this->m_objectList.insert(IOwObject::STATUS_WORK, owObject);
 }
 
-void ObjectManager::CreateObject() {}
+void OwObjectManager::CreateObject() {}
 
-void ObjectManager::DrawObjects(QPainter *painter)
+void OwObjectManager::DrawObjects(QPainter *painter)
 {
     if (this->m_objectList.size() <= 0)
         return;
@@ -237,18 +236,18 @@ void ObjectManager::DrawObjects(QPainter *painter)
     }
 }
 
-void ObjectManager::MouseDown(int metricX, int metricY)
+void OwObjectManager::MouseDown(int metricX, int metricY)
 {
     this->m_objectList[IOwObject::STATUS_WORK]->MouseDown(metricX, metricY);
 }
 
-void ObjectManager::MouseUp(int metricX, int metricY)
+void OwObjectManager::MouseUp(int metricX, int metricY)
 {
     Q_UNUSED(metricX)
     Q_UNUSED(metricY)
 }
 
-void ObjectManager::MouseMove(int metricX, int metricY)
+void OwObjectManager::MouseMove(int metricX, int metricY)
 {
     Q_UNUSED(metricX)
     Q_UNUSED(metricY)

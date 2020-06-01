@@ -139,7 +139,6 @@ void MainWindow::on_cboBackgroundColor_currentIndexChanged(int index)
     QVariant variant = this->m_ui->cboBackgroundColor->itemData(index);
     QColor color = variant.value<QColor>();
     this->m_ui->widgetOpenWorld->GetMainCamera()->SetBackgroundColor(new QBrush(color));
-    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -157,7 +156,7 @@ void MainWindow::on_btnLoadBackgroundImage_clicked()
         this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->SetTileImage(strFileName.toUtf8());
         this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionShowDefaultTileMapImage(false);
         this->m_ui->widgetOpenWorld->GetMainCamera()->GetTileMap()->OptionScroll(this->m_ui->chkScroll->isChecked());
-        //this->m_ui->widgetOpenWorld->repaint();
+        this->m_ui->chkShowDataMap->setCheckState(Qt::CheckState::Checked);
     }
 }
 
@@ -171,7 +170,6 @@ void MainWindow::on_chkShowDefaultTileMap_stateChanged(int arg1)
     Q_UNUSED(arg1);
 
     this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowDefaultTileMapImage(this->m_ui->chkShowDefaultTileMap->isChecked());
-    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -183,7 +181,6 @@ void MainWindow::on_chkShowTileLine_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileMapLine(this->m_ui->chkShowTileLine->isChecked());
-    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -196,7 +193,6 @@ void MainWindow::on_chkShowDataMap_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->m_ui->widgetOpenWorld->GetMainCamera()->OptionShowTileData(this->m_ui->chkShowDataMap->isChecked());
-    //this->m_ui->widgetOpenWorld->repaint();
 }
 
 
@@ -234,38 +230,7 @@ void MainWindow::on_btnFadeOut_clicked()
  */
 void MainWindow::on_btnViewCharactor_clicked()
 {
-    //m_movingDirection
-    // 연산 테스트
-
-    int moveOldY = 110, moveOldX = 110;
-    int moveY = 120, moveX = 100;
-
-    enum Dir {
-        N = 0b00000001, // 1
-        S = 0b00000010, // 2
-        E = 0b00000100, // 4
-        W = 0b00001000, // 8
-
-        SE = 0b00000110, // 6
-        SW = 0b00001010, // 10
-        NE = 0b00000101, // 5
-        NW = 0b00001001, // 9
-    };
-
-    int direction = Dir::S;
-
-    if (moveOldY > moveY) {
-        direction = Dir::S;
-    } else if (moveOldY < moveY) {
-        direction = Dir::N;
-    }
-    if (moveOldX > moveX) {
-        direction |= Dir::E;
-    } else if (moveOldX < moveX) {
-        direction |= Dir::W;
-    }
-
-    qDebug() << "결과 : " << QString::number(direction);
+    
 }
 
 void MainWindow::on_btnScene1_clicked()

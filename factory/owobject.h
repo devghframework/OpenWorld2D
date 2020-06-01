@@ -42,6 +42,7 @@ public:
     void MouseDown(int metricX, int metricY) override;
     void MouseUp(int metricX, int metricY) override;
     void MouseMove(int metricX, int metricY) override;
+    void MouseHover(int metricX, int metricY) override;
 
     /*!
      * \brief SetObjectSplitImageInfo 오브젝트의 움직임 애니메이션 이미지를 원본이미지에서 복사하는 함수
@@ -74,6 +75,7 @@ private:
      * \brief m_isometric 좌표계산용 매트릭 클래스
      */
     Isometric *m_isometric;
+
     /*!
      * \brief m_actionTimer 액션 렌더링 타이머
      */
@@ -104,6 +106,7 @@ private:
      * \brief m_animationNo Animation 을 할 경우 split image 의 번호
      */
     int m_animationNo = 0;
+
     /*!
      * \brief m_destination 목적지 도착상태
      */
@@ -113,6 +116,7 @@ private:
      * \brief m_metricLocation 오브젝트의 매트릭 좌표
      */
     QPoint m_metricLocation;
+
     /*!
      * \brief m_pixelLocation 오브젝트의 픽셀 좌표
      */
@@ -122,6 +126,7 @@ private:
      * \brief m_moveStartPoint 시작좌표 : 케릭터 이동
      */
     QPoint m_moveStartPoint;
+
     /*!
      * \brief m_moveEndPoint 도착좌표 : 케릭터 이동
      */
@@ -131,6 +136,7 @@ private:
      * \brief m_movePointPixel 시작좌표 : 케릭터 이동
      */
     QPoint m_movePointPixel;
+
     /*!
      * \brief m_movePointPixelOld 시작좌표 : 케릭터 이동
      */

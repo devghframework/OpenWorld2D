@@ -40,6 +40,11 @@ class IOwObject
 
 public:
     template<typename T>
+    /*!
+     * \brief GetMetaEnum Enum 요소의 메타 이름을 가져온다.
+     * \param value
+     * \return 
+     */
     static QString GetMetaEnum(const T value)
     {
         auto metaEnumMoveDir = QMetaEnum::fromType<T>();
@@ -48,16 +53,18 @@ public:
     }
 
 protected:
-// 오브젝트의 액션이나 이벤트를 정의한다.
+    /***********************************/
+    /* 오브젝트의 액션이나 이벤트를 정의한다.    */
+    /***********************************/
+
 #pragma region OBJECT_ACTION
 
-    //virtual QMap<QString, QObject> GetObjects() = 0;
-    //virtual QObject *GetObject(QString key) = 0;
     virtual void CreateObject() {}
     virtual void DrawObject(QPainter *) {}
     virtual void MouseDown(int, int) {}
     virtual void MouseUp(int, int) {}
     virtual void MouseMove(int, int) {}
+    virtual void MouseHover(int, int) {}
 
 #pragma endregion OBJECT_ACTION
 
@@ -124,48 +131,57 @@ public:
  */
 typedef struct structObjectSplitImage {
     /*!
-     * \brief actionNo 행동양식 번호 (ex: 0: 달리기, 1: 걷기, 2: 뛰기, 3: 쉬기 등)
+     * \brief actionNo 행동양식 번호 (OBJECT_STATUS)
      */
-    int actionNo; //
+    int actionNo;
+
     /*!
      * \brief originFileName 이미지 원본 파일 이름
      */
     QString originFileName;
+
     /*!
      * \brief copyStartPoint 원본이미지에서 복사를 시작할 좌표
      */
     QPoint copyStartPoint;
+
     /*!
      * \brief copyDirection 복사할 방향 (SPLITIMAGE_COPY_DIR)
      */
     int copyDirection;
+
     /*!
      * \brief totalSplitCount 분할된 이미지 전체 갯수
      */
     int totalSplitCount;
+
     /*!
      * \brief fullWidth 이미지 전체 넓이
      */
     int fullWidth;
+
     /*!
      * \brief fullHeight 이미지 전체 높이
      */
     int fullHeight;
+
     /*!
      * \brief width 이미지 하나의 넓이
      */
     int width;
+
     /*!
      * \brief height 이미지 하나의 높이
      */
     int height;
+
     /*!
      * \brief movePixel 이동시 픽셀 (speed)
      */
     int movePixel;
 
     /*!
-     * \brief centerCorrection 바닥좌표
+     * \brief bottom 바닥좌표
      */
     QPoint bottom;
 
@@ -173,6 +189,7 @@ typedef struct structObjectSplitImage {
      * \brief splitImage 1차원 배열 (행동양식에 해당하는 이미지 배열)
      */
     QPixmap *splitImage;
+
 } ObjectSplitImageInfo;
 
 #endif // IOBJECTGENERATOR_H

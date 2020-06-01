@@ -18,7 +18,7 @@
 #include <tilemap/tilemap.h>
 
 #include <coordinatesystem/isometric.h>
-#include <factory/objectmanager.h>
+#include <factory/owobjectmanager.h>
 #include <factory/owobject.h>
 
 /*!
@@ -43,7 +43,7 @@ public:
 
 private:
     TileMap *m_tileMap; // 씬의 배경 그림 (이미지가 아니라 데이타 형태로 불러와야 함)
-    ObjectManager *m_objectManager; // 등장인물과 사물들 생성 관리자.
+    OwObjectManager *m_objectManager; // 등장인물과 사물들 생성 관리자.
     Isometric *m_isoMetric;
 };
 

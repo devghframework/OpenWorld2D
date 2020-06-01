@@ -38,13 +38,13 @@
  * 1-1             주인공
  ************************************
  */
-class ObjectManager : public QObject
+class OwObjectManager : public QObject
 {
     Q_OBJECT
 
 public:
-    ObjectManager(Isometric *);
-    virtual ~ObjectManager();
+    OwObjectManager(Isometric *);
+    virtual ~OwObjectManager();
 
     void Create(int categoly);
     //OwObject GetObject(QString key);

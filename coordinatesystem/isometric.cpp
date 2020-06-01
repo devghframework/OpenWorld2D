@@ -83,8 +83,7 @@ QVector<int> *Isometric::defaultIsometricMouseMapData()
 }
 
 /*!
- * 마우스 위치에 대한 상대적 메트릭 위치를 계산한다.
- * \brief IsoMetric::SetMetric
+ * \brief IsoMetric::SetMetric 마우스가 위치한 곳의 마우스 매트릭 데이타 위치를 계산하는 함수
  * \param x
  * \param y
  */
@@ -103,10 +102,8 @@ void Isometric::CalculateMetricPosition(int mouseX, int mouseY) {
 #endif
 }
 
-
 /*!
- * 마우스맵 데이타에 해당하는 매트릭 존 위치를 계산하는 함수
- * \brief IsoMetric::CalculateMetricZone
+ * \brief IsoMetric::CalculateMetricZone 마우스 매트릭 데이타에 의해 마우스 마커 위치를 계산하는 함수
  */
 void Isometric::CalculateMetricZone() {
 
@@ -133,10 +130,8 @@ void Isometric::CalculateMetricZone() {
     this->m_metricY = this->m_regionY + regionDy;
 }
 
-
 /*!
- * 옮겨진 마우스 위치에 해당하는 매트릭 시작 위치 (픽셀)를 계산한다.
- * \brief IsoMetric::SetMetricStartPoint
+ * \brief IsoMetric::SetMetricStartPoint 옮겨진 마우스 위치에 해당하는 매트릭 시작 위치 (픽셀)를 계산한다.
  */
 void Isometric::CalculateMetricPixel() {
     this->m_metricPixelX = 0;
@@ -208,8 +203,7 @@ QPoint Isometric::GetMetricLocation(int mouseX, int mouseY)
 }
 
 /*!
- * 마우스 이동 이벤트 함수
- * \brief IsoMetric::MouseMove
+ * \brief IsoMetric::MouseMove 마우스 이동 이벤트 함수
  */
 void Isometric::MouseMoveEvent(int mouseX, int mouseY) {
 
@@ -218,10 +212,8 @@ void Isometric::MouseMoveEvent(int mouseX, int mouseY) {
     CalculateMetricPixel();
 }
 
-
 /*!
- * 마우스 위치에 해당하는 매트릭 위치를 계산한다.
- * \brief IsoMetric::SetLocation
+ * \brief IsoMetric::SetLocation 마우스 위치에 해당하는 매트릭 위치를 계산한다.
  * \param mouseX
  * \param mouseY
  */
@@ -238,6 +230,10 @@ QPoint Isometric::GetCurrentMetricLocation() {
     return point;
 }
 
+/*!
+ * \brief Isometric::GetCurrentMetricPixel 현재 위치의 픽셀 정보를 리턴한다.
+ * \return 
+ */
 QRect Isometric::GetCurrentMetricPixel() {
     QRect rect(this->m_metricPixelX,
                this->m_metricPixelY,
@@ -247,8 +243,7 @@ QRect Isometric::GetCurrentMetricPixel() {
 }
 
 /*!
- * 마우스 위치에 마커를 표시한다.
- * \brief IsoMetric::DrawMetric
+ * \brief IsoMetric::DrawMetric 마우스 위치에 마커를 표시한다.
  * \param painter
  */
 void Isometric::DrawMouseMarker(QPainter *painter) {

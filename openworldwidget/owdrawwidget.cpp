@@ -54,7 +54,7 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
     this->m_mousePoint = new QPoint(100, 100); // 시작 마우스 위치
 
     connect(&this->m_renderingTimer, SIGNAL(timeout()), this, SLOT(update()));
-    this->m_renderingTimer.start(50);
+    this->m_renderingTimer.start(RENDERING_TIME);
 }
 
 

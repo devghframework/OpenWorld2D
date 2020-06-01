@@ -25,7 +25,7 @@
 
 /*!
  * \class OwObject
- * \brief The OwObject class
+ * \brief The OwObject class 오브젝트 클래스 (케릭터 성질과 움직임을 처리한다.)
  *
  */
 class OwObject : public QObject, IOwObject
@@ -37,57 +37,114 @@ public:
     OwObject(Isometric *isometric);
     virtual ~OwObject();
 
-    //    QMap<QString, QObject> GetObjects() override;
-    //    QObject *GetObject(QString key) override;
     void CreateObject() override;
     void DrawObject(QPainter *painter) override;
-
     void MouseDown(int metricX, int metricY) override;
     void MouseUp(int metricX, int metricY) override;
     void MouseMove(int metricX, int metricY) override;
 
-    void SetObjectSplitImageInfo(QMap<int, ObjectSplitImageInfo *>);
-    //    ObjectSplitImageInfo *GetObjectSplitImageInfo();
+    /*!
+     * \brief SetObjectSplitImageInfo 오브젝트의 움직임 애니메이션 이미지를 원본이미지에서 복사하는 함수
+     */
+    void SetObjectSplitImageInfo(QMap<QString, ObjectSplitImageInfo *>);
 
 private:
+    /*!
+     * \brief CreateSplitImage 저장된 정보로 원본 이미지에서 분할하여 배열 이미지로 복사한다.
+     */
     void CreateSplitImage();
-    void ArrivedDestinationEvent();
-    int CheckDirection(int moveOldX, int moveOldY, int moveX, int moveY);
+
+    /*!
+     * \brief GetDirection 오브젝트가 움직이는 방향을 계산한다.
+     * \param moveOldX
+     * \param moveOldY
+     * \param moveX
+     * \param moveY
+     */
+    void GetDirection(int moveOldX, int moveOldY, int moveX, int moveY);
 
 private slots:
+    /*!
+     * \brief ObjectAction 오브젝트 움직임 계산 함수 (m_actionTimer에 의해 호출된다.)
+     */
     void ObjectAction();
 
 private:
+    /*!
+     * \brief m_isometric 좌표계산용 매트릭 클래스
+     */
     Isometric *m_isometric;
+    /*!
+     * \brief m_actionTimer 액션 렌더링 타이머
+     */
     QTimer m_actionTimer;
 
 public:
-    //ObjectSplitImageInfo **m_splitObjectInfo; // 객체의 행동 이미지가 들어 있는 구조체의 1차원 배열
-    QMap<int, ObjectSplitImageInfo *> m_splitObjectInfo;
+    /*!
+     * \brief m_splitObjectInfo 객체의 행동 이미지가 들어 있는 구조체의 1차원 배열
+     */
+    QMap<QString, ObjectSplitImageInfo *> m_splitObjectInfo;
 
 private:
-// 객체의 기본 특성을 정의한다.
+    /*************************/
+    /* 객체의 기본 특성을 정의한다. */
+    /*************************/
+
 #pragma region OBJECT_FIELDS
 
     /*!
-     * \brief m_splitObjectInfo
+     * \brief m_splitObjectInfo 오브젝트 상태 (OBJECT_STATUS 값을 가진다.)
      * 하나의 객체는 여러 행동 양식을 가질 수 있다.
      * 하나의 행동양식은 여러장의 이미지로 이루어 진다.
      * 각 배열에는 하나의 행동양식으로 이루어져 있다.
      */
-    int m_objectStatus; // 오브젝트 상태 (OBJECT_STATUS 값을 가진다.)
+    int m_objectStatus;
 
-    int m_animationNo = 0; // Animation 을 할 경우 split image 의 번호
-    int m_destination = OBJECT_DESTINATION::NO_DESTINATION; // 목적지 도착상태
+    /*!
+     * \brief m_animationNo Animation 을 할 경우 split image 의 번호
+     */
+    int m_animationNo = 0;
+    /*!
+     * \brief m_destination 목적지 도착상태
+     */
+    int m_destination = OBJECT_DESTINATION::NO_DESTINATION;
 
-    QPoint m_metricLocation; // 오브젝트의 매트릭 좌표
-    QPoint m_pixelLocation;  // 오브젝트의 픽셀 좌표
+    /*!
+     * \brief m_metricLocation 오브젝트의 매트릭 좌표
+     */
+    QPoint m_metricLocation;
+    /*!
+     * \brief m_pixelLocation 오브젝트의 픽셀 좌표
+     */
+    QPoint m_pixelLocation;
 
-    QPoint m_moveStartPoint;      // 시작좌표 : 케릭터 이동
-    QPoint m_moveEndPoint;        // 도착좌표 : 케릭터 이동
-    QPoint m_moveStartPointPixel; // 시작좌표 : 케릭터 이동
-    QPoint m_moveEndPointPixel;   // 도착좌표 : 케릭터 이동
-    int m_movingDirection;        // 움직이고 있는 방향 (OBJECT_MOVE_DIRECTION)
+    /*!
+     * \brief m_moveStartPoint 시작좌표 : 케릭터 이동
+     */
+    QPoint m_moveStartPoint;
+    /*!
+     * \brief m_moveEndPoint 도착좌표 : 케릭터 이동
+     */
+    QPoint m_moveEndPoint;
+
+    /*!
+     * \brief m_movePointPixel 시작좌표 : 케릭터 이동
+     */
+    QPoint m_movePointPixel;
+    /*!
+     * \brief m_movePointPixelOld 시작좌표 : 케릭터 이동
+     */
+    QPoint m_movePointPixelOld;
+
+    /*!
+     * \brief m_moveEndPointPixel 도착좌표 : 케릭터 이동
+     */
+    QPoint m_moveEndPointPixel;
+
+    /*!
+     * \brief m_actionName 행동 명칭
+     */
+    QString m_actionName;
 
 #pragma endregion OBJECT_FIELDS
 };

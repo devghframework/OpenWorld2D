@@ -29,7 +29,9 @@
  */
 class OWDrawWidget : public QWidget
 {
-    //QGraphicsView -- 참고
+public:
+    const static int RENDERING_TIME = 50; //millsecond
+
 public:
     OWDrawWidget(QWidget *parent = nullptr);
     ~OWDrawWidget();

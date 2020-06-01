@@ -12,6 +12,7 @@
 #ifndef IOBJECTGENERATOR_H
 #define IOBJECTGENERATOR_H
 
+#include <QMetaEnum>
 #include <QObject>
 #include <QPainter>
 
@@ -36,12 +37,19 @@
 class IOwObject
 {
     Q_GADGET
-    //Q_OBJECT
+
+public:
+    template<typename T>
+    static QString GetMetaEnum(const T value)
+    {
+        auto metaEnumMoveDir = QMetaEnum::fromType<T>();
+        QString enumStr = metaEnumMoveDir.valueToKey(value);
+        return enumStr;
+    }
 
 protected:
-
-    // 오브젝트의 액션이나 이벤트를 정의한다.
-    #pragma region OBJECT_ACTION
+// 오브젝트의 액션이나 이벤트를 정의한다.
+#pragma region OBJECT_ACTION
 
     //virtual QMap<QString, QObject> GetObjects() = 0;
     //virtual QObject *GetObject(QString key) = 0;
@@ -69,13 +77,15 @@ public:
      */
     enum OBJECT_STATUS {
         STATUS_NONE = 0, // 초기상태 (일반 사물일 경우 NONE 값을 가진다. 나무, 돌 등)
-        STATUS_STAY, // 대기 상태
-        STATUS_WORK, // 걷는 상태
-        STATUS_RUN,  // 달리는 상태
-        STATUS_IDLE, // 쉬는 상태
-        STATUS_STOP, // 액션을 하다 멈춘상태
-        STATUS_TALK, // 대화중
-        STATUS_CHAT  // 채팅중
+        STATUS_DONE,   // 프로세스가 모두 끝난 상태
+        STATUS_STAY,   // 대기 상태
+        STATUS_WORK,   // 걷는 상태
+        STATUS_RUN,    // 달리는 상태
+        STATUS_IDLE,   // 쉬는 상태
+        STATUS_STOP,   // 액션을 하다 강제로 멈춘상태
+        STATUS_TALK,   // 대화중
+        STATUS_CHAT,   // 채팅중
+        STATUS_ARRIVED // 목적지 도착
     };
     Q_ENUM(OBJECT_STATUS)
 
@@ -83,15 +93,15 @@ public:
      * \brief The OBJECT_MOVE_DIRECTION enum 사물이 움직이는 방향
      */
     enum OBJECT_MOVE_DIRECTION {
-        DIRECTION_DEFAULT = 0, // 정면을 바라본 초기 상태
-        DIRECTION_E,           // 동쪽
-        DIRECTION_W,           // 서쪽
-        DIRECTION_S,           // 남쪽
-        DIRECTION_N,           // 북쪽
-        DIRECTION_NE,          // 북동쪽
-        DIRECTION_NW,          // 북서쪽
-        DIRECTION_SE,          // 남동쪽
-        DIRECTION_SW           // 남서쪽
+        DIRECTION_NONE = 0b00000000, // 정면을 바라본 초기 상태
+        DIRECTION_N = 0b00000001,    // 1 북
+        DIRECTION_S = 0b00000010,    // 2 남
+        DIRECTION_E = 0b00000100,    // 4 동
+        DIRECTION_W = 0b00001000,    // 8 서
+        DIRECTION_SE = 0b00000110,   // 6 남동
+        DIRECTION_SW = 0b00001010,   // 10 남서
+        DIRECTION_NE = 0b00000101,   // 5 북동
+        DIRECTION_NW = 0b00001001,   // 9 북서
     };
     Q_ENUM(OBJECT_MOVE_DIRECTION)
 
@@ -113,17 +123,56 @@ public:
  * TODO : C/S 구성시 전송할 수 있도록 Serialization 시켜야 한다.
  */
 typedef struct structObjectSplitImage {
-    int actionNo;           // 행동양식 번호 (ex: 0: 달리기, 1: 걷기, 2: 뛰기, 3: 쉬기 등)
-    QString originFileName; // 이미지 원본 파일 이름
-    QPoint copyStartPoint;  // 원본이미지에서 복사를 시작할 좌표
-    int copyDirection;      // 복사할 방향 (SPLITIMAGE_COPY_DIR)
-    int totalSplitCount;    // 분할된 이미지 전체 갯수
-    int fullWidth;          // 이미지 전체 넓이
-    int fullHeight;         // 이미지 전체 높이
-    int width;              // 이미지 하나의 넓이
-    int height;             // 이미지 하나의 높이
-    int movePixel;          // 이동시 픽셀
-    QPixmap *splitImage;    // 1차원 배열 (행동양식에 해당하는 이미지 배열)
+    /*!
+     * \brief actionNo 행동양식 번호 (ex: 0: 달리기, 1: 걷기, 2: 뛰기, 3: 쉬기 등)
+     */
+    int actionNo; //
+    /*!
+     * \brief originFileName 이미지 원본 파일 이름
+     */
+    QString originFileName;
+    /*!
+     * \brief copyStartPoint 원본이미지에서 복사를 시작할 좌표
+     */
+    QPoint copyStartPoint;
+    /*!
+     * \brief copyDirection 복사할 방향 (SPLITIMAGE_COPY_DIR)
+     */
+    int copyDirection;
+    /*!
+     * \brief totalSplitCount 분할된 이미지 전체 갯수
+     */
+    int totalSplitCount;
+    /*!
+     * \brief fullWidth 이미지 전체 넓이
+     */
+    int fullWidth;
+    /*!
+     * \brief fullHeight 이미지 전체 높이
+     */
+    int fullHeight;
+    /*!
+     * \brief width 이미지 하나의 넓이
+     */
+    int width;
+    /*!
+     * \brief height 이미지 하나의 높이
+     */
+    int height;
+    /*!
+     * \brief movePixel 이동시 픽셀 (speed)
+     */
+    int movePixel;
+
+    /*!
+     * \brief centerCorrection 바닥좌표
+     */
+    QPoint bottom;
+
+    /*!
+     * \brief splitImage 1차원 배열 (행동양식에 해당하는 이미지 배열)
+     */
+    QPixmap *splitImage;
 } ObjectSplitImageInfo;
 
 #endif // IOBJECTGENERATOR_H

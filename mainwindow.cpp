@@ -234,12 +234,41 @@ void MainWindow::on_btnFadeOut_clicked()
  */
 void MainWindow::on_btnViewCharactor_clicked()
 {
-    //this->m_ui->widgetOpenWorld->GetMainCamera()->GetObjectCreator()->Create(1);
-    //this->m_ui->widgetOpenWorld->repaint();
+    //m_movingDirection
+    // 연산 테스트
+
+    int moveOldY = 110, moveOldX = 110;
+    int moveY = 120, moveX = 100;
+
+    enum Dir {
+        N = 0b00000001, // 1
+        S = 0b00000010, // 2
+        E = 0b00000100, // 4
+        W = 0b00001000, // 8
+
+        SE = 0b00000110, // 6
+        SW = 0b00001010, // 10
+        NE = 0b00000101, // 5
+        NW = 0b00001001, // 9
+    };
+
+    int direction = Dir::S;
+
+    if (moveOldY > moveY) {
+        direction = Dir::S;
+    } else if (moveOldY < moveY) {
+        direction = Dir::N;
+    }
+    if (moveOldX > moveX) {
+        direction |= Dir::E;
+    } else if (moveOldX < moveX) {
+        direction |= Dir::W;
+    }
+
+    qDebug() << "결과 : " << QString::number(direction);
 }
 
 void MainWindow::on_btnScene1_clicked()
 {
-//    SceneManager *sceneManager = this->m_ui->widgetOpenWorld->GetSceneManager();
-//    sceneManager->SceneAction();
+
 }

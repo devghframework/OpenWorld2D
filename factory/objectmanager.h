@@ -19,6 +19,8 @@
 
 #include <coordinatesystem/isometric.h>
 
+//#include <helper/utils.h>
+
 /*!
  * \class ObjectCreator
  * \brief The ObjectCreator class
@@ -57,6 +59,7 @@ public:
 private:
     Isometric *m_isometric;
     QMap<int, OwObject *> m_objectList;
+    //static Utils *m_util;
 
 private:
     void CreateCharactor();

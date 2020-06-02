@@ -28,6 +28,7 @@ Mac 에서 컴파일 오류 발생시<br>
      QT설치디렉토리 : Qt/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf<br>
      QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9<br>
 <br>
+![스크린샷 2020-06-02 오후 4 04 38](https://user-images.githubusercontent.com/55812664/83490323-cdc89a80-a4ea-11ea-9490-0c4ed4dc70ee.png){: width="640" height="480"}
 <br>
 프로그램에서 사용되는 isometric 은 다음과 같은 정보를 가진다.<br>
 마름모 크기 : 40 x 20 pixel<br>
@@ -83,4 +84,3 @@ Y 각도 : 26.57 (0.005도 차이가 있음)<br>
   매트릭 데이타 (Metric Data)<br>
 <br>
 
-![스크린샷 2020-06-02 오후 3 56 35](https://user-images.githubusercontent.com/55812664/83489643-b2a95b00-a4e9-11ea-9df8-08e850c4be18.png = 640x480){: width="100" height="100"}

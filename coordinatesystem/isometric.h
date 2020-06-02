@@ -22,11 +22,14 @@
  */
 class Isometric
 {
+public:
+    enum ISOMETRIC_KIND { METRIC_30, METRIC_2657 };
 
 public:
     Isometric(void);
     virtual ~Isometric();
 
+    int defaultIsometric();
     int defaultIsometricWidth();
     int defaultIsometricHeight();
     int defaultIsometricHarfWidth();
@@ -46,6 +49,10 @@ private:
     const static int METRIC_HARF_HEIGH_30 = 10;
 
 private:
+    /*!
+     * \brief m_defaultIsometric isometric 을 종류를 선택한다. (ISOMETRIC_KIND)
+     */
+    int m_defaultIsometric;
     int m_defaultIsometricWidth;
     int m_defaultIsometricHeight;
     int m_defaultIsometricHarfWidth;
@@ -140,7 +147,6 @@ private:
     void CalculateMetricZone();
     void CalculateMetricPixel();
     void GetPixelFromMetricZone(int zoneNumber);
-
     void MouseMoveEvent(int mouseX, int mouseY);
 
 };

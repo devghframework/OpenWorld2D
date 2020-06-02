@@ -190,15 +190,14 @@ QPoint OWDrawWidget::GetMetricLocation(int mouseX, int mouseY) {
     return point;
 }
 
-
 /*!
  * \brief OWDrawWidget::GetBorderToucDir 위젯의 보더를 터치한 방향을 구하는 함수
  * \return
  */
-int OWDrawWidget::GetBorderToucDir() {
+int OWDrawWidget::GetBorderTouchDir()
+{
     return this->m_borderTouchDir;
 }
-
 
 /*!
  * \brief OWDrawWidget::FadeIn 서서히 밝아지는 함수

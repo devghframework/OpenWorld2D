@@ -11,23 +11,48 @@
 
 #include "coordinatesystem/isometric.h"
 #include "qdebug.h"
+#include <QImage>
+#include <QImageReader>
+#include <QMessageBox>
 #include <QPainter>
 #include <QString>
-#include <QImageReader>
-#include <QImage>
 #include <QVector>
 
+Isometric::Isometric()
+{
+    this->m_defaultIsometric = Isometric::METRIC_30;
 
-Isometric::Isometric() {
-    // 기본 매트릭 정보 설정
-    this->m_defaultIsometricWidth = METRIC_WIDTH_2657;
-    this->m_defaultIsometricHeight = METRIC_HEIGH_2657;
-    this->m_defaultIsometricHarfWidth = METRIC_HARF_WIDTH_2657;
-    this->m_defaultIsometricHarfHeight = METRIC_HARF_HEIGH_2657;
-    this->m_defaultMouseMapData = new QVector<int>[this->m_defaultIsometricHeight];
-    for (int i = 0; i < this->m_defaultIsometricHeight; i++) {
-        for (int j = 0; j < this->m_defaultIsometricWidth; j++)
-            this->m_defaultMouseMapData[i].append(this->m_mouseMapData_2657[i][j]);
+    if (this->m_defaultIsometric == Isometric::METRIC_2657) {
+        //기본 매트릭 정보 설정 (26.57도)
+        this->m_defaultIsometricWidth = METRIC_WIDTH_2657;
+        this->m_defaultIsometricHeight = METRIC_HEIGH_2657;
+        this->m_defaultIsometricHarfWidth = METRIC_HARF_WIDTH_2657;
+        this->m_defaultIsometricHarfHeight = METRIC_HARF_HEIGH_2657;
+        this->m_defaultMouseMapData = new QVector<int>[this->m_defaultIsometricHeight];
+        for (int i = 0; i < this->m_defaultIsometricHeight; i++) {
+            for (int j = 0; j < this->m_defaultIsometricWidth; j++)
+                this->m_defaultMouseMapData[i].append(this->m_mouseMapData_2657[i][j]);
+        }
+    } else if (this->m_defaultIsometric == Isometric::METRIC_30) {
+        // 기본 매트릭 정보 설정 (30도)
+        this->m_defaultIsometricWidth = METRIC_WIDTH_30;
+        this->m_defaultIsometricHeight = METRIC_HEIGH_30;
+        this->m_defaultIsometricHarfWidth = METRIC_HARF_WIDTH_30;
+        this->m_defaultIsometricHarfHeight = METRIC_HARF_HEIGH_30;
+        this->m_defaultMouseMapData = new QVector<int>[this->m_defaultIsometricHeight];
+        for (int i = 0; i < this->m_defaultIsometricHeight; i++) {
+            for (int j = 0; j < this->m_defaultIsometricWidth; j++)
+                this->m_defaultMouseMapData[i].append(this->m_mouseMapData_30[i][j]);
+        }
+    } else {
+        QMessageBox msgBox;
+        msgBox.setText("기본 Isometric 을 선택하지 않았습니다.");
+        msgBox.setInformativeText(
+            "기본 Isometric 을 선택해 주십시오.\r\n(METRIC_2657 또는 METRIC_30)");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.exec();
+        return;
     }
 
     this->m_metricX = 0;
@@ -36,7 +61,15 @@ Isometric::Isometric() {
     // 마우스 마크 이미지를 설정한다.
     // TODO
     // 환경설정 기능으로 이동
-    const QString mouseImgFile = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/MouseMark.png";
+    QString mouseImgFile;
+    if (this->m_defaultIsometric == Isometric::METRIC_30) {
+        mouseImgFile
+            = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/마우스마커30.png";
+    } else if (this->m_defaultIsometric == Isometric::METRIC_2657) {
+        mouseImgFile
+            = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/MouseMark.png";
+    }
+
     QImageReader r(mouseImgFile);
     r.setDecideFormatFromContent(true);
     QImage i = r.read();
@@ -51,15 +84,16 @@ Isometric::Isometric() {
     }
 }
 
-
-Isometric::~Isometric() {
-
-}
-
+Isometric::~Isometric() {}
 
 int Isometric::defaultIsometricWidth()
 {
     return this->m_defaultIsometricWidth;
+}
+
+int Isometric::defaultIsometric()
+{
+    return this->m_defaultIsometric;
 }
 
 int Isometric::defaultIsometricHeight()

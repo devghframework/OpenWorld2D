@@ -36,8 +36,6 @@
 #include <QFileDialog>
 #include <QItemEditorFactory>
 
-//#define DEBUG
-
 
 /*!
  * \brief MainWindow::MainWindow 어플리케이션 생성자
@@ -67,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     this->timer->stop();
+
+    delete this->timer;
     delete this->m_ui;
 }
 
@@ -97,7 +97,7 @@ void MainWindow::mornitoringTimer()
     this->m_ui->edtMetricPixel->setText(str);
 
     // 화면 가장자리 터치 이벤트
-    int borderDir = this->m_ui->widgetOpenWorld->GetBorderToucDir();
+    int borderDir = this->m_ui->widgetOpenWorld->GetBorderTouchDir();
     auto metaEnum = QMetaEnum::fromType<TileMap::BORDER_DIR>();
     str = metaEnum.valueToKey(borderDir);
     this->m_ui->edtBorderTouchDir->setText(str);

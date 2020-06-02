@@ -48,7 +48,7 @@ public:
     void SetBackgroundColor(QColor);
     Isometric *GetIsometric();
     QPoint GetMetricLocation(int, int);
-    int GetBorderToucDir();
+    int GetBorderTouchDir();
     void FadeIn();
     void FadeOut();
     SceneManager *GetSceneManager();

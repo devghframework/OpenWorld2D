@@ -34,8 +34,19 @@ TileMap::TileMap(Isometric *isoMetric)
     this->m_tileMapLine = new QPixmap();
 
     // TODO : 환경설정으로 이동
-    const QString tileLineImage = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/배경타일라인.png";
-    const QString tileMapImage= "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/배경타일맵.png";
+    QString tileLineImage, tileMapImage;
+
+    if (this->m_isoMetric->defaultIsometric() == Isometric::METRIC_30) {
+        tileLineImage = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/"
+                        "배경타일라인30.png";
+        tileMapImage
+            = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/배경타일맵30.png";
+    } else if (this->m_isoMetric->defaultIsometric() == Isometric::METRIC_2657) {
+        tileLineImage
+            = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/배경타일라인.png";
+        tileMapImage
+            = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/배경타일맵.png";
+    }
     this->m_defaultTileMapImage = LoadTileImage(tileMapImage);
     this->m_tileMapLine = LoadTileImage(tileLineImage);
     this->m_tileImageMetricLocation = new QPoint(0, 0);

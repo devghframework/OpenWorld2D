@@ -49,6 +49,21 @@ public:
      */
     void SetObjectSplitImageInfo(QMap<QString, ObjectSplitImageInfo *>);
 
+    /****************************************/
+    /* 객체의 현재 상태                         */
+    /****************************************/
+    int GetObjectStatus();
+    int GetAnimationNo();
+    int GetDestinationArriveStatus();
+    QPoint GetMetricLocation();
+    QPoint GetPixelLocation();
+    QPoint GetMoveStartPoint();
+    QPoint GetMoveEndPoint();
+    QPoint GetMovePointPixel();
+    QPoint GetMovePointPixelOld();
+    QPoint GetMoveEndPointPixel();
+    /****************************************/
+
 private:
     /*!
      * \brief CreateSplitImage 저장된 정보로 원본 이미지에서 분할하여 배열 이미지로 복사한다.
@@ -110,7 +125,7 @@ private:
     /*!
      * \brief m_destination 목적지 도착상태
      */
-    int m_destination = OBJECT_DESTINATION::NO_DESTINATION;
+    int m_destinationArriveStatus = OBJECT_DESTINATION::NO_DESTINATION;
 
     /*!
      * \brief m_metricLocation 오브젝트의 매트릭 좌표
@@ -146,6 +161,11 @@ private:
      * \brief m_moveEndPointPixel 도착좌표 : 케릭터 이동
      */
     QPoint m_moveEndPointPixel;
+
+    /*!
+     * \brief m_objectBottomLocationPixel 오브젝트가 서 있는 좌표
+     */
+    QPoint m_objectBottomLocationPixel;
 
     /*!
      * \brief m_actionName 행동 명칭

@@ -183,7 +183,12 @@ typedef struct structObjectSplitImage {
     /*!
      * \brief bottom 바닥좌표
      */
-    QPoint bottom;
+    QPoint bottomLocation;
+
+    /*!
+     * \brief bottomGapFromMetricCenter
+     */
+    QPoint bottomGapFromMetricCenter;
 
     /*!
      * \brief splitImage 1차원 배열 (행동양식에 해당하는 이미지 배열)

@@ -35,6 +35,16 @@ OwObjectManager::~OwObjectManager()
     this->m_objectList.clear();
 }
 
+OwObject *OwObjectManager::GetObject(int objectNo)
+{
+    return this->m_objectList[objectNo];
+}
+
+int OwObjectManager::GetObjectsCount()
+{
+    return this->m_objectList.count();
+}
+
 void OwObjectManager::Create(int categoly)
 {
     switch (categoly) {
@@ -68,8 +78,12 @@ void OwObjectManager::CreateCharactor()
     moveS->actionNo = IOwObject::DIRECTION_S;
     moveS->totalSplitCount = 3;
     moveS->movePixel = 2;
-    moveS->bottom.setX(16);
-    moveS->bottom.setX(32);
+    moveS->bottomLocation.setX(16);
+    moveS->bottomLocation.setY(32);
+    moveS->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveS->bottomLocation.x()));
+    moveS->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveS->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S),
                                        moveS);
@@ -87,8 +101,12 @@ void OwObjectManager::CreateCharactor()
     moveN->actionNo = IOwObject::DIRECTION_N;
     moveN->totalSplitCount = 3;
     moveN->movePixel = 2;
-    moveN->bottom.setX(16);
-    moveN->bottom.setX(32);
+    moveN->bottomLocation.setX(16);
+    moveN->bottomLocation.setY(32);
+    moveN->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveN->bottomLocation.x()));
+    moveN->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveN->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_N),
                                        moveN);
@@ -105,8 +123,12 @@ void OwObjectManager::CreateCharactor()
     moveW->actionNo = IOwObject::DIRECTION_W;
     moveW->totalSplitCount = 3;
     moveW->movePixel = 2;
-    moveW->bottom.setX(16);
-    moveW->bottom.setX(32);
+    moveW->bottomLocation.setX(16);
+    moveW->bottomLocation.setY(32);
+    moveW->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveW->bottomLocation.x()));
+    moveW->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveW->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_W),
                                        moveW);
@@ -123,8 +145,12 @@ void OwObjectManager::CreateCharactor()
     moveE->actionNo = IOwObject::DIRECTION_E;
     moveE->totalSplitCount = 3;
     moveE->movePixel = 2;
-    moveE->bottom.setX(16);
-    moveE->bottom.setX(32);
+    moveE->bottomLocation.setX(16);
+    moveE->bottomLocation.setY(32);
+    moveE->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveE->bottomLocation.x()));
+    moveE->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveE->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_E),
                                        moveE);
@@ -141,8 +167,12 @@ void OwObjectManager::CreateCharactor()
     moveNE->actionNo = IOwObject::DIRECTION_NE;
     moveNE->totalSplitCount = 3;
     moveNE->movePixel = 2;
-    moveNE->bottom.setX(16);
-    moveNE->bottom.setX(32);
+    moveNE->bottomLocation.setX(16);
+    moveNE->bottomLocation.setY(32);
+    moveNE->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveNE->bottomLocation.x()));
+    moveNE->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveNE->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_NE),
                                        moveNE);
@@ -159,8 +189,12 @@ void OwObjectManager::CreateCharactor()
     moveNW->actionNo = IOwObject::DIRECTION_NW;
     moveNW->totalSplitCount = 3;
     moveNW->movePixel = 2;
-    moveNW->bottom.setX(16);
-    moveNW->bottom.setX(32);
+    moveNW->bottomLocation.setX(16);
+    moveNW->bottomLocation.setY(32);
+    moveNW->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveNW->bottomLocation.x()));
+    moveNW->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveNW->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_NW),
                                        moveNW);
@@ -177,8 +211,12 @@ void OwObjectManager::CreateCharactor()
     moveSE->actionNo = IOwObject::DIRECTION_SE;
     moveSE->totalSplitCount = 3;
     moveSE->movePixel = 2;
-    moveSE->bottom.setX(16);
-    moveSE->bottom.setX(32);
+    moveSE->bottomLocation.setX(16);
+    moveSE->bottomLocation.setY(32);
+    moveSE->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveSE->bottomLocation.x()));
+    moveSE->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveSE->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_SE),
                                        moveSE);
@@ -195,8 +233,12 @@ void OwObjectManager::CreateCharactor()
     moveSW->actionNo = IOwObject::DIRECTION_SW;
     moveSW->totalSplitCount = 3;
     moveSW->movePixel = 2;
-    moveSW->bottom.setX(16);
-    moveSW->bottom.setX(32);
+    moveSW->bottomLocation.setX(16);
+    moveSW->bottomLocation.setY(32);
+    moveSW->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveSW->bottomLocation.x()));
+    moveSW->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveSW->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_SW),
                                        moveSW);
@@ -213,8 +255,12 @@ void OwObjectManager::CreateCharactor()
     moveArrived->actionNo = IOwObject::STATUS_ARRIVED;
     moveArrived->totalSplitCount = 3;
     moveArrived->movePixel = 2;
-    moveArrived->bottom.setX(16);
-    moveArrived->bottom.setX(32);
+    moveArrived->bottomLocation.setX(16);
+    moveArrived->bottomLocation.setY(32);
+    moveArrived->bottomGapFromMetricCenter.setX(
+        (this->m_isometric->defaultIsometricHarfWidth() - moveArrived->bottomLocation.x()));
+    moveArrived->bottomGapFromMetricCenter.setY(
+        (this->m_isometric->defaultIsometricHarfHeight() - moveArrived->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
                                            IOwObject::OBJECT_STATUS::STATUS_ARRIVED),
                                        moveArrived);

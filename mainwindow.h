@@ -35,6 +35,18 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public:
+    void monitoringObjectStatus(int);
+    void monitoringAnimationNo(int);
+    void monitoringDestinationArriveStatus(int);
+    void monitoringObjectDirection(QString);
+    void monitoringMetricLocation(QPoint);
+    void monitoringMoveStartPoint(QPoint);
+    void monitoringMoveEndPoint(QPoint);
+    void monitoringMovePointPixel(QPoint);
+    void monitoringMovePointPixelOld(QPoint);
+    void monitoringMoveEndPointPixel(QPoint);
+
 protected:
     virtual void showEvent(QShowEvent *event) override;
 

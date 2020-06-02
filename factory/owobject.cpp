@@ -20,6 +20,10 @@
 #include <QString>
 #include <QThread>
 
+#include "mainwindow.h"
+//#include "ui_MainWindow.h"
+extern MainWindow *Main;
+
 /*!
  * \brief OwObject::OwObject 객체 생성 함수
  * \param isometric
@@ -30,6 +34,9 @@ OwObject::OwObject(Isometric *isometric) : IOwObject()
     this->m_objectStatus = IOwObject::STATUS_NONE;
     this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S);
 
+    this->m_objectBottomLocationPixel.setX(0);
+    this->m_objectBottomLocationPixel.setY(0);
+
     connect(&m_actionTimer, SIGNAL(timeout()), this, SLOT(ObjectAction()));
 }
 
@@ -39,6 +46,56 @@ OwObject::OwObject(Isometric *isometric) : IOwObject()
 OwObject::~OwObject()
 {
 
+}
+
+int OwObject::GetObjectStatus()
+{
+    return this->m_objectStatus;
+}
+
+int OwObject::GetAnimationNo()
+{
+    return this->m_animationNo;
+}
+
+int OwObject::GetDestinationArriveStatus()
+{
+    return this->m_destinationArriveStatus;
+}
+
+QPoint OwObject::GetMetricLocation()
+{
+    return this->m_metricLocation;
+}
+
+QPoint OwObject::GetPixelLocation()
+{
+    return this->m_pixelLocation;
+}
+
+QPoint OwObject::GetMoveStartPoint()
+{
+    return this->m_moveStartPoint;
+}
+
+QPoint OwObject::GetMoveEndPoint()
+{
+    return this->m_moveEndPoint;
+}
+
+QPoint OwObject::GetMovePointPixel()
+{
+    return this->m_movePointPixel;
+}
+
+QPoint OwObject::GetMovePointPixelOld()
+{
+    return this->m_movePointPixelOld;
+}
+
+QPoint OwObject::GetMoveEndPointPixel()
+{
+    return this->m_moveEndPointPixel;
 }
 
 /*!
@@ -52,7 +109,6 @@ void OwObject::ObjectAction()
         if (this->m_animationNo
             >= (this->m_splitObjectInfo[this->m_actionName]->totalSplitCount - 1)) {
             this->m_objectStatus = IOwObject::STATUS_DONE;
-            return;
         }
     }
 
@@ -62,7 +118,6 @@ void OwObject::ObjectAction()
         this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S);
         this->m_objectStatus = IOwObject::STATUS_NONE;
         this->m_animationNo = 0;
-        return;
     }
 
     // 움직임 처리
@@ -110,13 +165,36 @@ void OwObject::ObjectAction()
         // 현재 좌표가 목적지와 같을 경우
         if (this->m_movePointPixel.x() == this->m_moveEndPointPixel.x()
             && this->m_movePointPixel.y() == this->m_moveEndPointPixel.y()) {
-            // 현재 상태를 목적지 도착으로 변경하고 목적지 도착 행동을 하도록 처리한다.
-            this->m_destination = IOwObject::DESTINATION_ARRIVED;
+            // 현재 상태를 목적지 도착으로 변경하고 목적지 도착 행동을 하도록 설정한다.
+            this->m_destinationArriveStatus = IOwObject::DESTINATION_ARRIVED;
             this->m_objectStatus = IOwObject::STATUS_ARRIVED;
             this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_STATUS::STATUS_ARRIVED);
             this->m_animationNo = 0;
         }
     }
+
+    this->m_objectBottomLocationPixel.setX(this->m_movePointPixel.x()
+                                           + this->m_isometric->defaultIsometricHarfWidth());
+    this->m_objectBottomLocationPixel.setY(this->m_movePointPixel.y()
+                                           + this->m_isometric->defaultIsometricHarfHeight());
+
+    if (this->m_objectBottomLocationPixel.x() >= 0 && this->m_objectBottomLocationPixel.y() >= 0) {
+        this->m_metricLocation = this->m_isometric
+                                     ->GetMetricLocation(this->m_objectBottomLocationPixel.x(),
+                                                         this->m_objectBottomLocationPixel.y());
+    }
+
+    // 모니터링
+    Main->monitoringObjectStatus(this->m_objectStatus);
+    Main->monitoringAnimationNo(this->m_animationNo);
+    Main->monitoringDestinationArriveStatus(this->m_destinationArriveStatus);
+    Main->monitoringObjectDirection(this->m_actionName);
+    Main->monitoringMetricLocation(this->m_metricLocation);
+    Main->monitoringMovePointPixel(this->m_movePointPixel);
+    Main->monitoringMoveStartPoint(this->m_moveStartPoint);
+    Main->monitoringMoveEndPoint(this->m_moveEndPoint);
+    Main->monitoringMovePointPixelOld(this->m_movePointPixelOld);
+    Main->monitoringMoveEndPointPixel(this->m_moveEndPointPixel);
 }
 
 /*!
@@ -161,17 +239,12 @@ void OwObject::DrawObject(QPainter *painter)
     }
 
     if (this->m_splitObjectInfo.count() > 0) {
-        // 오브젝트의 바닥이 매트릭 중앙에 오도록 보정한다. (케릭터일 경우와 사물일 경우가 다른데...흠)
-        int bottomX, bottomY;
-        bottomX = (this->m_isometric->defaultIsometricWidth()
-                   - this->m_splitObjectInfo[this->m_actionName]->bottom.x());
-        bottomY = (this->m_isometric->defaultIsometricHeight()
-                   - this->m_splitObjectInfo[this->m_actionName]->bottom.y());
-
-        painter->drawPixmap(this->m_movePointPixel.x() + bottomX,
-                            this->m_movePointPixel.y() - bottomY,
-                            this->m_splitObjectInfo[this->m_actionName]
-                                ->splitImage[this->m_animationNo]);
+        painter->drawPixmap(
+            this->m_movePointPixel.x()
+                + this->m_splitObjectInfo[this->m_actionName]->bottomGapFromMetricCenter.x(),
+            this->m_movePointPixel.y()
+                + this->m_splitObjectInfo[this->m_actionName]->bottomGapFromMetricCenter.y(),
+            this->m_splitObjectInfo[this->m_actionName]->splitImage[this->m_animationNo]);
 
         this->m_animationNo++;
 
@@ -188,16 +261,22 @@ void OwObject::DrawObject(QPainter *painter)
  */
 void OwObject::MouseDown(int metricX, int metricY)
 {
+    // 처음 마우스가 눌렸을 경우
     if (this->m_objectStatus == IOwObject::STATUS_NONE) {
         this->m_objectStatus = IOwObject::STATUS_WORK;
+        this->m_moveStartPoint = this->m_metricLocation;
         this->m_movePointPixelOld = this->m_movePointPixel;
-    } else if (this->m_objectStatus == IOwObject::STATUS_WORK) {
+    }
+
+    // 두번째 마우스가 눌렸을 경우
+    // 도착지 정보를 설정하고 액션을 시작한다.
+    else if (this->m_objectStatus == IOwObject::STATUS_WORK) {
         this->m_moveEndPoint.setX(metricX);
         this->m_moveEndPoint.setY(metricY);
         this->m_moveEndPointPixel = this->m_isometric->GetMetricPixel(metricX, metricY);
 
         this->m_animationNo = 0;
-        this->m_destination = IOwObject::DESTINATION_START;
+        this->m_destinationArriveStatus = IOwObject::DESTINATION_START;
 
         this->m_actionTimer.start(OWDrawWidget::RENDERING_TIME);
     }
@@ -248,11 +327,12 @@ void OwObject::CreateSplitImage()
             this->m_splitObjectInfo.value(key)->splitImage
                 = new QPixmap[this->m_splitObjectInfo.value(key)->totalSplitCount];
 
+            int x = this->m_splitObjectInfo.value(key)->copyStartPoint.x();
+            int y = this->m_splitObjectInfo.value(key)->copyStartPoint.y();
+
             switch (this->m_splitObjectInfo.value(key)->copyDirection) {
                 // 우측방향으로 복사
             case IOwObject::COPY_RIGHT: {
-                int x = this->m_splitObjectInfo.value(key)->copyStartPoint.x();
-                int y = this->m_splitObjectInfo.value(key)->copyStartPoint.y();
                 for (int idx = 0; idx < this->m_splitObjectInfo.value(key)->totalSplitCount; idx++) {
                     this->m_splitObjectInfo.value(key)->splitImage[idx]
                         = pixmap.copy(x,
@@ -265,8 +345,6 @@ void OwObject::CreateSplitImage()
             }
                 // 아래 방향으로 복사
             case IOwObject::COPY_BOTTOM: {
-                int x = this->m_splitObjectInfo.value(key)->copyStartPoint.x();
-                int y = this->m_splitObjectInfo.value(key)->copyStartPoint.y();
                 for (int idx = 0; idx < this->m_splitObjectInfo.value(key)->totalSplitCount; idx++) {
                     this->m_splitObjectInfo.value(key)->splitImage[idx]
                         = pixmap.copy(x,
@@ -277,6 +355,7 @@ void OwObject::CreateSplitImage()
                 }
                 break;
             }
+
             default: {
                 QMessageBox msgBox;
                 msgBox.setText("복사할 방향을 지정하지 않았습니다.");

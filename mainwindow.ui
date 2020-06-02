@@ -329,9 +329,9 @@
     <property name="geometry">
      <rect>
       <x>700</x>
-      <y>10</y>
+      <y>30</y>
       <width>181</width>
-      <height>211</height>
+      <height>451</height>
      </rect>
     </property>
     <property name="title">
@@ -341,13 +341,13 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>163</y>
+       <y>203</y>
        <width>91</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>매트릭의 데이타</string>
+      <string>매트릭 좌표</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_9">
@@ -360,7 +360,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>매트릭의 픽셀 좌표</string>
+      <string>애니메이션 번호</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_10">
@@ -373,10 +373,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>화면상의매트릭 좌표</string>
+      <string> 상태</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edtMetricLocation_2">
+    <widget class="QLineEdit" name="edtObjectStatus">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -386,7 +386,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edtMetricPixel_2">
+    <widget class="QLineEdit" name="edtAnimationNo">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -396,11 +396,11 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edtMetricData_2">
+    <widget class="QLineEdit" name="edtObjectMetricLocation">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>180</y>
+       <y>220</y>
        <width>113</width>
        <height>21</height>
       </rect>
@@ -416,10 +416,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>맵데이타내의 좌표</string>
+      <string>목적지도착상태</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="edtMetricDataLocation_2">
+    <widget class="QLineEdit" name="edtDestinationArrive">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -427,6 +427,149 @@
        <width>113</width>
        <height>21</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>243</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>출발 매트릭 좌표</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtMoveStartPoint">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtMoveEndPoint">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>300</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>280</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>도착 매트릭 좌표</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>323</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>현재 픽셀 좌표</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtPointPixel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>340</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>360</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>이전 픽셀 좌표</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtMovePointPixelOld">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>377</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>403</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>도착지 픽셀 좌표</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtMoveEndPointPixel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>420</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtObjectDirection">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>176</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>13</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>이동방향</string>
      </property>
     </widget>
    </widget>

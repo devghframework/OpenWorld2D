@@ -47,7 +47,8 @@ public:
     virtual ~OwObjectManager();
 
     void Create(int categoly);
-    //OwObject GetObject(QString key);
+    OwObject *GetObject(int);
+    int GetObjectsCount();
     void DrawObjects(QPainter *painter);
 
     // 움직일 수 있는 오브젝트에게만 이벤트를 전달한다.

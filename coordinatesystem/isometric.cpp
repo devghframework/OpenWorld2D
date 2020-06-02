@@ -208,8 +208,8 @@ QPoint Isometric::GetMetricPixel(int metricX, int metricY) {
  */
 QPoint Isometric::GetMetricLocation(int mouseX, int mouseY)
 {
-//    int regionX = mouseX / METRIC_WIDTH;
-//    int regionY = (mouseY / METRIC_HEIGH) * 2;
+    int regionX = mouseX / this->m_defaultIsometricWidth;
+    int regionY = (mouseY / this->m_defaultIsometricHeight) * 2;
     int offX = mouseX % this->m_defaultIsometricWidth;
     int offY = mouseY % this->m_defaultIsometricHeight;
 
@@ -229,8 +229,8 @@ QPoint Isometric::GetMetricLocation(int mouseX, int mouseY)
         default: break;
     }
 
-    int metricX = this->m_regionX + regionDx;
-    int metricY = this->m_regionY + regionDy;
+    int metricX = regionX + regionDx;
+    int metricY = regionY + regionDy;
 
     QPoint point(metricX, metricY);
     return point;

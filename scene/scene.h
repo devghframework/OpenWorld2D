@@ -35,6 +35,8 @@ public:
     Scene(Isometric *isometric);
     virtual ~Scene();
 
+    OwObjectManager *GetObjectManager();
+
     void mousePressEvent(const QMouseEvent *);
     void mouseReleaseEvent(const QMouseEvent *);
     void mouseMoveEvent(const QMouseEvent *);

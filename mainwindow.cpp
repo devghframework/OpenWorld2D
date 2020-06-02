@@ -36,6 +36,7 @@
 #include <QFileDialog>
 #include <QItemEditorFactory>
 
+MainWindow *Main;
 
 /*!
  * \brief MainWindow::MainWindow 어플리케이션 생성자
@@ -45,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , m_ui(new Ui::MainWindow)
 {
+    Main = this;
+
     this->m_ui->setupUi(this);
 
     this->m_ui->cboBackgroundColor->addItem("Black", QColor(Qt::black));
@@ -70,6 +73,56 @@ MainWindow::~MainWindow()
     delete this->m_ui;
 }
 
+void MainWindow::monitoringObjectStatus(int status)
+{
+    auto metaEnum = QMetaEnum::fromType<IOwObject::OBJECT_STATUS>();
+    this->m_ui->edtObjectStatus->setText(metaEnum.valueToKey(status));
+}
+void MainWindow::monitoringAnimationNo(int animationNo)
+{
+    this->m_ui->edtAnimationNo->setText(QString::number(animationNo));
+}
+void MainWindow::monitoringDestinationArriveStatus(int status)
+{
+    auto metaEnum = QMetaEnum::fromType<IOwObject::OBJECT_DESTINATION>();
+    this->m_ui->edtDestinationArrive->setText(metaEnum.valueToKey(status));
+}
+void MainWindow::monitoringMetricLocation(QPoint point)
+{
+    this->m_ui->edtObjectMetricLocation->setText(QString::number(point.x()) + ","
+                                                 + QString::number(point.y()));
+}
+
+void MainWindow::monitoringObjectDirection(QString direction)
+{
+    this->m_ui->edtObjectDirection->setText(direction);
+}
+
+void MainWindow::monitoringMoveStartPoint(QPoint point)
+{
+    this->m_ui->edtMoveStartPoint->setText(QString::number(point.x()) + ","
+                                           + QString::number(point.y()));
+}
+void MainWindow::monitoringMoveEndPoint(QPoint point)
+{
+    this->m_ui->edtMoveEndPoint->setText(QString::number(point.x()) + ","
+                                         + QString::number(point.y()));
+}
+void MainWindow::monitoringMovePointPixel(QPoint point)
+{
+    this->m_ui->edtPointPixel->setText(QString::number(point.x()) + ","
+                                       + QString::number(point.y()));
+}
+void MainWindow::monitoringMovePointPixelOld(QPoint point)
+{
+    this->m_ui->edtMovePointPixelOld->setText(QString::number(point.x()) + ","
+                                              + QString::number(point.y()));
+}
+void MainWindow::monitoringMoveEndPointPixel(QPoint point)
+{
+    this->m_ui->edtMoveEndPointPixel->setText(QString::number(point.x()) + ","
+                                              + QString::number(point.y()));
+}
 
 /*!
  * \brief MainWindow::mornitoringTimer 모니터링 타이머 함수
@@ -113,8 +166,95 @@ void MainWindow::mornitoringTimer()
         str = QString::number(data);
         this->m_ui->edtMetricData->setText(str);
     }
-}
 
+    //    int GetObjectStatus();
+    //    int GetAnimationNo();
+    //    int GetDestinationArriveStatus();
+    //    QPoint GetMetricLocation();
+    //    QPoint GetPixelLocation();
+    //    QPoint GetMoveStartPoint();
+    //    QPoint GetMoveEndPoint();
+    //    QPoint GetMovePointPixel();
+    //    QPoint GetMovePointPixelOld();
+    //    QPoint GetMoveEndPointPixel();
+
+    //    qDebug() << "생성된 오브젝트 갯수:"
+    //             << this->m_ui->widgetOpenWorld->GetSceneManager()
+    //                    ->GetScene("1")
+    //                    ->GetObjectManager()
+    //                    ->GetObjectsCount();
+
+    // 아래 코드를 실행하면EXC_BAD_ACCESS (SIGSEGV) 에러가 발생하는데,
+    // 쓰레드간 교차 억세스 에러로 보여진다.
+    // 따라서 업/다운 방식의 억세스는 힘들어 보이고
+    // 반대로 다운/업 방식으로 시도해 본다.
+    //    qDebug() << "오브젝트 상태:"
+    //             << this->m_ui->widgetOpenWorld->GetSceneManager()
+    //                    ->GetScene("1")
+    //                    ->GetObjectManager()
+    //                    ->GetObject(0)
+    //                    ->GetObjectStatus();
+
+    //    if (this->m_ui->widgetOpenWorld->GetSceneManager()
+    //            ->GetScene("1")
+    //            ->GetObjectManager()
+    //            ->GetObjectsCount()
+    //        <= 0)
+    //        return;
+
+    //    this->m_ui->edtObjectStatus->setText(
+    //        QString::number(this->m_ui->widgetOpenWorld->GetSceneManager()
+    //                            ->GetScene("1")
+    //                            ->GetObjectManager()
+    //                            ->GetObject(0)
+    //                            ->GetObjectStatus()));
+
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetAnimationNo();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetDestinationArriveStatus();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetMetricLocation();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetPixelLocation();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetMoveStartPoint();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetMoveEndPoint();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetMovePointPixel();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetMovePointPixelOld();
+    //    this->m_ui->widgetOpenWorld->GetSceneManager()
+    //        ->GetScene("1")
+    //        ->GetObjectManager()
+    //        ->GetObject(0)
+    //        ->GetMoveEndPointPixel();
+}
 
 /*!
  * \brief MainWindow::showEvent 윈도우 Show event

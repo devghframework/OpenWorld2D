@@ -12,6 +12,9 @@
 #include "scene/scene.h"
 
 #include <coordinatesystem/isometric.h>
+#include <factory/owobject.h>
+#include <factory/owobjectmanager.h>
+
 #include <QDebug>
 #include <QObject>
 #include <QPoint>
@@ -29,6 +32,11 @@ Scene::Scene(Isometric *isometric)
 }
 
 Scene::~Scene() {}
+
+OwObjectManager *Scene::GetObjectManager()
+{
+    return this->m_objectManager;
+}
 
 void Scene::mousePressEvent(const QMouseEvent *event)
 {

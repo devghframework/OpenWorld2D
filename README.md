@@ -82,5 +82,7 @@ Y 각도 : 26.57 (0.005도 차이가 있음)<br>
 <br>
   매트릭 데이타 (Metric Data)<br>
 <br>
-
+<table><td width=600 height=400><td>
 ![스크린샷 2020-06-02 오후 3 56 35](https://user-images.githubusercontent.com/55812664/83489643-b2a95b00-a4e9-11ea-9df8-08e850c4be18.png)
+     </td></tr></table>
+     

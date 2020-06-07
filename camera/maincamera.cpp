@@ -25,31 +25,41 @@ MainCamera::MainCamera(Isometric *isometric, SceneManager *sceneManager)
     this->m_sceneManager = sceneManager;
 
     this->m_bDrawBackgroundImage = true;
-    this->m_tileMap = new TileMap(this->m_isoMetric);
-    this->m_backgroundColor = new QBrush(QColor(Qt::black));
+
+    InitMainCamera();
 }
 
 
 MainCamera::~MainCamera()
 {
+    this->m_tileMap = nullptr;
+    this->m_backgroundColor = nullptr;
+
+    delete this->m_tileMap;
+    delete this->m_backgroundColor;
 }
 
+void MainCamera::InitMainCamera()
+{
+    this->m_tileMap = new TileMap(this->m_isoMetric);
+    this->m_backgroundColor = new QBrush(QColor(Qt::black));
+}
 
-Isometric *MainCamera::GetIsoMetric() {
+Isometric *MainCamera::GetIsoMetric()
+{
     return this->m_isoMetric;
 }
 
-
-TileMap *MainCamera::GetTileMap() {
+TileMap *MainCamera::GetTileMap()
+{
     return this->m_tileMap;
 }
 
-
-void MainCamera::SetScreenSize(QRect rect) {
+void MainCamera::SetScreenSize(QRect rect)
+{
     this->m_backgroundSize = rect;
     this->m_tileMap->SetScreenSize(rect);
 }
-
 
 void MainCamera::SetBackgroundColor(QBrush *brush) {
     this->m_backgroundColor = brush;

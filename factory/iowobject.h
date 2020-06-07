@@ -59,12 +59,12 @@ protected:
 
 #pragma region OBJECT_ACTION
 
-    virtual void CreateObject() {}
-    virtual void DrawObject(QPainter *) {}
-    virtual void MouseDown(int, int) {}
-    virtual void MouseUp(int, int) {}
-    virtual void MouseMove(int, int) {}
-    virtual void MouseHover(int, int) {}
+    virtual void CreateObject() = 0;
+    virtual void DrawObject(QPainter *) = 0;
+    virtual void MouseDown(int, int) = 0;
+    virtual void MouseUp(int, int) = 0;
+    virtual void MouseMove(int, int) = 0;
+    virtual void MouseHover(int, int) = 0;
 
 #pragma endregion OBJECT_ACTION
 
@@ -100,22 +100,22 @@ public:
      * \brief The OBJECT_MOVE_DIRECTION enum 사물이 움직이는 방향
      */
     enum OBJECT_MOVE_DIRECTION {
-        DIRECTION_NONE = 0b00000000, // 정면을 바라본 초기 상태
-        DIRECTION_N = 0b00000001,    // 1 북
-        DIRECTION_S = 0b00000010,    // 2 남
-        DIRECTION_E = 0b00000100,    // 4 동
-        DIRECTION_W = 0b00001000,    // 8 서
-        DIRECTION_SE = 0b00000110,   // 6 남동
-        DIRECTION_SW = 0b00001010,   // 10 남서
-        DIRECTION_NE = 0b00000101,   // 5 북동
-        DIRECTION_NW = 0b00001001,   // 9 북서
+        DIR_NONE = 0b00000000, // 정면을 바라본 초기 상태
+        DIR_N = 0b00000001,    // 1 북
+        DIR_S = 0b00000010,    // 2 남
+        DIR_E = 0b00000100,    // 4 동
+        DIR_W = 0b00001000,    // 8 서
+        DIR_SE = 0b00000110,   // 6 남동
+        DIR_SW = 0b00001010,   // 10 남서
+        DIR_NE = 0b00000101,   // 5 북동
+        DIR_NW = 0b00001001,   // 9 북서
     };
     Q_ENUM(OBJECT_MOVE_DIRECTION)
 
     /*!
      * \brief The SPLITIMAGE_COPY_DIR enum 원본 이미지에서 복사할 방향
      */
-    enum SPLITIMAGE_COPY_DIR { COPY_RIGHT = 0, COPY_BOTTOM };
+    enum SPLITIMAGE_COPY_DIR { COPY_DIR_RIGHT = 0, COPY_DIR_DOWN };
     Q_ENUM(SPLITIMAGE_COPY_DIR)
 
     /*!

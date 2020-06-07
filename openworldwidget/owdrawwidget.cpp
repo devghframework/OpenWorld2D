@@ -26,8 +26,7 @@
  * \brief OWDrawWidget::OWDrawWidget 오픈월드 메인 위젯 생성자
  * \param parent
  */
-OWDrawWidget::OWDrawWidget(QWidget* parent)
-    : QWidget(parent)
+OWDrawWidget::OWDrawWidget(QWidget *parent) : QWidget(parent)
 {
     this->m_openWorldWidget = parent;
     //this->m_openWorldWidget->setFont(QFont ("Courier", 8));
@@ -35,8 +34,32 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
     this->setMouseTracking(true);
 
     //Q_GLOBAL_STATIC(DrawManager, this->m_drawManager);
+    connect(&this->m_renderingTimer, SIGNAL(timeout()), this, SLOT(update()));
 
-    this->m_isometric = new Isometric();
+    SetIsometricKind(Isometric::METRIC_30);
+}
+
+/*!
+ * \brief OWDrawWidget::~OWDrawWidget
+ */
+OWDrawWidget::~OWDrawWidget()
+{
+    this->m_renderingTimer.stop();
+
+    delete this->m_isometric;
+}
+
+void OWDrawWidget::SetIsometricKind(int isometricKind)
+{
+    this->m_isometric = nullptr;
+    this->m_sceneManager = nullptr;
+    this->m_mainCamera = nullptr;
+
+    delete this->m_isometric;
+    delete this->m_sceneManager;
+    delete this->m_mainCamera;
+
+    this->m_isometric = new Isometric(isometricKind);
 
     // Scene 에디터가 필요함.
     // Scene 에디터에서 작성 Scene데이를 로딩해서 처리 해야함.
@@ -47,23 +70,19 @@ OWDrawWidget::OWDrawWidget(QWidget* parent)
 
     this->m_mainCamera = new MainCamera(this->m_isometric, this->m_sceneManager);
     this->m_mainCamera->setParent(this);
+    this->m_mainCamera->InitMainCamera();
     this->m_mainCamera->OptionShowDefaultTileMapImage(true);
     this->m_mainCamera->OptionShowTileMapLine(true);
     this->m_mainCamera->OptionShowTileData(true);
+    QRect rect(0, 0, this->size().width(), this->size().height());
+    this->m_mainCamera->GetTileMap()->SetScreenSize(rect);
 
     this->m_mousePoint = new QPoint(100, 100); // 시작 마우스 위치
 
-    connect(&this->m_renderingTimer, SIGNAL(timeout()), this, SLOT(update()));
+    if (this->m_renderingTimer.isActive()) {
+        this->m_renderingTimer.stop();
+    }
     this->m_renderingTimer.start(RENDERING_TIME);
-}
-
-
-/*!
- * \brief OWDrawWidget::~OWDrawWidget
- */
-OWDrawWidget::~OWDrawWidget()
-{
-    this->m_renderingTimer.stop();
 }
 
 Isometric *OWDrawWidget::GetIsometric()
@@ -111,7 +130,6 @@ void OWDrawWidget::resizeEvent(QResizeEvent *event)
     this->m_mainCamera->SetScreenSize(this->rect());
 }
 
-
 /*!
  * \brief OWDrawWidget::timerEvent 타이머 이벤트 함수
  * \param event
@@ -119,7 +137,6 @@ void OWDrawWidget::resizeEvent(QResizeEvent *event)
 void OWDrawWidget::timerEvent(QTimerEvent *event)
 {
     Q_UNUSED(event);
-
 }
 
 

@@ -26,7 +26,7 @@ public:
     enum ISOMETRIC_KIND { METRIC_30, METRIC_2657 };
 
 public:
-    Isometric(void);
+    Isometric(int);
     virtual ~Isometric();
 
     int defaultIsometric();

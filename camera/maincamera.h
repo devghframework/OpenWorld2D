@@ -31,6 +31,7 @@ class MainCamera : public QObject
 public:
     MainCamera(Isometric *, SceneManager *);
     virtual ~MainCamera();
+    void InitMainCamera();
 
 private:
     Isometric *m_isoMetric;

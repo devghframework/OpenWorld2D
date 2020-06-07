@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>17</y>
+      <y>60</y>
       <width>58</width>
       <height>16</height>
      </rect>
@@ -46,7 +46,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>10</y>
+      <y>53</y>
       <width>101</width>
       <height>32</height>
      </rect>
@@ -77,9 +77,9 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>150</y>
-      <width>181</width>
+      <x>20</x>
+      <y>213</y>
+      <width>161</width>
       <height>251</height>
      </rect>
     </property>
@@ -206,7 +206,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>40</y>
+      <y>83</y>
       <width>131</width>
       <height>20</height>
      </rect>
@@ -222,7 +222,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>60</y>
+      <y>103</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -238,7 +238,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>120</y>
+      <y>163</y>
       <width>141</width>
       <height>20</height>
      </rect>
@@ -302,8 +302,8 @@
    <widget class="QCheckBox" name="chkScroll">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>94</y>
+      <x>30</x>
+      <y>183</y>
       <width>61</width>
       <height>20</height>
      </rect>
@@ -316,7 +316,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>90</y>
+      <y>133</y>
       <width>112</width>
       <height>32</height>
      </rect>
@@ -331,7 +331,7 @@
       <x>700</x>
       <y>30</y>
       <width>181</width>
-      <height>451</height>
+      <height>461</height>
      </rect>
     </property>
     <property name="title">
@@ -341,7 +341,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>203</y>
+       <y>194</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -354,7 +354,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>76</y>
+       <y>70</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -381,7 +381,7 @@
       <rect>
        <x>10</x>
        <y>46</y>
-       <width>113</width>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -390,8 +390,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>92</y>
-       <width>113</width>
+       <y>86</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -400,8 +400,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>220</y>
-       <width>113</width>
+       <y>211</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -410,21 +410,21 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>121</y>
+       <y>110</y>
        <width>111</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>목적지도착상태</string>
+      <string>목적지 도착 상태</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="edtDestinationArrive">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>137</y>
-       <width>113</width>
+       <y>126</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -433,7 +433,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>243</y>
+       <y>238</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -446,8 +446,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>260</y>
-       <width>113</width>
+       <y>254</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -456,8 +456,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>300</y>
-       <width>113</width>
+       <y>296</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -493,7 +493,7 @@
       <rect>
        <x>10</x>
        <y>340</y>
-       <width>113</width>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -502,7 +502,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>360</y>
+       <y>364</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -515,8 +515,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>377</y>
-       <width>113</width>
+       <y>381</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -525,7 +525,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>403</y>
+       <y>407</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -538,8 +538,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>420</y>
-       <width>113</width>
+       <y>424</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -548,8 +548,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>176</y>
-       <width>113</width>
+       <y>168</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -558,20 +558,43 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>160</y>
+       <y>152</y>
        <width>111</width>
        <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>13</pointsize>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <property name="text">
       <string>이동방향</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QComboBox" name="cboIsometric">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>23</y>
+      <width>101</width>
+      <height>32</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ISOMETRIC</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

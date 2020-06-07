@@ -10,7 +10,7 @@
  */
 
 #include "factory/owobject.h"
-#include <openworldwidget/owdrawwidget.h>
+#include "openworldwidget/owdrawwidget.h"
 
 #include <QDebug>
 #include <QImageReader>
@@ -21,7 +21,6 @@
 #include <QThread>
 
 #include "mainwindow.h"
-//#include "ui_MainWindow.h"
 extern MainWindow *Main;
 
 /*!
@@ -32,7 +31,7 @@ OwObject::OwObject(Isometric *isometric) : IOwObject()
 {
     this->m_isometric = isometric;
     this->m_objectStatus = IOwObject::STATUS_NONE;
-    this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S);
+    this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S);
 
     this->m_objectBottomLocationPixel.setX(0);
     this->m_objectBottomLocationPixel.setY(0);
@@ -48,54 +47,107 @@ OwObject::~OwObject()
 
 }
 
-int OwObject::GetObjectStatus()
+int OwObject::GetObjectStatus() const
 {
     return this->m_objectStatus;
 }
 
-int OwObject::GetAnimationNo()
+int OwObject::GetAnimationNo() const
 {
     return this->m_animationNo;
 }
 
-int OwObject::GetDestinationArriveStatus()
+int OwObject::GetDestinationArriveStatus() const
 {
     return this->m_destinationArriveStatus;
 }
+void OwObject::ActionTimerStart()
+{
+    return this->m_actionTimer.start(OWDrawWidget::RENDERING_TIME);
+}
+void OwObject::ActionTimerStop()
+{
+    return this->m_actionTimer.stop();
+}
+QString OwObject::GetActionName() const
+{
+    return this->m_actionName;
+}
 
-QPoint OwObject::GetMetricLocation()
+QPoint OwObject::GetMetricLocation() const
 {
     return this->m_metricLocation;
 }
 
-QPoint OwObject::GetPixelLocation()
+QPoint OwObject::GetPixelLocation() const
 {
     return this->m_pixelLocation;
 }
 
-QPoint OwObject::GetMoveStartPoint()
+QPoint OwObject::GetMoveStartPoint() const
 {
     return this->m_moveStartPoint;
 }
 
-QPoint OwObject::GetMoveEndPoint()
+QPoint OwObject::GetMoveEndPoint() const
 {
     return this->m_moveEndPoint;
 }
 
-QPoint OwObject::GetMovePointPixel()
+QPoint OwObject::GetMovePointPixel() const
 {
     return this->m_movePointPixel;
 }
 
-QPoint OwObject::GetMovePointPixelOld()
+QPoint OwObject::GetMovePointPixelOld() const
 {
     return this->m_movePointPixelOld;
 }
 
-QPoint OwObject::GetMoveEndPointPixel()
+QPoint OwObject::GetMoveEndPointPixel() const
 {
     return this->m_moveEndPointPixel;
+}
+
+ObjectSplitImageInfo *OwObject::GetSplitObjectInfo(QString actionName) const
+{
+    return this->m_splitObjectInfo[actionName];
+}
+void OwObject::SetActionName(QString actionName)
+{
+    this->m_actionName = actionName;
+}
+void OwObject::InitAnimation()
+{
+    this->m_animationNo = 0;
+}
+void OwObject::SetMovePointPixel(QPoint point)
+{
+    this->m_movePointPixel = point;
+}
+void OwObject::SetMovePointPixelOld(QPoint point)
+{
+    this->m_movePointPixelOld = point;
+}
+void OwObject::SetDestinationArriveStatus(int status)
+{
+    this->m_destinationArriveStatus = status;
+}
+void OwObject::SetObjectStatus(int status)
+{
+    this->m_objectStatus = status;
+}
+QPoint OwObject::GetObjectBottomLocationPixel() const
+{
+    return this->m_objectBottomLocationPixel;
+}
+void OwObject::SetObjectBottomLocationPixel(QPoint point)
+{
+    this->m_objectBottomLocationPixel = point;
+}
+void OwObject::SetMetricLocation(QPoint point)
+{
+    this->m_metricLocation = point;
 }
 
 /*!
@@ -104,6 +156,8 @@ QPoint OwObject::GetMoveEndPointPixel()
  */
 void OwObject::ObjectAction()
 {
+    //    inputDevice.Update(this, *this->m_isometric);
+
     // 목적지에 도착하였을 경우 움직임 처리
     if (this->m_objectStatus == IOwObject::STATUS_ARRIVED) {
         if (this->m_animationNo
@@ -115,7 +169,7 @@ void OwObject::ObjectAction()
     // 모든 처리가 완료 되었을 경우 처리
     else if (this->m_objectStatus == IOwObject::STATUS_DONE) {
         this->m_actionTimer.stop();
-        this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S);
+        this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S);
         this->m_objectStatus = IOwObject::STATUS_NONE;
         this->m_animationNo = 0;
     }
@@ -130,9 +184,8 @@ void OwObject::ObjectAction()
 
         // 아무것 안하는 상태일 경우 DIRECTION_S 방향을 보도록 한다.
         if (this->m_actionName
-            == IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_NONE)) {
-            this->m_actionName = IOwObject::GetMetaEnum(
-                IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S);
+            == IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_NONE)) {
+            this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S);
         }
 
         // 현재 좌표를 이전좌표로 백업한다.
@@ -209,21 +262,22 @@ void OwObject::GetDirection(int moveOldX, int moveOldY, int moveX, int moveY)
     int moveDirection;
 
     if (moveOldY > moveY) {
-        moveDirection = IOwObject::DIRECTION_N;
+        moveDirection = IOwObject::DIR_N;
     } else if (moveOldY < moveY) {
-        moveDirection = IOwObject::DIRECTION_S;
+        moveDirection = IOwObject::DIR_S;
     } else {
-        moveDirection = IOwObject::DIRECTION_NONE;
+        moveDirection = IOwObject::DIR_NONE;
     }
 
     if (moveOldX > moveX) {
-        moveDirection |= IOwObject::DIRECTION_W;
+        moveDirection |= IOwObject::DIR_W;
     } else if (moveOldX < moveX) {
-        moveDirection |= IOwObject::DIRECTION_E;
+        moveDirection |= IOwObject::DIR_E;
     }
 
     auto metaEnum = QMetaEnum::fromType<IOwObject::OBJECT_MOVE_DIRECTION>();
     this->m_actionName = metaEnum.valueToKey(moveDirection);
+    qDebug() << "ACTION NAME:" << this->m_actionName;
 }
 
 void OwObject::CreateObject() {}
@@ -332,7 +386,7 @@ void OwObject::CreateSplitImage()
 
             switch (this->m_splitObjectInfo.value(key)->copyDirection) {
                 // 우측방향으로 복사
-            case IOwObject::COPY_RIGHT: {
+            case IOwObject::COPY_DIR_RIGHT: {
                 for (int idx = 0; idx < this->m_splitObjectInfo.value(key)->totalSplitCount; idx++) {
                     this->m_splitObjectInfo.value(key)->splitImage[idx]
                         = pixmap.copy(x,
@@ -344,7 +398,7 @@ void OwObject::CreateSplitImage()
                 break;
             }
                 // 아래 방향으로 복사
-            case IOwObject::COPY_BOTTOM: {
+            case IOwObject::COPY_DIR_DOWN: {
                 for (int idx = 0; idx < this->m_splitObjectInfo.value(key)->totalSplitCount; idx++) {
                     this->m_splitObjectInfo.value(key)->splitImage[idx]
                         = pixmap.copy(x,

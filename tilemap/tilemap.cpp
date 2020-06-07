@@ -53,6 +53,19 @@ TileMap::TileMap(Isometric *isoMetric)
     this->m_mapDataMetricLocation = new QPoint(0, 0);
 }
 
+TileMap::~TileMap()
+{
+    this->m_defaultTileMapImage = nullptr;
+    this->m_tileMapLine = nullptr;
+    this->m_tileImageMetricLocation = nullptr;
+    this->m_mapDataMetricLocation = nullptr;
+
+    delete this->m_defaultTileMapImage;
+    delete this->m_tileMapLine;
+    delete this->m_tileImageMetricLocation;
+    delete this->m_mapDataMetricLocation;
+}
+
 /*!
  * \brief TileMap::LoadTileImage 이미지 파일을 읽어 QPixmap으로 리턴하는 함수
  * \param fileName

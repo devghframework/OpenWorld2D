@@ -36,6 +36,7 @@ public:
     ~MainWindow();
 
 public:
+    // Observer 로 이동
     void monitoringObjectStatus(int);
     void monitoringAnimationNo(int);
     void monitoringDestinationArriveStatus(int);
@@ -64,6 +65,8 @@ private slots:
     void on_btnFadeOut_clicked();
     void on_btnViewCharactor_clicked();
     void on_btnScene1_clicked();
+
+    void on_cboIsometric_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *m_ui;

@@ -17,10 +17,15 @@
 #include <QPainter>
 #include <QString>
 #include <QVector>
+#include <QDir>
 
-Isometric::Isometric()
+Isometric::Isometric(int defaultIsometric)
 {
-    this->m_defaultIsometric = Isometric::METRIC_30;
+    this->m_defaultIsometric = defaultIsometric;
+
+    qDebug() << "isometric -->" << QString::number(defaultIsometric);
+    qDebug() << "CurrentPath -->" << QDir::currentPath();
+    qDebug() << "Application Path -->" << QCoreApplication::applicationDirPath();
 
     if (this->m_defaultIsometric == Isometric::METRIC_2657) {
         //기본 매트릭 정보 설정 (26.57도)
@@ -57,6 +62,7 @@ Isometric::Isometric()
 
     this->m_metricX = 0;
     this->m_metricY = 0;
+
 
     // 마우스 마크 이미지를 설정한다.
     // TODO

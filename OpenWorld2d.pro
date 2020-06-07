@@ -30,7 +30,10 @@ DEFINES += DEBUG
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    factory/inputdevice.cpp \
+    observer/monitoring.cpp \
     factory/owobjectmanager.cpp \
+    observer/subject.cpp \
     scene/scene.cpp \
     scene/scenemanager.cpp \
     camera/maincamera.cpp \
@@ -42,7 +45,12 @@ SOURCES += \
     tilemap/tilemap.cpp
 
 HEADERS += \
+    factory/inputdevice.h \
+    observer/iobserver.h \
+    observer/iobserver.h \
+    observer/monitoring.h \
     factory/owobjectmanager.h \
+    observer/subject.h \
     scene/scene.h \
     scene/scenemanager.h \
     camera/maincamera.h \

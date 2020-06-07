@@ -12,7 +12,7 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
-#include "coordinatesystem/isometric.h"
+#include "isometric/isometric.h"
 
 #include <QtCore>
 #include <QPixmap>
@@ -31,7 +31,6 @@ class TileMap
 
 public:
     TileMap(Isometric *isoMetric);
-    virtual ~TileMap();
 
     /*!
      * \brief The BORDER_DIR 테두리 방향

@@ -45,6 +45,7 @@ protected:
     virtual void mouseMoveEvent(QMouseEvent *) override;
 
 public:
+    void SetIsometricKind(int);
     void SetBackgroundColor(QColor);
     Isometric *GetIsometric();
     QPoint GetMetricLocation(int, int);

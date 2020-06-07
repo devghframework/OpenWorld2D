@@ -19,7 +19,6 @@
 
 #include <coordinatesystem/isometric.h>
 
-//#include <helper/utils.h>
 
 /*!
  * \class ObjectCreator

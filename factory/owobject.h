@@ -12,6 +12,8 @@
 #ifndef OWOBJECT_H
 #define OWOBJECT_H
 
+#include "coordinatesystem/isometric.h"
+#include "factory/inputdevice.h"
 #include "factory/iowobject.h"
 
 #include <QMap>
@@ -21,8 +23,6 @@
 #include <QSize>
 #include <QTimer>
 
-#include <coordinatesystem/isometric.h>
-
 /*!
  * \class OwObject
  * \brief The OwObject class 오브젝트 클래스 (케릭터 성질과 움직임을 처리한다.)
@@ -31,7 +31,6 @@
 class OwObject : public QObject, IOwObject
 {
     Q_OBJECT
-    //Q_DISABLE_COPY(OwObject)
 
 public:
     OwObject(Isometric *isometric);
@@ -49,26 +48,36 @@ public:
      */
     void SetObjectSplitImageInfo(QMap<QString, ObjectSplitImageInfo *>);
 
-    /****************************************/
-    /* 객체의 현재 상태                         */
-    /****************************************/
-    int GetObjectStatus();
-    int GetAnimationNo();
-    int GetDestinationArriveStatus();
-    QPoint GetMetricLocation();
-    QPoint GetPixelLocation();
-    QPoint GetMoveStartPoint();
-    QPoint GetMoveEndPoint();
-    QPoint GetMovePointPixel();
-    QPoint GetMovePointPixelOld();
-    QPoint GetMoveEndPointPixel();
-    /****************************************/
-
-private:
-    /*!
-     * \brief CreateSplitImage 저장된 정보로 원본 이미지에서 분할하여 배열 이미지로 복사한다.
-     */
-    void CreateSplitImage();
+    /************************************************************/
+    /* 객체의 현재 상태                                             */
+    /************************************************************/
+    int GetObjectStatus() const;
+    int GetAnimationNo() const;
+    int GetDestinationArriveStatus() const;
+    void ActionTimerStart();
+    void ActionTimerStop();
+    QString GetActionName() const;
+    QPoint GetMetricLocation() const;
+    QPoint GetPixelLocation() const;
+    QPoint GetMoveStartPoint() const;
+    QPoint GetMoveEndPoint() const;
+    QPoint GetMovePointPixel() const;
+    QPoint GetMovePointPixelOld() const;
+    QPoint GetMoveEndPointPixel() const;
+    QPoint GetObjectBottomLocationPixel() const;
+    ObjectSplitImageInfo *GetSplitObjectInfo(QString) const;
+    /************************************************************/
+    /* 객체의 현재 상태 변경                                         */
+    /************************************************************/
+    void SetActionName(QString);
+    void InitAnimation();
+    void SetMovePointPixel(QPoint);
+    void SetMovePointPixelOld(QPoint);
+    void SetDestinationArriveStatus(int);
+    void SetObjectStatus(int);
+    void SetObjectBottomLocationPixel(QPoint);
+    void SetMetricLocation(QPoint);
+    /************************************************************/
 
     /*!
      * \brief GetDirection 오브젝트가 움직이는 방향을 계산한다.
@@ -78,6 +87,22 @@ private:
      * \param moveY
      */
     void GetDirection(int moveOldX, int moveOldY, int moveX, int moveY);
+
+    /*!
+     * \brief m_splitObjectInfo 객체의 행동 이미지가 들어 있는 구조체의 1차원 배열
+     */
+    QMap<QString, ObjectSplitImageInfo *> m_splitObjectInfo;
+
+private:
+    /* Device */
+    InputDevice inputDevice;
+
+private:
+    /*!
+     * \brief CreateSplitImage 저장된 정보로 원본 이미지에서 분할하여 배열 이미지로 복사한다.
+     */
+    void CreateSplitImage();
+
 
 private slots:
     /*!
@@ -96,17 +121,10 @@ private:
      */
     QTimer m_actionTimer;
 
-public:
-    /*!
-     * \brief m_splitObjectInfo 객체의 행동 이미지가 들어 있는 구조체의 1차원 배열
-     */
-    QMap<QString, ObjectSplitImageInfo *> m_splitObjectInfo;
-
 private:
-    /*************************/
-    /* 객체의 기본 특성을 정의한다. */
-    /*************************/
-
+/*************************/
+/* 객체의 기본 특성을 정의한다. */
+/*************************/
 #pragma region OBJECT_FIELDS
 
     /*!

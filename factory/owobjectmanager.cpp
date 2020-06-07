@@ -70,12 +70,12 @@ void OwObjectManager::CreateCharactor()
     moveS->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
     moveS->copyStartPoint = QPoint(0, 0);
-    moveS->copyDirection = IOwObject::COPY_RIGHT;
+    moveS->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveS->fullWidth = 96;
     moveS->fullHeight = 32;
     moveS->width = 32;
     moveS->height = 32;
-    moveS->actionNo = IOwObject::DIRECTION_S;
+    moveS->actionNo = IOwObject::DIR_S;
     moveS->totalSplitCount = 3;
     moveS->movePixel = 2;
     moveS->bottomLocation.setX(16);
@@ -85,20 +85,20 @@ void OwObjectManager::CreateCharactor()
     moveS->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveS->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_S),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_S),
                                        moveS);
 
     // 북쪽방향 이동
     ObjectSplitImageInfo *moveN = new ObjectSplitImageInfo();
     moveN->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveN->copyDirection = IOwObject::COPY_RIGHT;
+    moveN->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveN->copyStartPoint = QPoint(0, 96);
     moveN->fullWidth = 96;
     moveN->fullHeight = 32;
     moveN->width = 32;
     moveN->height = 32;
-    moveN->actionNo = IOwObject::DIRECTION_N;
+    moveN->actionNo = IOwObject::DIR_N;
     moveN->totalSplitCount = 3;
     moveN->movePixel = 2;
     moveN->bottomLocation.setX(16);
@@ -108,19 +108,19 @@ void OwObjectManager::CreateCharactor()
     moveN->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveN->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_N),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_N),
                                        moveN);
 
     ObjectSplitImageInfo *moveW = new ObjectSplitImageInfo();
     moveW->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveW->copyDirection = IOwObject::COPY_RIGHT;
+    moveW->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveW->copyStartPoint = QPoint(0, 32);
     moveW->fullWidth = 96;
     moveW->fullHeight = 32;
     moveW->width = 32;
     moveW->height = 32;
-    moveW->actionNo = IOwObject::DIRECTION_W;
+    moveW->actionNo = IOwObject::DIR_W;
     moveW->totalSplitCount = 3;
     moveW->movePixel = 2;
     moveW->bottomLocation.setX(16);
@@ -130,19 +130,19 @@ void OwObjectManager::CreateCharactor()
     moveW->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveW->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_W),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_W),
                                        moveW);
 
     ObjectSplitImageInfo *moveE = new ObjectSplitImageInfo();
     moveE->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveE->copyDirection = IOwObject::COPY_RIGHT;
+    moveE->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveE->copyStartPoint = QPoint(0, 64);
     moveE->fullWidth = 96;
     moveE->fullHeight = 32;
     moveE->width = 32;
     moveE->height = 32;
-    moveE->actionNo = IOwObject::DIRECTION_E;
+    moveE->actionNo = IOwObject::DIR_E;
     moveE->totalSplitCount = 3;
     moveE->movePixel = 2;
     moveE->bottomLocation.setX(16);
@@ -152,19 +152,19 @@ void OwObjectManager::CreateCharactor()
     moveE->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveE->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_E),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_E),
                                        moveE);
 
     ObjectSplitImageInfo *moveNE = new ObjectSplitImageInfo();
     moveNE->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveNE->copyDirection = IOwObject::COPY_RIGHT;
+    moveNE->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveNE->copyStartPoint = QPoint(96, 96);
     moveNE->fullWidth = 96;
     moveNE->fullHeight = 32;
     moveNE->width = 32;
     moveNE->height = 32;
-    moveNE->actionNo = IOwObject::DIRECTION_NE;
+    moveNE->actionNo = IOwObject::DIR_NE;
     moveNE->totalSplitCount = 3;
     moveNE->movePixel = 2;
     moveNE->bottomLocation.setX(16);
@@ -174,19 +174,19 @@ void OwObjectManager::CreateCharactor()
     moveNE->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveNE->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_NE),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_NE),
                                        moveNE);
 
     ObjectSplitImageInfo *moveNW = new ObjectSplitImageInfo();
     moveNW->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveNW->copyDirection = IOwObject::COPY_RIGHT;
+    moveNW->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveNW->copyStartPoint = QPoint(96, 32);
     moveNW->fullWidth = 96;
     moveNW->fullHeight = 32;
     moveNW->width = 32;
     moveNW->height = 32;
-    moveNW->actionNo = IOwObject::DIRECTION_NW;
+    moveNW->actionNo = IOwObject::DIR_NW;
     moveNW->totalSplitCount = 3;
     moveNW->movePixel = 2;
     moveNW->bottomLocation.setX(16);
@@ -196,19 +196,19 @@ void OwObjectManager::CreateCharactor()
     moveNW->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveNW->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_NW),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_NW),
                                        moveNW);
 
     ObjectSplitImageInfo *moveSE = new ObjectSplitImageInfo();
     moveSE->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveSE->copyDirection = IOwObject::COPY_RIGHT;
+    moveSE->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveSE->copyStartPoint = QPoint(96, 64);
     moveSE->fullWidth = 96;
     moveSE->fullHeight = 32;
     moveSE->width = 32;
     moveSE->height = 32;
-    moveSE->actionNo = IOwObject::DIRECTION_SE;
+    moveSE->actionNo = IOwObject::DIR_SE;
     moveSE->totalSplitCount = 3;
     moveSE->movePixel = 2;
     moveSE->bottomLocation.setX(16);
@@ -218,19 +218,19 @@ void OwObjectManager::CreateCharactor()
     moveSE->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveSE->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_SE),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_SE),
                                        moveSE);
 
     ObjectSplitImageInfo *moveSW = new ObjectSplitImageInfo();
     moveSW->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveSW->copyDirection = IOwObject::COPY_RIGHT;
+    moveSW->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveSW->copyStartPoint = QPoint(96, 0);
     moveSW->fullWidth = 96;
     moveSW->fullHeight = 32;
     moveSW->width = 32;
     moveSW->height = 32;
-    moveSW->actionNo = IOwObject::DIRECTION_SW;
+    moveSW->actionNo = IOwObject::DIR_SW;
     moveSW->totalSplitCount = 3;
     moveSW->movePixel = 2;
     moveSW->bottomLocation.setX(16);
@@ -240,13 +240,13 @@ void OwObjectManager::CreateCharactor()
     moveSW->bottomGapFromMetricCenter.setY(
         (this->m_isometric->defaultIsometricHarfHeight() - moveSW->bottomLocation.y()));
     owObject->m_splitObjectInfo.insert(IOwObject::GetMetaEnum(
-                                           IOwObject::OBJECT_MOVE_DIRECTION::DIRECTION_SW),
+                                           IOwObject::OBJECT_MOVE_DIRECTION::DIR_SW),
                                        moveSW);
 
     ObjectSplitImageInfo *moveArrived = new ObjectSplitImageInfo();
     moveArrived->originFileName
         = "/Users/devlee/Dropbox/CodingStudio/Projects/OpenWorld2d/Resources/playerfull.png";
-    moveArrived->copyDirection = IOwObject::COPY_RIGHT;
+    moveArrived->copyDirection = IOwObject::COPY_DIR_RIGHT;
     moveArrived->copyStartPoint = QPoint(192, 128);
     moveArrived->fullWidth = 96;
     moveArrived->fullHeight = 32;

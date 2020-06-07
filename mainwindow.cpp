@@ -50,11 +50,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->m_ui->setupUi(this);
 
+    this->m_ui->cboIsometric->addItem("30 Degree", QVariant("0"));
+    this->m_ui->cboIsometric->addItem("26.57 Degree", QVariant("1"));
+
     this->m_ui->cboBackgroundColor->addItem("Black", QColor(Qt::black));
     this->m_ui->cboBackgroundColor->addItem("White", QColor(Qt::white));
     this->m_ui->cboBackgroundColor->addItem("Red", QColor(Qt::red));
     this->m_ui->cboBackgroundColor->addItem("Green", QColor(Qt::green));
     this->m_ui->cboBackgroundColor->addItem("Blue", QColor(Qt::blue));
+
+    connect(this->m_ui->cboBackgroundColor,
+            SIGNAL(currentIndexChanged()),
+            this,
+            SLOT(on_cboBackgroundColor_currentIndexChanged()));
 
     this->timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(mornitoringTimer()));
@@ -78,15 +86,18 @@ void MainWindow::monitoringObjectStatus(int status)
     auto metaEnum = QMetaEnum::fromType<IOwObject::OBJECT_STATUS>();
     this->m_ui->edtObjectStatus->setText(metaEnum.valueToKey(status));
 }
+
 void MainWindow::monitoringAnimationNo(int animationNo)
 {
     this->m_ui->edtAnimationNo->setText(QString::number(animationNo));
 }
+
 void MainWindow::monitoringDestinationArriveStatus(int status)
 {
     auto metaEnum = QMetaEnum::fromType<IOwObject::OBJECT_DESTINATION>();
     this->m_ui->edtDestinationArrive->setText(metaEnum.valueToKey(status));
 }
+
 void MainWindow::monitoringMetricLocation(QPoint point)
 {
     this->m_ui->edtObjectMetricLocation->setText(QString::number(point.x()) + ","
@@ -103,21 +114,25 @@ void MainWindow::monitoringMoveStartPoint(QPoint point)
     this->m_ui->edtMoveStartPoint->setText(QString::number(point.x()) + ","
                                            + QString::number(point.y()));
 }
+
 void MainWindow::monitoringMoveEndPoint(QPoint point)
 {
     this->m_ui->edtMoveEndPoint->setText(QString::number(point.x()) + ","
                                          + QString::number(point.y()));
 }
+
 void MainWindow::monitoringMovePointPixel(QPoint point)
 {
     this->m_ui->edtPointPixel->setText(QString::number(point.x()) + ","
                                        + QString::number(point.y()));
 }
+
 void MainWindow::monitoringMovePointPixelOld(QPoint point)
 {
     this->m_ui->edtMovePointPixelOld->setText(QString::number(point.x()) + ","
                                               + QString::number(point.y()));
 }
+
 void MainWindow::monitoringMoveEndPointPixel(QPoint point)
 {
     this->m_ui->edtMoveEndPointPixel->setText(QString::number(point.x()) + ","
@@ -376,4 +391,28 @@ void MainWindow::on_btnViewCharactor_clicked()
 void MainWindow::on_btnScene1_clicked()
 {
 
+}
+
+void MainWindow::on_cboIsometric_currentIndexChanged(int index)
+{
+    // 현재 지원하지 않음.
+    // 위젯을 새로 생성하면서 기존 콤보박스와 이벤트가 끊어 지기 때문에
+    // 위젯안에서 윈도우 객체의 값을 제대로 불러올 수 없다.
+    if (index == 0)
+        this->m_ui->widgetOpenWorld->SetIsometricKind(Isometric::METRIC_30);
+    else if (index == 1)
+        this->m_ui->widgetOpenWorld->SetIsometricKind(Isometric::METRIC_2657);
+
+    connect(this->m_ui->cboBackgroundColor,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            [this](int index) { on_cboBackgroundColor_currentIndexChanged(index); });
+
+    //    connect(this->m_ui->cboBackgroundColor, &QComboBox::currentIndexChanged, [this](int index){
+    //        on_cboBackgroundColor_currentIndexChanged(index, stateId)}); // your might need to capture "stateId" I don't know where it comes from
+    //    });
+
+    //    connect(this->m_ui->cboBackgroundColor,
+    //            SIGNAL(currentIndexChanged(int)),
+    //            this,
+    //            SLOT(on_cboBackgroundColor_currentIndexChanged()));
 }

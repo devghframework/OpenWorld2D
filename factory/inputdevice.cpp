@@ -32,7 +32,7 @@ void InputDevice::Update(QObject *qobject, Isometric &isometric)
                              object->GetMovePointPixel().x(),
                              object->GetMovePointPixel().y());
 
-        // 아무것 안하는 상태일 경우 DIRECTION_S 방향을 보도록 한다.
+        // 아무것 안하는 상태일 경우 DIR_S 방향을 보도록 한다.
         if (object->GetActionName()
             == IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_NONE)) {
             object->SetActionName(IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S));
@@ -50,7 +50,7 @@ void InputDevice::Update(QObject *qobject, Isometric &isometric)
         }
 
         // 현재 좌표가 목적지 보다 우측에 있을 경우
-        else if (object->GetMoveEndPoint().x() < object->GetMovePointPixel().x()) {
+        else if (object->GetMoveEndPointPixel().x() < object->GetMovePointPixel().x()) {
             x -= object->GetSplitObjectInfo(object->GetActionName())->movePixel;
         }
 
@@ -79,16 +79,13 @@ void InputDevice::Update(QObject *qobject, Isometric &isometric)
     }
 
     int bottomX = object->GetMovePointPixel().x() + isometric.defaultIsometricHarfWidth();
-    int bottomY = object->GetMoveEndPoint().y() + isometric.defaultIsometricHarfHeight();
+    int bottomY = object->GetMovePointPixel().y() + isometric.defaultIsometricHarfHeight();
     QPoint bottomPoint(bottomX, bottomY);
     object->SetObjectBottomLocationPixel(bottomPoint);
 
-    if (object->GetObjectBottomLocationPixel().x() >= 0
-        && object->GetObjectBottomLocationPixel().y() >= 0) {
-        object->SetMetricLocation(
-            isometric.GetMetricLocation(object->GetObjectBottomLocationPixel().x(),
-                                        object->GetObjectBottomLocationPixel().y()));
-    }
+    object->SetMetricLocation(
+        isometric.GetMetricLocation(object->GetObjectBottomLocationPixel().x(),
+                                    object->GetObjectBottomLocationPixel().y()));
 
     // 모니터링
     //    Main->monitoringObjectStatus(object.GetActionName());

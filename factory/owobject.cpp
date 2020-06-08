@@ -156,86 +156,86 @@ void OwObject::SetMetricLocation(QPoint point)
  */
 void OwObject::ObjectAction()
 {
-    //    inputDevice.Update(this, *this->m_isometric);
+    inputDevice.Update(this, *this->m_isometric);
 
-    // 목적지에 도착하였을 경우 움직임 처리
-    if (this->m_objectStatus == IOwObject::STATUS_ARRIVED) {
-        if (this->m_animationNo
-            >= (this->m_splitObjectInfo[this->m_actionName]->totalSplitCount - 1)) {
-            this->m_objectStatus = IOwObject::STATUS_DONE;
-        }
-    }
+    //    // 목적지에 도착하였을 경우 움직임 처리
+    //    if (this->m_objectStatus == IOwObject::STATUS_ARRIVED) {
+    //        if (this->m_animationNo
+    //            >= (this->m_splitObjectInfo[this->m_actionName]->totalSplitCount - 1)) {
+    //            this->m_objectStatus = IOwObject::STATUS_DONE;
+    //        }
+    //    }
 
-    // 모든 처리가 완료 되었을 경우 처리
-    else if (this->m_objectStatus == IOwObject::STATUS_DONE) {
-        this->m_actionTimer.stop();
-        this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S);
-        this->m_objectStatus = IOwObject::STATUS_NONE;
-        this->m_animationNo = 0;
-    }
+    //    // 모든 처리가 완료 되었을 경우 처리
+    //    else if (this->m_objectStatus == IOwObject::STATUS_DONE) {
+    //        this->m_actionTimer.stop();
+    //        this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S);
+    //        this->m_objectStatus = IOwObject::STATUS_NONE;
+    //        this->m_animationNo = 0;
+    //    }
 
-    // 움직임 처리
-    else {
-        // 방향을 찾는다.
-        GetDirection(this->m_movePointPixelOld.x(),
-                     this->m_movePointPixelOld.y(),
-                     this->m_movePointPixel.x(),
-                     this->m_movePointPixel.y());
+    //    // 움직임 처리
+    //    else {
+    //        // 방향을 찾는다.
+    //        GetDirection(this->m_movePointPixelOld.x(),
+    //                     this->m_movePointPixelOld.y(),
+    //                     this->m_movePointPixel.x(),
+    //                     this->m_movePointPixel.y());
 
-        // 아무것 안하는 상태일 경우 DIRECTION_S 방향을 보도록 한다.
-        if (this->m_actionName
-            == IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_NONE)) {
-            this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S);
-        }
+    //        // 아무것 안하는 상태일 경우 DIRECTION_S 방향을 보도록 한다.
+    //        if (this->m_actionName
+    //            == IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_NONE)) {
+    //            this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_MOVE_DIRECTION::DIR_S);
+    //        }
 
-        // 현재 좌표를 이전좌표로 백업한다.
-        this->m_movePointPixelOld = this->m_movePointPixel;
+    //        // 현재 좌표를 이전좌표로 백업한다.
+    //        this->m_movePointPixelOld = this->m_movePointPixel;
 
-        // 현재 좌표가 목적지 보다 좌측에 있을 경우
-        if (this->m_moveEndPointPixel.x() > this->m_movePointPixel.x()) {
-            this->m_movePointPixel.setX(this->m_movePointPixel.x()
-                                        + this->m_splitObjectInfo[this->m_actionName]->movePixel);
-        }
+    //        // 현재 좌표가 목적지 보다 좌측에 있을 경우
+    //        if (this->m_moveEndPointPixel.x() > this->m_movePointPixel.x()) {
+    //            this->m_movePointPixel.setX(this->m_movePointPixel.x()
+    //                                        + this->m_splitObjectInfo[this->m_actionName]->movePixel);
+    //        }
 
-        // 현재 좌표가 목적지 보다 우측에 있을 경우
-        else if (this->m_moveEndPointPixel.x() < this->m_movePointPixel.x()) {
-            this->m_movePointPixel.setX(this->m_movePointPixel.x()
-                                        - this->m_splitObjectInfo[this->m_actionName]->movePixel);
-        }
+    //        // 현재 좌표가 목적지 보다 우측에 있을 경우
+    //        else if (this->m_moveEndPointPixel.x() < this->m_movePointPixel.x()) {
+    //            this->m_movePointPixel.setX(this->m_movePointPixel.x()
+    //                                        - this->m_splitObjectInfo[this->m_actionName]->movePixel);
+    //        }
 
-        // 현재 좌표가 목적지 보다 아래에 있을 경우
-        if (this->m_moveEndPointPixel.y() > this->m_movePointPixel.y()) {
-            this->m_movePointPixel.setY(this->m_movePointPixel.y()
-                                        + this->m_splitObjectInfo[this->m_actionName]->movePixel);
-        }
+    //        // 현재 좌표가 목적지 보다 아래에 있을 경우
+    //        if (this->m_moveEndPointPixel.y() > this->m_movePointPixel.y()) {
+    //            this->m_movePointPixel.setY(this->m_movePointPixel.y()
+    //                                        + this->m_splitObjectInfo[this->m_actionName]->movePixel);
+    //        }
 
-        // 현재 좌표가 목적지 보다 위에 있을 경우
-        else if (this->m_moveEndPointPixel.y() < this->m_movePointPixel.y()) {
-            this->m_movePointPixel.setY(this->m_movePointPixel.y()
-                                        - this->m_splitObjectInfo[this->m_actionName]->movePixel);
-        }
+    //        // 현재 좌표가 목적지 보다 위에 있을 경우
+    //        else if (this->m_moveEndPointPixel.y() < this->m_movePointPixel.y()) {
+    //            this->m_movePointPixel.setY(this->m_movePointPixel.y()
+    //                                        - this->m_splitObjectInfo[this->m_actionName]->movePixel);
+    //        }
 
-        // 현재 좌표가 목적지와 같을 경우
-        if (this->m_movePointPixel.x() == this->m_moveEndPointPixel.x()
-            && this->m_movePointPixel.y() == this->m_moveEndPointPixel.y()) {
-            // 현재 상태를 목적지 도착으로 변경하고 목적지 도착 행동을 하도록 설정한다.
-            this->m_destinationArriveStatus = IOwObject::DESTINATION_ARRIVED;
-            this->m_objectStatus = IOwObject::STATUS_ARRIVED;
-            this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_STATUS::STATUS_ARRIVED);
-            this->m_animationNo = 0;
-        }
-    }
+    //        // 현재 좌표가 목적지와 같을 경우
+    //        if (this->m_movePointPixel.x() == this->m_moveEndPointPixel.x()
+    //            && this->m_movePointPixel.y() == this->m_moveEndPointPixel.y()) {
+    //            // 현재 상태를 목적지 도착으로 변경하고 목적지 도착 행동을 하도록 설정한다.
+    //            this->m_destinationArriveStatus = IOwObject::DESTINATION_ARRIVED;
+    //            this->m_objectStatus = IOwObject::STATUS_ARRIVED;
+    //            this->m_actionName = IOwObject::GetMetaEnum(IOwObject::OBJECT_STATUS::STATUS_ARRIVED);
+    //            this->m_animationNo = 0;
+    //        }
+    //    }
 
-    this->m_objectBottomLocationPixel.setX(this->m_movePointPixel.x()
-                                           + this->m_isometric->defaultIsometricHarfWidth());
-    this->m_objectBottomLocationPixel.setY(this->m_movePointPixel.y()
-                                           + this->m_isometric->defaultIsometricHarfHeight());
+    //    this->m_objectBottomLocationPixel.setX(this->m_movePointPixel.x()
+    //                                           + this->m_isometric->defaultIsometricHarfWidth());
+    //    this->m_objectBottomLocationPixel.setY(this->m_movePointPixel.y()
+    //                                           + this->m_isometric->defaultIsometricHarfHeight());
 
-    if (this->m_objectBottomLocationPixel.x() >= 0 && this->m_objectBottomLocationPixel.y() >= 0) {
-        this->m_metricLocation = this->m_isometric
-                                     ->GetMetricLocation(this->m_objectBottomLocationPixel.x(),
-                                                         this->m_objectBottomLocationPixel.y());
-    }
+    //    if (this->m_objectBottomLocationPixel.x() >= 0 && this->m_objectBottomLocationPixel.y() >= 0) {
+    //        this->m_metricLocation = this->m_isometric
+    //                                     ->GetMetricLocation(this->m_objectBottomLocationPixel.x(),
+    //                                                         this->m_objectBottomLocationPixel.y());
+    //    }
 
     // 모니터링
     Main->monitoringObjectStatus(this->m_objectStatus);

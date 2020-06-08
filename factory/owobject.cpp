@@ -285,7 +285,7 @@ void OwObject::GetDirection(int moveOldX, int moveOldY, int moveX, int moveY)
 
     auto metaEnum = QMetaEnum::fromType<IOwObject::OBJECT_MOVE_DIRECTION>();
     this->m_actionName = metaEnum.valueToKey(moveDirection);
-    qDebug() << "ACTION NAME:" << this->m_actionName;
+    //qDebug() << "ACTION NAME:" << this->m_actionName;
 }
 
 void OwObject::CreateObject() {}

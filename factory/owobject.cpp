@@ -113,6 +113,10 @@ ObjectSplitImageInfo *OwObject::GetSplitObjectInfo(QString actionName) const
 {
     return this->m_splitObjectInfo[actionName];
 }
+int OwObject::GetSplitObjectInfoCount() const
+{
+    return this->m_splitObjectInfo.count();
+}
 void OwObject::SetActionName(QString actionName)
 {
     this->m_actionName = actionName;
@@ -120,6 +124,10 @@ void OwObject::SetActionName(QString actionName)
 void OwObject::InitAnimation()
 {
     this->m_animationNo = 0;
+}
+void OwObject::AddAnimationNo()
+{
+    this->m_animationNo++;
 }
 void OwObject::SetMovePointPixel(QPoint point)
 {
@@ -288,24 +296,26 @@ void OwObject::CreateObject() {}
  */
 void OwObject::DrawObject(QPainter *painter)
 {
-    if (this->m_objectStatus == IOwObject::STATUS_NONE) {
-        this->m_animationNo = 0;
-    }
+    drawDevice.Update(this, *painter);
 
-    if (this->m_splitObjectInfo.count() > 0) {
-        painter->drawPixmap(
-            this->m_movePointPixel.x()
-                + this->m_splitObjectInfo[this->m_actionName]->bottomGapFromMetricCenter.x(),
-            this->m_movePointPixel.y()
-                + this->m_splitObjectInfo[this->m_actionName]->bottomGapFromMetricCenter.y(),
-            this->m_splitObjectInfo[this->m_actionName]->splitImage[this->m_animationNo]);
+    //    if (this->m_objectStatus == IOwObject::STATUS_NONE) {
+    //        this->m_animationNo = 0;
+    //    }
 
-        this->m_animationNo++;
+    //    if (this->m_splitObjectInfo.count() > 0) {
+    //        painter->drawPixmap(
+    //            this->m_movePointPixel.x()
+    //                + this->m_splitObjectInfo[this->m_actionName]->bottomGapFromMetricCenter.x(),
+    //            this->m_movePointPixel.y()
+    //                + this->m_splitObjectInfo[this->m_actionName]->bottomGapFromMetricCenter.y(),
+    //            this->m_splitObjectInfo[this->m_actionName]->splitImage[this->m_animationNo]);
 
-        if (this->m_animationNo >= this->m_splitObjectInfo[this->m_actionName]->totalSplitCount) {
-            this->m_animationNo = 0;
-        }
-    }
+    //        this->m_animationNo++;
+
+    //        if (this->m_animationNo >= this->m_splitObjectInfo[this->m_actionName]->totalSplitCount) {
+    //            this->m_animationNo = 0;
+    //        }
+    //    }
 }
 
 /*!

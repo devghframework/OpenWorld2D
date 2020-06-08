@@ -13,6 +13,7 @@
 #define OWOBJECT_H
 
 #include "coordinatesystem/isometric.h"
+#include "factory/drawdevice.h"
 #include "factory/inputdevice.h"
 #include "factory/iowobject.h"
 
@@ -66,11 +67,13 @@ public:
     QPoint GetMoveEndPointPixel() const;
     QPoint GetObjectBottomLocationPixel() const;
     ObjectSplitImageInfo *GetSplitObjectInfo(QString) const;
+    int GetSplitObjectInfoCount() const;
     /************************************************************/
     /* 객체의 현재 상태 변경                                         */
     /************************************************************/
     void SetActionName(QString);
     void InitAnimation();
+    void AddAnimationNo();
     void SetMovePointPixel(QPoint);
     void SetMovePointPixelOld(QPoint);
     void SetDestinationArriveStatus(int);
@@ -96,6 +99,7 @@ public:
 private:
     /* Device */
     InputDevice inputDevice;
+    DrawDevice drawDevice;
 
 private:
     /*!

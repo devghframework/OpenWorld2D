@@ -68,6 +68,7 @@ public:
     QPoint GetObjectBottomLocationPixel() const;
     ObjectSplitImageInfo *GetSplitObjectInfo(QString) const;
     int GetSplitObjectInfoCount() const;
+    QPixmap GetSplitImage(QString, int) const;
     /************************************************************/
     /* 객체의 현재 상태 변경                                         */
     /************************************************************/

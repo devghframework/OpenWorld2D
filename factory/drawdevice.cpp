@@ -26,14 +26,12 @@ void DrawDevice::Update(QObject *qobject, QPainter &painter)
     }
 
     if (object->GetSplitObjectInfoCount() > 0) {
-        painter.drawPixmap(object->GetMovePointPixel().x()
-                               + object->GetSplitObjectInfo(object->GetActionName())
-                                     ->bottomGapFromMetricCenter.x(),
-                           object->GetMovePointPixel().y()
-                               + object->GetSplitObjectInfo(object->GetActionName())
-                                     ->bottomGapFromMetricCenter.y(),
-                           object->GetSplitObjectInfo(object->GetActionName())
-                               ->splitImage[object->GetAnimationNo()]);
+        painter.drawPixmap(
+            object->GetMovePointPixel().x()
+                + object->GetSplitObjectInfo(object->GetActionName())->bottomGapFromMetricCenter.x(),
+            object->GetMovePointPixel().y()
+                + object->GetSplitObjectInfo(object->GetActionName())->bottomGapFromMetricCenter.y(),
+            object->GetSplitImage(object->GetActionName(), object->GetAnimationNo()));
 
         object->AddAnimationNo();
 

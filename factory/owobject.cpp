@@ -117,6 +117,11 @@ int OwObject::GetSplitObjectInfoCount() const
 {
     return this->m_splitObjectInfo.count();
 }
+QPixmap OwObject::GetSplitImage(QString actionName, int animationNo) const
+{
+    return this->m_splitObjectInfo[actionName]->splitImage[animationNo];
+}
+
 void OwObject::SetActionName(QString actionName)
 {
     this->m_actionName = actionName;
